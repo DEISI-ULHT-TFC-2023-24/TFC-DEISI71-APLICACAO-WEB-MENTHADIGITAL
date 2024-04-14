@@ -27,24 +27,6 @@ Para isso precisamos de uma versão específica do package 'channels'
 ```
 pip install channels==3.0.5
 ```
-📶 Acesso Online
-======
-
-1. Abrir o Link https://menthadigital.com/
-2. Fazer login com as credenciais user:"superuser" pw:"super123"
-
-🔖 Acesso à VM
-======
-
-## acesso
-
-acesso ao servidor onde está o menthadigital.com:
-* dns: `jupiter.ulusofona.pt`
-* ip: `193.137.75.199`
-* ports: `8822`[ssh], 80[http], 443[https]
-* user: leda 
-* password (ver no grupo WhatsApp): ***
-
 
 ## sincronizar servidor 
 
