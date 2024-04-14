@@ -1,0 +1,208 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+    <div class="container-fluid">
+        <div style="padding: 8px">
+            <div class="bcca-breadcrumb">
+                <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;"></div>
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <i class="fa-solid fa-user-doctor" style="color:white;"></i>
+                    <span>MentHA {{ programa|upper }}</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center;"><strong>Grupo</strong></th>
+                        <th style="text-align: center;"><strong>Diagnóstico</strong></th>
+                        <th style="text-align: center;"><strong>Nº Membros</strong></th>
+                        <th style="text-align: center;"><strong>Sessões Realizadas</strong></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for grupo in grupos %}
+                        <tr style="vertical-align: middle;">
+                            <td style="text-align: center;">
+                                <form action="{% url 'diario:grupo_details' grupo.id %}">
+                                    <button class="btn mb-btn btn-group" style="width:100%;justify-content: center;">
+                                        <i class="fa-solid fa-user-group"
+                                           style="top: 25%; left: 5%; position: absolute;"></i>
+                                        <span>{{ grupo }}</span>
+                                    </button>
+                                </form>
+                            </td>
+                            <td style="text-align: center;">{{ grupo.diagnostico }}</td>
+                            <td style="text-align: center;">
+                                <i class="fa-solid fa-users"></i> {{ grupo.nr_membros }}
+                            </td>
+                            <td style="text-align: center;">{{ grupo.sessoes_realizadas }}/13</td>
+                        </tr>
+                    {% empty %}
+                        <div class="alert alert-warning" role="alert">
+                            Não tem Grupos associados
+                        </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if grupos_permissoes %}
+                    {% if flag == 'care' %}
+                        <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                            <button class="btn btn-outline-primary mb-btn-outline" type="button" style="border-radius: 8px"
+                                    data-bs-toggle="modal" data-toggle="modal" data-target="#Cuidador_grupo"
+                                    data-bs-target="#Cuidador_grupo">
+                                <i class="fa-solid fa-user-plus"></i> Cuidadores sem grupo
+                            </button>
+                            <a href="https://www.youtube.com/watch?v=WiiMpOdaj0k"> <!-- Link do video tutorial -->
+                                <button id="btn-popupvideo" class="btn mb-btn-outline" style="width:150px;">
+                                    <i class="fa fa-video"></i> Tutorial
+                                  </button>
+                            </a>
+                    {% elif flag == 'cog' %}
+                        <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                            <button class="btn btn-outline-primary mb-btn-outline" type="button" style="border-radius: 8px"
+                                    data-bs-toggle="modal" data-toggle="modal" data-target="#Participante_grupo"
+                                    data-bs-target="#Participante_grupo">
+                                <i class="fa-solid fa-user-plus"></i> Participantes sem grupo
+                            </button>
+                            <a href="https://www.youtube.com/watch?v=UIlJCyYeAjg"> <!-- Link do video tutorial -->
+                                <button id="btn-popupvideo" class="btn mb-btn-outline" style="width:150px;">
+                                    <i class="fa fa-video"></i> Tutorial
+                                  </button>
+                            </a>
+                    {% endif %}
+                        <form action="{% url 'diario:new_group' %}">
+                            <button class="btn btn-outline-primary mb-btn-outline" style="border-radius: 8px"><i
+                                    class="fa-solid fa-plus"></i> Criar grupo
+                            </button>
+                        </form>
+                    
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+
+        {% if flag == 'care' %}
+            <!-- The Modal  Cuidador sem grupo -->
+            <div class="modal" id="Cuidador_grupo">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Lista de Candidatos</h4>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+
+                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar por ..."
+                                   style="background-position: 10px 12px;width: 100%;font-size: 16px;padding: 12px 20px 12px 40px;border: 1px solid #ddd;margin-bottom: 12px;border-radius: 10px;">
+                            {% if cudadores %}
+                            <table class="table table-hover" id="myTable">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Escolaridade</th>
+                                    <th>Referência</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                {% for cuidador in cuidadores %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ cuidador }}</td>
+                                            <td>{{ cuidador.escolaridade }}</td>
+                                            <td>
+                                                {{ cuidador.referenciacao }}
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'diario:filter_group' cuidador.id %}">
+                                                    <button class="btn mb-btn btn-sm" style="border-radius: 10px">Atribuir
+                                                        grupo
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                            {% else %}
+                                <div class="alert alert-warning" role="alert">
+                                    Não há Cuidadores sem grupo
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% elif flag == 'cog' %}
+            <!-- The Modal Participante sem grupo -->
+            <div class="modal" id="Participante_grupo">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Lista de Candidatos</h4>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+
+                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar por ..."
+                                   style="background-position: 10px 12px;width: 100%;font-size: 16px;padding: 12px 20px 12px 40px;border: 1px solid #ddd;margin-bottom: 12px;border-radius: 10px;">
+                            {% if participantes %}
+                            <table class="table table-hover" id="myTable">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Escolaridade</th>
+                                    <th>Referência</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                {% for participante in participantes %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ participante }}</td>
+                                            <td>{{ participante.escolaridade }}</td>
+                                            <td>
+                                                {{ participante.referenciacao }}
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'diario:filter_group' participante.id %}">
+                                                    <button class="btn mb-btn btn-sm" style="border-radius: 10px">Atribuir
+                                                        grupo
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                            {% else %}
+                                <div class="alert alert-warning" role="alert">
+                                    Não há Participantes sem grupo
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

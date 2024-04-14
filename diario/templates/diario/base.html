@@ -1,0 +1,240 @@
+{% load diario_tags %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>MentHA Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="/static/protocolo/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+
+    <link rel="stylesheet" href="{% static 'protocolo/assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'protocolo/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'protocolo/assets/fonts/fontawesome5-overrides.min.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="{% static 'protocolo/assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'protocolo/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'protocolo/assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+
+    <link href="{% static 'diario/new_layout.css' %}?{% now 'U' %}" rel="stylesheet">
+    <link href="{% static 'diario/hover.css' %}?{% now 'U' %}" rel="stylesheet">
+    <script src="{% static 'diario/js/Agora/AgoraRTC.js' %}"></script>
+    <script src="{% static 'diario/js/diario.js' %}?{% now 'U' %}"></script>
+    <script src="{% static 'diario/js/diario_de_bordo.js' %}?{% now 'U' %}"></script>
+    <script src="{% static 'diario/js/jquery.js' %}?{% now 'U' %}"></script>
+    <script src="{% static 'diario/js/js.cookie.js' %}?{% now 'U' %}"></script>
+    <script src="{% static 'diario/js/Agora/AgoraRTC_N-4.17.2.js' %}"></script>
+
+    {% block head %} {% endblock %}
+
+    <script type="text/javascript">
+        let url = `ws://${window.location.host}/ws/socket-server/`
+        const chatSocket = new WebSocket(url)
+
+        chatSocket.onmessage = function(e){
+            let data = JSON.parse(e.data)
+            console.log('Data:', data)
+            const value = document.getElementById("sessaoGrupo_id").value;
+            if(data.type === 'chat'){
+                if(value != null){
+                    if (value === data.message){
+                        location.reload()
+                    }
+                }
+            }
+        }
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+    </script>
+</head>
+
+<body class="wrapper h-100 w-100">
+
+<div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary gap-4 shadow-lg sidebar h-100">
+    <!-- Botao fechar sidebar -->
+    <button type="button" class="sidebar-toggle-btn shadow-lg"
+            style="width: 39px;color:white;background-color:rgba(66,197,210,1)!important;">
+        <i id="sidebar-icon" class="fa-solid fa-chevron-right" style="color:white !important"></i>
+    </button>
+    <div id="sidebar-content" style="display:block; height:271px">
+
+        <!-- Logo -->
+        <div id="container-logo" style="display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 19px 0 15px 0px;">
+            <img src="{% static 'diario/img/mentha-logo.png' %}" alt="logo" class="me-2" width="150px" height="150px">
+            <a href="#"
+               class="d-flex align-items-center mb-3 mb-md-0 me-md-auto ml-auto link-body-emphasis undecorated nooverflow-nowrap"
+               style="height: 1.5rem;">
+                <span id="logo" class="fs-5 brand-text" style="display:none;">MENTHA DIGITAL</span>
+            </a>
+        </div>
+
+        <!-- Paginas -->
+        <ul class="nav nav-pills flex-column mb-auto gap-2 nooverflow-nowrap">
+            <li class="nav-item">
+                <a href="#" class="nav-link active videoconf-button">
+                    <i class="fa-solid fa-video"></i>
+                    <span class="sidebar-text" style="display:none;">Videoconferência</span>
+                </a>
+            </li>
+
+            {% if tem_proxima %}
+                <li class="nav-item">
+                    <a href="{% url 'diario:nextSession' %}" class="nav-link active jq-btn">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span class="sidebar-text" style="display:none;">Próxima Sessão</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!-- {% if grupos_permissoes_autoridade%}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'protocolo:colaboradores' %}" data-href="#">
+                        <i class="fa-solid fa-people-group"></i>
+                        <span class="sidebar-text" style="display:none;">Colaboradores</span>
+                    </a>
+                </li>
+            {% endif %} -->
+        </ul>
+    </div>
+
+    <div id="sidebar-content-bottom" style="display:block;">
+        <!-- Apps -->
+        <ul class="nav nav-pills flex-column mb-auto gap-2 nooverflow-nowrap">
+        {% if request.user|has_group:"Administrador" %}
+            <li class="nav-item ">
+                <a class="nav-link active" href="{% url 'diario:colaboradores' %}" data-href="#">
+                    <i class="fa-solid fa-users"></i>
+                    <span class="sidebar-text" style="display:none;">Colaboradores</span>
+                </a>
+            </li>
+         {% endif %}
+            {% if request.user|has_group:"Administrador" or request.user|has_group:"Avaliador" %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'protocolo:dashboard' %}" data-href="#">
+                        <i class="fa-solid fa-user-check"></i>
+                        <span class="sidebar-text" style="display:none;">MentHA-Eval</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if request.user|has_group:"Administrador" or request.user|has_group:"Mentor" or request.user|has_group:"Cuidador" %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'diario:dashboard_Care' %}?flag=care" data-href="#">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span class="sidebar-text" style="display:none;">MentHA-Care</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if request.user|has_group:"Administrador" or request.user|has_group:"Dinamizador" or request.user|has_group:"Participante" %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'diario:dashboard_Care' %}?flag=cog" data-href="#">
+                        <img src="{% static 'diario/img/cog.svg' %}" style="width:35px;display:inline-block"></i>
+                        <span class="sidebar-text" style="display:none;">MentHA-Cog</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div id="sidebar-content-bottom" style="display:block;">
+        <!-- Apps -->
+        <ul class="nav nav-pills flex-column mb-auto gap-2 nooverflow-nowrap">
+            <li class="nav-item " style="color:whitesmoke; text-align:center;">
+                <!-- <i class="fa-solid fa-user"></i> -->
+                <br>
+                <span class="sidebar-text fs-4"
+                      style="display:none;margin-bottom:10px;">Olá {{ request.user.first_name }} {{ request.user.last_name }}  </span>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link active jq-btn" href="{% url 'mentha:index' %}" data-href="#">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="sidebar-text" style="display:none;">Website MentHA</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link active jq-btn" href="{% url 'mentha:logout' %}" data-href="#">
+                    <i class="fa-solid fa-power-off"></i>
+                    <span class="sidebar-text" style="display:none;">Terminar Sessão</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    </ul>
+</div>
+
+</div>
+<div id="content" class="h-100">
+
+    <div id="videoconf">
+        <div class="cameras">
+            <div style="display: flex;flex-direction: column;align-items: center;justify-content: center;height: 90px; width: 200px; gap: 5px">
+                <button id="camera-btn" style="color: white"><i class="fa-solid fa-video-slash"
+                                                                style="color: white"></i> Iniciar vídeo
+                </button>
+                <button id="mic-btn" style="color: white"><i class="fa-solid fa-microphone-slash"
+                                                             style="color: white"></i> Ativar microfone
+                </button>
+                <button id="leave-btn" style="color: white"><i class="fa-solid fa-microphone-slash"
+                                                               style="color: white"></i> Sair
+                </button>
+                <button id="join-btn" style="color: white"><i class="fa-solid fa-microphone-slash"
+                                                              style="color: white"></i> Entrar
+                </button>
+            </div>
+            <div class="user-camera">
+            </div>
+            <div class="user-camera">
+            </div>
+            <div class="user-camera">
+            </div>
+            <div class="user-camera">
+            </div>
+            <div class="user-camera">
+            </div>
+            <div class="user-camera">
+            </div>
+            <div class="user-camera">
+            </div>
+            <div class="user-camera">
+            </div>
+        </div>
+    </div>
+    {% block main %}
+    {% endblock main %}
+    {% block diario %}
+    {% endblock %}
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+
+
+{% block main %}
+<body>
+<div class="d-sm-flex justify-content-between align-items-center mb-4">        
+</div>
+
+<div class="container-fluid">
+
+        <div class="card-header py-3 flex-header">
+            <p class="m-0 fw-bold mb-text fs-4" style="font-size: 20px;">
+                Questionário - {{questionario.nome}}
+            </p>
+        </div>
+        <div class="card-body">
+            <form class="flex-container" id="question-form" action="{% url 'diario:view_questionario' questionario.id parte.id sessaoGrupo %}" method="post">
+                <input type="hidden" name="sessaogrupo-id" value="{{ sessaoGrupo }}">
+                <input type="hidden" name="questionario-id" value="{{ questionario.id }}">
+                {% csrf_token %}
+                    <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width:35%;"></th>
+                            {% for opcao in lista_opcoes %}
+                                <th style="text-align: center;">{{ opcao }}</th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for pergunta in questionario.perguntas.all %}
+                            {% if pergunta.fase == 'I' or pergunta.fase == 'F' and parte.fase == 'F' %}
+                                {% if pergunta.sessao_numero == 0 or pergunta.sessao_numero == numero_sessao %}
+                                <tr>
+                                    <td 
+                                    {% if pergunta.fase == 'I' and parte.fase == 'F' %}
+                                    style="color:gray;"
+                                    {% endif%}
+                                    >{{ pergunta.texto }}</td>
+                                    {% for opcao in pergunta.opcoes.all %}
+                                        <td style="text-align: center;">
+                                                <input type="radio" name="choice-{{ pergunta.id }}" id="{{ opcao.id }}" value="{{ opcao.id }}"
+                                                {% for escolha in escolhas %}
+                                                    {% if escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sessaoGrupo or escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sg_anterior.id %}
+                                                        checked 
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if pergunta.fase == 'I' and parte.fase == 'F' %}
+                                                    disabled>
+                                                {% else%}
+                                                    >
+                                                {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}  
+                        {% endfor %}
+            
+                        </tr>
+                        <tr></tr>
+                        </tbody>
+                    </table>
+                <br>
+                <div class="card-flex">
+                    <a onclick="history.back()">
+                        <button id="previous" class="btn jq-btn btn-primary mb-btn-outline btn-submit flex-left" type="button">
+                            <i class="fa-solid fa-angle-left"></i>&nbsp; Anterior
+                        </button>
+                    </a>
+
+                    {% if grupos_permissoes.exists %}
+                        <button hidden class="btn mb-btn" style="" type="submit">
+                            <i class="fa fa-check"></i>&nbsp; Submeter
+                        </button>
+                    {% else %}
+                        <button class="btn mb-btn" style="" type="submit">
+                            <i class="fa fa-check"></i>&nbsp; Submeter
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+            </form>
+        </div>
+
+</div>
+</body>
+{% endblock %}

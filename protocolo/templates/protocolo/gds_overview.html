@@ -1,0 +1,274 @@
+{% load tags %}
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="container-fluid">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p style="font-size: 20px" class="text-primary m-0 fw-bold">Visão Geral dos Questionários
+                            GDS</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width:5% ">Estadio</th>
+                                    <th style="width:75%">Pergunta</th>
+                                    <th style="text-align: center">Respondente #1</th>
+                                    <th style="text-align: center">Respondente #2</th>
+                                    <th style="text-align: center">Respondente #3</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% get_from_dict questions_dict "2" as questions_2 %}
+                                {% get_from_dict questions_dict "3" as questions_3 %}
+                                {% get_from_dict questions_dict "4" as questions_4 %}
+                                {% get_from_dict questions_dict "5" as questions_5 %}
+                                {% get_from_dict questions_dict "6" as questions_6 %}
+                                {% get_from_dict questions_dict "7" as questions_7 %}
+                                <!-- ESTADIO 2 -->
+                                <tr>
+                                {% get_from_dict max_total_dict '2' as mt %}
+                                    <td class="estadio-level"
+                                        rowspan="{% get_rowspan rowspans 2 %}">2 <p style="font-size: 18px" class="standard-text text-gray-700">({{ mt.0 }}/{{ mt.1 }})</p>
+                                    </td>
+                                    {% for q in questions_2 %}
+                                        <tr>
+                                            <td>{{ q }}</td>
+                                            {% get_from_answers_dict dict 1 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}
+                                            </td>
+                                            {% get_from_answers_dict dict 2 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                            {% get_from_answers_dict dict 3 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tr>
+
+                                <!-- ESTADIO 3 -->
+                                <tr>
+                                {% get_from_dict max_total_dict '3' as mt %}
+                                    <td class="estadio-level"
+                                        rowspan="{% get_rowspan rowspans 3 %}">3 <p style="font-size: 18px" class="standard-text text-gray-700">({{ mt.0 }}/{{ mt.1 }})</p>
+                                    </td>
+                                    {% for q in questions_3 %}
+                                        <tr>
+                                            <td>{{ q }}</td>
+                                            {% get_from_answers_dict dict 1 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}
+                                            </td>
+                                            {% get_from_answers_dict dict 2 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                            {% get_from_answers_dict dict 3 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tr>
+
+                                <!-- ESTADIO 4 -->
+                                <tr>
+                                {% get_from_dict max_total_dict '4' as mt %}
+                                    <td class="estadio-level"
+                                        rowspan="{% get_rowspan rowspans 4 %}">4 <p style="font-size: 18px" class="standard-text text-gray-700">({{ mt.0 }}/{{ mt.1 }})</p>
+                                    </td>
+                                    {% for q in questions_4 %}
+                                        <tr>
+                                            <td>{{ q }}</td>
+                                            {% get_from_answers_dict dict 1 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}
+                                            </td>
+                                            {% get_from_answers_dict dict 2 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                            {% get_from_answers_dict dict 3 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tr>
+
+                                <!-- ESTADIO 5 -->
+                                <tr>
+                                {% get_from_dict max_total_dict '5' as mt %}
+                                    <td class="estadio-level"
+                                        rowspan="{% get_rowspan rowspans 5 %}">5 <p style="font-size: 18px" class="standard-text text-gray-700">({{ mt.0 }}/{{ mt.1 }})</p>
+                                    </td>
+                                    {% for q in questions_5 %}
+                                        <tr>
+                                            <td>{{ q }}</td>
+                                            {% get_from_answers_dict dict 1 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}
+                                            </td>
+                                            {% get_from_answers_dict dict 2 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                            {% get_from_answers_dict dict 3 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tr>
+                                <!-- ESTADIO 6 -->
+                                <tr>
+                                {% get_from_dict max_total_dict '6' as mt %}
+                                    <td class="estadio-level"
+                                        rowspan="{% get_rowspan rowspans 6 %}">6 <p style="font-size: 18px" class="standard-text text-gray-700">({{ mt.0 }}/{{ mt.1 }})</p>
+                                    </td>
+                                    {% for q in questions_6 %}
+                                        <tr>
+                                            <td>{{ q }}</td>
+                                            {% get_from_answers_dict dict 1 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}
+                                            </td>
+                                            {% get_from_answers_dict dict 2 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                            {% get_from_answers_dict dict 3 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tr>
+                                <!-- ESTADIO 7 -->
+                                <tr>
+                                {% get_from_dict max_total_dict '7' as mt %}
+                                    <td class="estadio-level"
+                                        rowspan="{% get_rowspan rowspans 7 %}">7 <p style="font-size: 18px" class="standard-text text-gray-700">({{ mt.0 }}/{{ mt.1 }})</p>
+                                    </td>
+                                    {% for q in questions_7 %}
+                                        <tr>
+                                            <td>{{ q }}</td>
+                                            {% get_from_answers_dict dict 1 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}
+                                            </td>
+                                            {% get_from_answers_dict dict 2 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                            {% get_from_answers_dict dict 3 q as checked %}
+                                            {% if checked is not None %}
+                                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                    {% else %}
+                                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tr>
+                                <tr></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    <!-- Buttons -->
+                        <div class="flex-buttons">
+                            <button id="previous" class="btn jq-btn btn-primary flex-left mb-btn"
+                                    data-href="{% url 'protocolo:dimensions' protocol_id part_id area_id instrument_id patient_id %}"
+                                    type="button">
+                                <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>

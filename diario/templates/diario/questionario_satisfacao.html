@@ -1,0 +1,260 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% load markdownify %}
+
+
+{% block main %}
+<body>
+<div class="d-sm-flex justify-content-between align-items-center mb-4">        
+</div>
+
+<div style="max-width:99%;" class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header py-3 flex-header">
+            <p class="text-primary m-0 fw-bold" style="font-size: 20px;">
+                Questionário de Avaliação da Satisfação
+            </p>
+        </div>
+        <div class="card-body">
+            <form class="flex-container" id="question-form" action="{% url 'diario:questionario_satisfacao' questionario.id parte.id sessaoGrupo %}" method="post">
+                <input type="hidden" name="sessaogrupo-id" value="{{ sessaoGrupo }}">
+                <input type="hidden" name="questionario-id" value="{{ questionario.id }}">
+                {% csrf_token %}
+                <div class="table-responsive">
+                    <table class="table table-hover-light">
+                        <thead>
+                            <tr>
+                                <th style="width: 45%;"></th>
+                                {% for opcao in lista_opcoes_satisfacao %}
+                                    <th style="text-align:center;"><br /><strong>{{opcao }}</strong><br /></th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="table-primary" colspan="6">Logística e Organização</td>
+                            </tr>
+                            
+                                {% for pergunta in q_logistica.perguntas.all %}
+                                {% if forloop.counter == 3 %}
+                                    <tr>
+                                        <td style="font-weight:bold;" colspan="6">Local de realização:</td>
+                                    </tr>
+                                {% endif%}
+                                <tr>
+                                    <td>{% if forloop.counter > 2 %}&emsp;&emsp;&emsp;{% endif %}{{pergunta.texto}}</td>
+                                    {% for opcao in pergunta.opcoes.all %}
+                                        <td style="text-align: center;">
+                                                <input type="radio" name="choice-{{ pergunta.id }}" id="{{ opcao.id }}" value="{{ opcao.id }}"
+                                                {% for escolha in escolhas %}
+                                                    {% if escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sessaoGrupo or escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sg_anterior.id %}
+                                                        checked 
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if pergunta.fase == 'I' and parte.fase == 'F' %}
+                                                    disabled>
+                                                {% else%}
+                                                    >
+                                                {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td class="table-primary" colspan="6">Expectativas</td>
+                                </tr>
+                                {% for pergunta in q_expectativas.perguntas.all %}
+                                <tr>
+                                    <td>{{pergunta.texto}}</td>
+                                    {% for opcao in pergunta.opcoes.all %}
+                                        <td style="text-align: center;">
+                                                <input type="radio" name="choice-{{ pergunta.id }}" id="{{ opcao.id }}" value="{{ opcao.id }}"
+                                                {% for escolha in escolhas %}
+                                                    {% if escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sessaoGrupo or escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sg_anterior.id %}
+                                                        checked 
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if pergunta.fase == 'I' and parte.fase == 'F' %}
+                                                    disabled>
+                                                {% else%}
+                                                    >
+                                                {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+
+                                <tr>
+                                    <td class="table-primary" colspan="6">Documentação</td>
+                                </tr>
+                                {% for pergunta in q_documentacao.perguntas.all %}
+                                <tr>
+                                    <td>{{pergunta.texto}}</td>
+                                    {% for opcao in pergunta.opcoes.all %}
+                                        <td style="text-align: center;">
+                                                <input type="radio" name="choice-{{ pergunta.id }}" id="{{ opcao.id }}" value="{{ opcao.id }}"
+                                                {% for escolha in escolhas %}
+                                                    {% if escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sessaoGrupo or escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sg_anterior.id %}
+                                                        checked 
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if pergunta.fase == 'I' and parte.fase == 'F' %}
+                                                    disabled>
+                                                {% else%}
+                                                    >
+                                                {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+
+                                <tr>
+                                    <td class="table-primary" colspan="6">Avaliação dos Dinamizadores</td>
+                                </tr>
+                                {% for pergunta in q_avaliacao_dinamizadores.perguntas.all %}
+                                <tr>
+                                    <td>{{pergunta.texto}}</td>
+                                    {% for opcao in pergunta.opcoes.all %}
+                                        <td style="text-align: center;">
+                                                <input type="radio" name="choice-{{ pergunta.id }}" id="{{ opcao.id }}" value="{{ opcao.id }}"
+                                                {% for escolha in escolhas %}
+                                                    {% if escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sessaoGrupo or escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sg_anterior.id %}
+                                                        checked 
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if pergunta.fase == 'I' and parte.fase == 'F' %}
+                                                    disabled>
+                                                {% else%}
+                                                    >
+                                                {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+
+                                
+                            
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="max-width:99%; margin-top:35px;" class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header py-3 flex-header">
+            <p class="text-primary m-0 fw-bold" style="font-size: 20px;">
+                Questionário de Avaliação da Experiência de Participação
+            </p>
+        </div>
+        <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover-light">
+                        <thead>
+                            <tr>
+                                <th style="width: 45%;"></th>
+                                {% for opcao in lista_opcoes_experiencia %}
+                                    <th style="text-align:center;"><br /><strong>{{opcao }}</strong><br /></th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                                {% for pergunta in questionario_experiencia.perguntas.all %}
+                                <tr>
+                                    <td>{{pergunta.texto}}</td>
+                                    {% for opcao in pergunta.opcoes.all %}
+                                        <td style="text-align: center;">
+                                                <input type="radio" name="choice-{{ pergunta.id }}" id="{{ opcao.id }}" value="{{ opcao.id }}"
+                                                {% for escolha in escolhas %}
+                                                    {% if escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sessaoGrupo or escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sg_anterior.id %}
+                                                        checked 
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if pergunta.fase == 'I' and parte.fase == 'F' %}
+                                                    disabled>
+                                                {% else%}
+                                                    >
+                                                {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}                            
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="max-width:99%; margin-top:35px;" class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header py-3 flex-header">
+            <p class="text-primary m-0 fw-bold" style="font-size: 20px;">
+                {{q_avaliacao_geral_text}}
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover-light">
+                    <thead>
+                        <tr>
+                            {% for opcao in lista_opcoes_geral %}
+                                <th style="text-align:center;"><br /><strong>{{ opcao }}</strong><br /></th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {% for pergunta in q_avaliacao_geral.perguntas.all %}
+                            <tr>
+                                {% for opcao in pergunta.opcoes.all %}
+                                    <td style="text-align: center;">
+                                            <input type="radio" name="choice-{{ pergunta.id }}" id="{{ opcao.id }}" value="{{ opcao.id }}"
+                                            {% for escolha in escolhas %}
+                                                {% if escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sessaoGrupo or escolha.pergunta.id == pergunta.id and escolha.opcao.id == opcao.id and escolha.sessao_grupo.id == sg_anterior.id %}
+                                                    checked 
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if pergunta.fase == 'I' and parte.fase == 'F' %}
+                                                disabled>
+                                            {% else%}
+                                                >
+                                            {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}                            
+                        <tr></tr>
+                    </tbody>
+                </table>
+                <br><br>
+                {{ q_avaliacao_geral_long_text.texto| markdownify }}
+                <div class="flex-textarea flex-item">
+                    <textarea style="white-space: pre-line" class="notes-area form-control" id="text-{{ q_avaliacao_geral_long_text.id }}"
+                              name="text-{{ q_avaliacao_geral_long_text.id }}">{{ resposta_longa  }}</textarea>
+                </div>
+            </div>
+                <div style="margin-top:15px;"class="flex-buttons">
+                    <a onclick="history.back()">
+                        <button id="previous" class="btn jq-btn btn-primary btn-submit flex-left" type="button">
+                            <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+                        </button>
+                     </a>
+                     <button class="btn btn-submit btn-primary flex-right"
+                     style="" type="submit">
+                 <i class="fa fa-check"></i>&nbsp; Submeter
+                    </button>
+                    </form>
+                </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

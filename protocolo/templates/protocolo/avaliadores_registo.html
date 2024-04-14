@@ -1,0 +1,89 @@
+{% load static %}
+{% block head %}
+<script src="{% static 'protocolo/js/registo.js' %}?{% now 'U' %}"></script>
+<link href="{% static 'protocolo/stylingForm.css' %}" rel="stylesheet">
+{% endblock %}
+
+<div class="bcca-breadcrumb" style="padding:38px;">
+    <div class="bcca-breadcrumb-item fw-normal fs-4" style="display:none;"></div>
+
+    <div class="bcca-breadcrumb-item fw-normal fs-4">
+        <a data-href="{% url 'protocolo:participantes_registo' %}" class="jq-btn">
+            <i class="fa fa fa-user-plus" style="color:white;"></i>
+            Registo de um Avaliador
+        </a>
+    </div>
+
+    <div class="bcca-breadcrumb-item fw-normal fs-4">
+        <a data-href="{% url 'protocolo:participants' %}" class="jq-btn">
+            <i class="fa-solid fa-user-check" style="color:white;"></i>
+            MentHA-EVAL
+        </a>
+    </div>
+</div>
+
+<div class="container-form-registo">
+    <form id="patient-form" action="" method="POST">
+        {% csrf_token %}
+        <table style="border-spacing: 15px;
+        border-collapse: separate;">
+            <tr>
+                <td>
+                    <label for="username" class="label"><b>Username</b></label>
+                        <div class="input-class">
+                                <input class="form-input-registo" type="text" id="username" name="username" required>
+                        </div>
+                </td>
+                <td>
+                    <label for="username" class="label"><b>Password</b></label>
+                        <div class="input-class">
+                                <input class="form-input-registo" type="password" id="password" name="password" required>
+                        </div>
+
+                </td>        
+            </tr>
+            <tr>
+                <td colspan="1">
+                        <label for="nome" class="label"><b>Primeiro Nome</b></label>
+                        <div class="input-class">
+                                <input class="form-input-registo" type="text" id="primeiro_nome" name="primeiro_nome" required>
+                        </div>
+                </td>
+                <td>
+                    <label for="sexo" class="label"><b>Último Nome</b></label>
+                    <div class="input-class">
+                        <input class="form-input-registo" type="text" id="ultimo_nome" name="ultimo_nome" required>
+                </div>
+                </td>
+                <td colspan="2">
+                    <label for="email" class="label"><b>E-mail</b></label>
+                    <div class="input-class">
+                        <input class="form-input-registo" type="email" id="email" name="email" required>
+                    </div>
+
+                </td>
+                
+            </tr>
+        </table>
+        
+        <div style="
+        padding-right: 15px;
+        display: flex;
+        padding-left: 15px;
+        flex-direction: row-reverse;
+        justify-content: space-between;">
+        <button class="btn mb-btn btn-registar flex-left" type="submit" data-href="{% url 'protocolo:avaliadores_registo' %}" style="width:150px;">
+            <i class="fa fa fa-user-plus"></i>&nbsp Registar
+        </button>
+        <button class="btn jq-btn mb-btn-outline flex-left" data-href="{% url 'protocolo:participants' %}">
+            <i class="fa fa-times"></i> Cancelar
+        </button> 
+        </div>                                                 
+    </form>
+</div>
+    {% comment %} {% for field in form %}
+        <div>
+            {{ field.label }}: {{ field }}
+        </div>
+        <br>
+    {% endfor %} {% endcomment %}

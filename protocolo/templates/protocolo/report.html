@@ -1,0 +1,320 @@
+{% load tags %}
+{% load markdownify %}
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="container-fluid">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 fw-bold">Relatório {{ resolution.part }} - {{ resolution.patient }}
+                            ({{ resolution.date }})</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 text-nowrap">
+                                <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                    <button class="btn btn-primary mb-btn" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#modalReport">
+                                        <i class="fa fa-print"></i> Gerar Word
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;text-align: left">Área de Avaliação
+                                    </th>
+                                    <th style="width: 35%;text-align: left;">Resultados</th>
+                                    <th style="width: 40%;text-align: left;color: var(--bs-blue);">{% comment %} GRAFICOS {% endcomment %}</th>
+                                    <th style="width: 5%;text-align: left;color: var(--bs-blue);"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for area_id, instrument in report.items %}
+                                    {% get_area_from_id areas area_id as area %}
+                                    <tr>
+                                        <!-- Área de Avaliação -->
+                                        <td>{{ area.name }}</td>
+                                        <!-- Resultados -->
+                                        <td>
+                                            <!-- Instrumentos -->
+                                            {% for instrument_name, dimension in instrument.items %}
+                                                {% if instrument_name != 'None' %}
+                                                    <span class="fw-bold {% for i in instruments %}{% if i.name == instrument_name and i.tooltip.1%}instrument-tooltip{% endif %}{% endfor %}">
+                                                    {% for i in instruments %}
+                                                            {% if i.name == instrument_name %}
+                                                <a href="#" class="jq-btn no-decor" 
+                                                {% comment %} data-href="{% url 'protocolo:dimensions' resolution.part.part.protocol.id resolution.part.id area_id i.id resolution.patient.id %}" {% endcomment %}
+                                                >
+                                                            {% endif %}
+                                                    {% endfor %}
+                                                    {{ instrument_name }}
+                                                    {% for i in instruments %}{% if i.name == instrument_name and i.tooltip.1%}
+                                                        <div class="tooltiptext">
+                                                            {{ i.tooltip|markdownify }}
+                                                        </div>{% endif %}{% endfor %}
+                                                    </span>
+                                                    <svg style="margin-top: 0px;"
+                                                         xmlns="http://www.w3.org/2000/svg"
+                                                         width="16"
+                                                         height="16" fill="currentColor"
+                                                         class="bi bi-link" viewBox="0 0 16 16">
+                                                        <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/>
+                                                        <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z"/>
+                                                    </svg>
+                                                    </a>
+
+                                                {% elif instrument_name == 'None' %}
+                                                    {% if area == 'Consciência Humor e Comportamento' %}
+                                                        {% chc_answers answers as exists_chc %}
+                                                        {% if exists_chc %}
+                                                        <ul class="list-group">
+                                                        <li>Consciência: <span
+                                                                class="fw-bold">{% chc_consciencia answers %}</span>
+                                                        </li>
+                                                        <li>Atividade Motora: <span
+                                                                class="fw-bold">{% chc_atividade_motora answers %}</span>
+                                                        </li>
+                                                        <li>Humor: <span
+                                                                class="fw-bold">{% chc_humor answers %}</span>
+                                                        </li>
+                                                        {% endif %}
+                                                    {% elif area == 'Cooperação dada na entrevista' %}
+                                                        {% cde answers as cde_value %}
+                                                        {% if cde_value is None %}
+                                                            {% comment %} Nao faz nada {% endcomment %}
+                                                        {% else %}
+                                                            <ul class="list-group list-unstyled">
+                                                                <li><span class="fw-bold">{{ cde_value }}</span></li>
+                                                            </ul>
+                                                        {% endif %}
+
+                                                    {% elif area == 'Relação com o Avaliador' %}
+                                                        {% rca answers as rca_value %}
+                                                        {% if rca_value is None %}
+                                                           {% comment %} Nao faz nada {% endcomment %}
+                                                        {% else %}
+                                                            <ul class="list-group list-unstyled">
+                                                                <li><span class="fw-bold">{{ rca_value }}</span></li>
+                                                            </ul>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% exist_answers instrument_name answers as exists %}
+                                                {% if not exists %}
+                                                    <ul class="list-group list-unstyled">
+                                                        <li><span class="badge bg-secondary"> <i
+                                                                class="fa fa-warning"></i> Não Respondido</span></li>
+                                                    </ul>
+                                                    <br>
+                                                {% else %}
+
+                                                    {% comment %}
+                                                    (Cotação Total: {{ dimension.Total }})
+                                                {% endcomment %}
+                                                    <!-- CASOS ESPECIAIS -->
+                                                    <!-- PANAS -->
+                                                    {% if instrument_name == "PANAS" %}
+                                                        <ul class="list-group">
+                                                            {% for a in answers %}
+                                                                {% if a.instrument == "PANAS" %}
+																	{% get_area_id a.instrument_obj resolution.part as area_id %}
+                                                                    <li>
+                                                                        <a href="#"
+                                                                           {% comment %} data-href="{% url 'protocolo:question' 1 resolution.part.id area_id a.question.section.dimension.instrument.id a.question.section.dimension.id a.question.section.id resolution.patient.id %}" {% endcomment %}
+  																		  class="jq-btn no-decor">{{ a.question.name }}
+                                                                            <svg style="margin-top: 0px;"
+                                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                                 width="16"
+                                                                                 height="16" fill="currentColor"
+                                                                                 class="bi bi-link" viewBox="0 0 16 16">
+                                                                                <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/>
+                                                                                <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z"/>
+                                                                            </svg>
+                                                                        </a>: <span
+                                                                            class="fw-bold">{{ a.multiple_choice_answer.name }}</span>
+                                                                    </li>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </ul>
+                                                        <!-- ABVD - MDA -->
+                                                    {% elif instrument_name == "ABVD - MDA" %}
+                                                        <br>
+                                                        <span class="fw-bold">
+                                                         <span class="badge bg-{% if dimension.Total <= 7 %}success{% elif dimension.Total <= 14 %}warning{% else %}danger{% endif %}">
+                                                            Grau de Dependência {% abvd_evaluation dimension.Total %}
+                                                        </span>
+                                                        </span>
+                                                        <!-- AIVD -->
+                                                    {% elif instrument_name == "AIVD" %}
+                                                        <br>
+                                                        <span class="badge bg-
+                                                                {% if resolution.patient.sexo == 'Masculino' %}{% if dimension.Total <= 1 %}danger{% elif dimension.Total <= 3 %}warning{% else %}success{% endif %}{% elif resolution.patient.sexo == 'Feminino' %}{% if dimension.Total <= 3 %}danger{% elif dimension.Total <= 5 %}warning{% else %}success{% endif %}{% endif %}">
+                                                             Grau de Dependência {% aivd_evaluation dimension.Total resolution.patient.sexo %}
+                                                        </span>
+                                                        <!-- BSI -->
+                                                    {% elif instrument_name == "BSI" %}
+                                                        <ul class="list-group">
+                                                            <li>Somatização: <span
+                                                                    class="fw-bold">{% bsi_somatizacao_quotation answers %}</span>
+                                                            </li>
+                                                            <li>Obsessões-Compulsões: <span
+                                                                    class="fw-bold">{% bsi_obs_comp_quotation answers %}</span>
+                                                            </li>
+                                                            <li>Depressão: <span
+                                                                    class="fw-bold">{% bsi_depressao_quotation answers %}</span>
+                                                            </li>
+                                                            <li>Sensibilidade Interpessoal: <span
+                                                                    class="fw-bold">{% bsi_sens_interp_quotation answers %}</span>
+                                                            </li>
+                                                            <li>Ansiedade: <span
+                                                                    class="fw-bold">{% bsi_ansiedade_quotation answers %}</span>
+                                                            </li>
+                                                            <li>Hostilidade: <span
+                                                                    class="fw-bold">{% bsi_hostilidade_quotation answers %}</span>
+                                                            </li>
+                                                            <li>Ansiedade Fóbica: <span
+                                                                    class="fw-bold">{% bsi_ansiedade_fob_quotation answers %}</span>
+                                                            </li>
+                                                            <li>Ideação Paranóide: <span
+                                                                    class="fw-bold">{% bsi_ideacao_paranoide_quotation answers %}</span>
+                                                            </li>
+                                                            <li>Psicoticismo: <span
+                                                                    class="fw-bold">{% bsi_psicoticismo_quotation answers %}</span>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-unstyled">
+                                                            <li><span class="badge bg-primary fw-bold">IGS: {% bsi_igs answers %}</span>
+                                                            </li>
+                                                        <li><span class="badge bg-primary fw-bold">TSP: {% bsi_tsp answers %}</span>
+                                                            </li>
+                                                        <li><span class="badge bg-primary fw-bold">ISP: {% bsi_isp answers %}</span>
+                                                            </li>
+                                                        </ul>
+                                                        <!-- NEO-FFI 20 -->
+                                                    {% elif instrument_name == "NEO-FFI 20" %}
+                                                        <ul class="list-group">
+                                                            <li>Neuroticismo: <span
+                                                                    class="fw-bold">{% neoffi20_neuroticismo answers %}</span>
+                                                            </li>
+                                                            <li>Extroversão: <span
+                                                                    class="fw-bold">{% neoffi20_extroversao answers %}</span>
+                                                            </li>
+                                                            <li>Abertura à experiência: <span
+                                                                    class="fw-bold">{% neoffi20_experiencia answers %}</span>
+                                                            </li>
+                                                            <li>Amabilidade: <span
+                                                                    class="fw-bold">{% neoffi20_amabilidade answers %}</span>
+                                                            </li>
+                                                            <li>Conscienciosidade: <span
+                                                                    class="fw-bold">{% neoffi20_conscienciosidade answers %}</span>
+                                                            </li>
+                                                        </ul>
+                                                        <!-- HADS -->
+                                                    {% elif instrument_name == "HADS" %}
+                                                        {% hads_a_quotation answers as hads_a_q %}
+                                                        {% hads_d_quotation answers as hads_d_q %}
+                                                        <br>
+                                                        <span class="badge bg-{% if hads_a_q <= 10 %}success{% elif hads_a_q <= 14 %}warning{% else %}danger{% endif %}">
+                                                                Estado Ansiedade: {% hads_evaluation hads_a_q %} ({{ hads_a_q }})
+                                                            </span>
+                                                        <br>
+                                                        <span class="badge bg-{% if hads_d_q <= 10 %}success{% elif hads_d_q <= 14 %}warning{% else %}danger{% endif %}">
+                                                                Estado Depressão: {% hads_evaluation hads_d_q %} ({{ hads_d_q }})
+                                                            </span>
+                                                        <!-- GDS -->
+                                                    {% elif instrument_name == "GDS" %}
+                                                        <br>
+                                                        <span class="badge bg-primary">{% gds_evaluation answers %}</span>
+
+                                                        <!-- MMSE -->
+                                                    {% elif instrument_name == "MMSE" %}
+                                                        <br>
+                                                        {% mmse_evaluation resolution.patient dimension.Total as mmse_eval_bool %}
+                                                        {% if mmse_eval_bool %}
+                                                            <span class="badge bg-danger"> Com Declíneo Cognitivo</span>
+                                                        {% else %}
+                                                            <span class="badge bg-success"> Sem Declíneo Cognitivo</span>
+                                                        {% endif %}
+                                                    {% elif instrument_name == "MMSE" %}
+                                                        <br>
+                                                        <!-- ACE-R -->
+                                                    {% elif instrument_name == "ACE-R" %}
+                                                        <br>
+                                                        {% if dimension.Total > 79 %}
+                                                            <span class="badge bg-success"> Sem Declíneo Cognitivo</span>
+                                                        {% elif dimension.Total <= 68 %}
+                                                            <span class="badge bg-danger"> Demência</span>
+                                                        {% elif dimension.Total <= 79 %}
+                                                            <span class="badge bg-danger"> Declíneo Cognitivo Ligeiro</span>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    <!-- Dimensões -->
+                                                    <ul class="list-group">
+                                                        {% for dim, section in dimension.items %}
+                                                            {% if forloop.counter0 == 0 %}
+                                                                <!-- Nada -->
+                                                            {% elif dim != 'None' and dim != 'Graph' and instrument_name != "GDS" and instrument_name != "None" %}
+                                                                <li>
+                                                                    <a href="#" class="jq-btn no-decor"
+                                                                            {% for q in questions %}
+                                                                                {% if q.section.dimension.name == dim and instrument_name == q.section.dimension.instrument.name %}
+                                                                                        {% comment %} data-href="{% url 'protocolo:sections' 1 resolution.part.id area.id q.section.dimension.instrument.id q.section.dimension.id resolution.patient.id %}" {% endcomment %}
+                                                                                {% endif %}
+                                                                            {% endfor %}> {{ dim }}
+                                                                        <svg style="margin-top: 0px;"
+                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                             width="16"
+                                                                             height="16" fill="currentColor"
+                                                                             class="bi bi-link" viewBox="0 0 16 16">
+                                                                            <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/>
+                                                                            <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z"/>
+                                                                        </svg>
+                                                                    </a> (<span
+                                                                        class="fw-bold">Cotação:</span> {{ section.Total }})
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                    <br>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td style="justify-content: center">
+                                            {% for instrument_name, dimension in instrument.items %}
+                                                {% if dimension.Graph and instrument_name != "GDS" and instrument_name != 'None' %}
+                                                    {{ dimension.Graph|safe }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        {% if forloop.counter == 1 %}
+                                            <td style="vertical-align:middle;width: 5%;" rowspan="3"><p
+                                                    class="vertical sideways">Momento de Avaliação</p></td>
+                                        {% elif forloop.counter == 4 %}
+                                            {% count report.items as size_area %}
+                                            <td style="vertical-align:middle;width: 5%;"
+                                                rowspan="{% subtraction size_area 3 %}"><p
+                                                    class="vertical sideways text-center">Parte 5</p></td>
+                                        {% endif %}
+                                    </tr>
+                                    
+                                {% endfor %}
+                                </tbody>
+                                {% comment %} <td style="justify-content: center">
+                                    <label for="comentario">
+                                        <textarea type="text" id="comentario" name="comentario" placeholder="Escreva o seu comentário" rows ="5" cols="100"></textarea>
+                                    </label>
+                                </td> {% endcomment %}
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>

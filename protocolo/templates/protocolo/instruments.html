@@ -1,0 +1,99 @@
+{% load tags %}
+{% load static %}
+<div class="container-fluid" >
+    <div class="" style="padding:8px;">
+        <div class="card-body card-flex">
+            {% include 'protocolo/tree.html' %}
+            <a class="btn jq-btn mb-btn-outline btn-sm d-none d-sm-inline-block report-button"
+                role="button"
+                href="#"
+                data-href="{% url 'protocolo:report' resolution %}"
+                style="display: flex!important;height: 40px;width: 150px;align-items: center;justify-content: space-around;">
+                <i class="fas fa-download"></i>&nbsp;Gerar Relatório
+            </a>
+        </div>
+        <div class="">
+            <h1 class="m-0 fw-bold mb-text fs-4" style="padding-top:20px">
+                {% if area.name is not 'None' %}
+                    {{area.name}}
+                {% endif %}
+            </h1>
+            <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                    aria-describedby="dataTable_info">
+                <table class="table my-0 table-hover-light" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th style="text-align: left;width: 29%">Instrumentos</th>
+                        <th style="text-align: left;width: 15%">Cotação</th>
+                        <th style="text-align: left;width: 25%">Progresso</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <!-- Iteration -->
+                        {% for instrument,answered,percentage,quotation in instruments %}
+
+                            <!-- Name -->
+                            <td style="vertical-align: middle;">
+                                <a href="#" class="jq-btn no-decor"
+                                    data-href="{% url 'protocolo:dimensions' protocol_id part_id area_id instrument.id patient_id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                                    <button class="btn mb-btn" style="margin-bottom: 5px;width: 50%;text-align: left;">
+                                        {{ instrument.name }}
+                                    </button>
+                                    <a href="{% static 'protocolo/files/MentHA_Manual_Avaliacao_Final.pdf' %}#page={{ instrument.get_pdf_page }}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                                            target="_blank">
+                                            <i style="padding:5px;color: var(--bs-warning);font-size: 20px;"
+                                                class="fas fa-info-circle"></i>
+                                        </a>
+                                </a>
+                            </td>
+                            <!-- Quotation -->
+                            <td style="vertical-align: middle;">
+                                <span class="tree-quotation">({% minimum quotation instrument.maximum_quotation %}/{{ instrument.maximum_quotation }})</span>
+                            </td>
+
+                            <!-- Progress Bar -->
+                                <td style="vertical-align: middle">
+                                    <div style="display: flex; flex-direction: column; align-items: start">
+                                        {% if percentage >= 0 and percentage <= 25 %}
+                                            <div style="width: 80%; text-align: end; font-weight:bold; color: red;">
+                                                {{ percentage }}%
+                                            </div>
+                                        {% elif percentage > 25 and percentage < 50 %}
+                                            <div style="width: 80%; text-align: end; font-weight:bold; color: coral;">
+                                                {{ percentage }}%
+                                            </div>
+                                        {% elif percentage >= 50 and percentage < 75 %}
+                                            <div style="width: 80%; text-align: end; font-weight:bold; color: #DBA800;">
+                                                {{ percentage }}%
+                                            </div>
+                                        {% elif percentage >= 75 %}
+                                            <div style="width: 80%; text-align: end; font-weight:bold; color: mediumseagreen;">
+                                                {{ percentage }}%
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="progress" style="display: flex; height: 10px; width: 80%;background-color: white; border: 1px solid lightslategrey">
+                                            <div class="progress-bar" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: {{ percentage }}%; background-color: lightslategrey; font-size: 14px; color: white; height: 100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>  
+                </table>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end;">
+            <button class="btn jq-btn mb-btn-outline">
+                <a data-href="{% url 'protocolo:areas' protocol.id part.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}" class="jq-btn">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <span>Anterior</span>
+                </a>
+            </button>
+        </div>
+    </div>
+</div>

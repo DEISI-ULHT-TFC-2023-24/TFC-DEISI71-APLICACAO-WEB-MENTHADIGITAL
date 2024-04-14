@@ -1,0 +1,475 @@
+{% load static %}
+
+<style>
+    .circle-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    }
+
+    @media (max-width:1300px) {
+        .bcca-breadcrumb-item span {
+            display:none;
+        }
+    }
+</style>
+
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+            </div>
+            <div class="container-fluid">
+                <div style="display: flex;flex-direction: row;justify-content: space-between">
+                    <div class="card-body">
+                        <p class="m-0 fw-bold" style="margin: 5px; font-size: 26px; color: #4EB4BE">
+                            Editar Cuidador</p>
+                    </div>
+                </div>
+
+                <form action="" id="update-form" class="row g-3" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="4" class="align-content-center align-middle" style="width: 0%; border-bottom: none;">
+                                        <!-- Imagem -->
+                                        {% if cuidador.imagem %}
+                                            <div class="circle-image">
+                                                <img src="{{ cuidador.imagem.url }}"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                        {% else %}
+                                            <div class="circle-image">
+                                                <img src="{% static 'protocolo/img/placeholder-avatar.png' %}"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                        {% endif %}
+                                    </td>
+
+                                    <td class="text-start" style="text-align:center; width: 25%">
+                                        <!-- Nome -->
+                                        <label class="form-label" style="margin: 0px;">Nome</label>
+                                        <input style="font-weight: bold;" type="text" id="{{ formCuidador.nome.id_for_label }}" name="{{ formCuidador.nome.html_name }}" value="{{ cuidador.nome }}">
+                                    </td>
+
+                                    <td class="text-start" style="text-align:center; width: 25%">
+                                        <!-- Telemovel -->
+                                        <label class="form-label" style="margin: 0px;">Telemóvel</label>
+                                        <input style="font-weight: bold;" type="text"
+                                            id="{{ formCuidador.telemovel.id_for_label }}"
+                                            name="{{ formCuidador.telemovel.html_name }}"
+                                            value="{{ cuidador.telemovel }}">
+                                    </td>
+
+                                    {% if cuidador.referenciacao == None %}
+                                        <td class="text-start" style="text-align:center; width: 25%">
+                                            <!-- Referenciacao -->
+                                            <label class="form-label" style="margin-bottom: 20px">Referenciação</label>
+                                            <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                Sem Informação
+                                            </p>
+                                        </td>
+                                    {% else %}
+                                        <td class="text-start" style="text-align:center; width: 25%">
+                                            <!-- Referenciacao -->
+                                            <label class="form-label">Referenciação</label>
+                                            <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                {{ cuidador.referenciacao }}
+                                            </p>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <!-- Data de Nascimento -->
+                                        <label class="form-label">Data de Nascimento</label>
+                                        <p style="color: var(--bs-gray-dark); padding-top: 0px; margin-top: -10px; font-weight: bold;">
+                                            {{ formCuidador.nascimento }}
+                                        </p>
+                                    </td>
+
+                                    <td>
+                                        <!-- E-mail -->
+                                        <label class="form-label" style="margin: 0px;">E-mail</label>
+                                        <input style="font-weight: bold;" type="text"
+                                           id="{{ formCuidador.email.id_for_label }}"
+                                           name="{{ formCuidador.email.html_name }}"
+                                           value="{{ cuidador.email }}">
+                                    </td>
+
+                                    <td>
+                                        <!-- Grupo CARE -->
+                                        <label class="form-label" style="margin-bottom: 20px">Grupo CARE</label>
+                                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                                            {% if not cuidador.grupo.all %}
+                                                Não tem grupo CARE
+                                            {% else %}
+                                                {% for grupo in cuidador.grupo.all %}
+                                                    {{ grupo.nome }}
+                                                {% endfor %}
+                                            {% endif %}
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <!-- Sexo -->
+                                        <label class="form-label">Género</label>
+                                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                            {{ formCuidador.sexo }}
+                                        </p>
+                                    </td>
+
+                                    <td>
+                                        <!-- Escolaridade -->
+                                        <label class="form-label" style="margin: 0px;">Escolaridade</label>
+                                        <b>{{ formCuidador.escolaridade }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Pacientes -->
+                                        <label style="margin-bottom: 20px" class="form-label">Paciente(es)</label>
+                                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                            {% if not cuidador.participantes.all %}
+                                                Não tem paciente(es)
+                                            {% else %}
+                                                {% for participante in cuidador.participantes.all %}
+                                                    {{ participante.nome }}
+                                                {% endfor %}
+                                            {% endif %}
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <!-- Nacionalidade -->
+                                        <label style="margin: 0px;" class="form-label">Nacionalidade</label>
+                                        <input style="font-weight: bold;" type="text"
+                                           id="{{ formCuidador.nacionalidade.id_for_label }}"
+                                           name="{{ formCuidador.nacionalidade.html_name }}"
+                                           value="{{ cuidador.nacionalidade }}">
+                                    </td>
+
+                                    <td>
+                                        <!-- Localizacao -->
+                                        <label style="margin: 0px;" class="form-label">Localização</label>
+                                        <input style="font-weight: bold;" type="text"
+                                           id="{{ formCuidador.localizacao.id_for_label }}"
+                                           name="{{ formCuidador.localizacao.html_name }}"
+                                           value="{{ cuidador.localizacao }}">
+                                    </td>
+
+                                    {% if not cuidador.participantes.all %}
+                                        <td>
+                                            <!-- Grupo COG dos pacientes-->
+                                            <label style="margin-bottom: 20px" class="form-label">Grupo COG do(s) paciente(es)</label>
+                                            <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                Sem Informação
+                                            </p>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <!-- Grupo COG dos pacientes-->
+                                            <label style="margin-bottom: 20px" class="form-label">Grupo COG do(s) paciente(es)</label>
+                                            <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                {% for participante in cuidador.participantes.all %}
+                                                    {% if not participante.grupo %}
+                                                        Não tem grupo COG
+                                                    {% else %}
+                                                        {% for grupo in participante.grupo.all %}
+                                                            {{ grupo.nome }}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </p>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+
+                                <!-- EDITEI A PARTIR DAQUI -->
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td>
+                                        <!-- Sit. Laboral -->
+                                        <label style="margin: 0px;" class="form-label">Situação Laboral</label>
+                                        <b>{{ formCuidador.situacaoLaboral }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Profissao -->
+                                        <label style="margin: 0px;" class="form-label">Profissão atual (ou antiga profissão)</label>
+                                        <b>{{ formCuidador.profissaoPrincipal }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Sit. Economica -->
+                                        <label style="margin: 0px;" class="form-label">Sit. Económica (Rendimentos/Despesas)</label>
+                                        <b>{{ formCuidador.situacaoEconomica }}</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td>
+                                        <!-- Estado Civil -->
+                                        <label style="margin: 0px;" class="form-label">Estado Civil</label>
+                                        <b>{{ formCuidador.estadoCivil }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Agregado Familiar -->
+                                        <label style="margin: 0px;" class="form-label">Agregado Familiar Atual</label>
+                                        <b>{{ formCuidador.agregadoFamiliar }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Nr Filhos -->
+                                        <label style="margin: 0px;" class="form-label">Número de Filhos</label>
+                                        <b>{{ formCuidador.nrFilhos }}</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <!-- Estado de Saude -->
+                                        <label style="margin: 0px;" class="form-label">Estado de Saúde Atual</label>
+                                        <b>{{ formCuidador.autoAvaliacaoEstadoSaude }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Diagnosticos -->
+                                        <label style="margin: 0px;" class="form-label">Diagnósticos do cuidador</label>
+                                        <select multiple class="form-select form-select-sm" style="font-weight: bold;" name="doenca" id="doenca">
+                                            {% for doenca in doencas %}
+                                                <option {% if doenca in patient.diagnosticos.all %}selected{% endif %}
+                                                        value="{{ doenca.id }}">{{ doenca.nome }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <!-- Inserir novo diagnostico -->
+                                        <label style="margin: 0px;" class="form-label">Outros diagnósticos (comorbilidades)</label>
+                                        <input class="form-text" style="margin-top: 0rem; font-weight: bold;" type="text"
+                                        name="outra-doenca" id="outra-doenca">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                        <p class="m-0 fw-bold" style="margin: 5px;font-size: 26px;color: #4EB4BE; border-bottom: none; ">
+                                            Atividade de Cuidador
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <!-- Motivo Participante -->
+                                        <label style="margin: 0px;" class="form-label">Motivo da dependência do Participante</label>
+                                        <b>{{ formCuidador.motivoDependecia }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Se vive com o participante -->
+                                        <label style="margin: 0px;" class="form-label">Vive com o Participante?</label>
+                                        <b>{{ formCuidador.viveComParticipante }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Presta Cuidados -->
+                                        <label style="margin: 0px;" class="form-label">Presta cuidados há quantos meses?</label>
+                                        <b>{{ formCuidador.tempoCuidados_meses }}</b>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td colspan='3'>
+                                        <!-- Motivo Participante -->
+                                        <div style="display: flex;">
+                                            <label style="margin: 0px; width: fit-content; margin-right: 5px;" class="form-label">Motivo de se tornar cuidador</label>
+                                            <button type="button" data-toggle="tooltip" data-placement="top" title="Ex. compromisso, amor, responsabilidade, doença da pessoa cuidada, não haver mais ninguém para prestar os cuidados, razões afetivas">
+                                                <i style="color: var(--bs-warning);font-size: 20px;" class="fas fa-info-circle"></i></a>
+                                            </button>
+                                        </div>
+                                        <b>{{ formCuidador.motivoDependecia }}</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td>
+                                        <!-- Nr Familiares -->
+                                        <label style="margin: 0px;" class="form-label">Nrº de Familiares envolvidos na assistência</label>
+                                        <b>{{ formCuidador.prestadoresCuidadosFamiliares }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Se vive com o participante -->
+                                        <label style="margin: 0px;" class="form-label">Nrº de Amigos envolvidos na assistência</label>
+                                        <b>{{ formCuidador.prestadoresCuidadosAmigos }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Presta Cuidados -->
+                                        <label style="margin: 0px;" class="form-label">Nrº de Vizinhos envolvidos na assistência</label>
+                                        <b>{{ formCuidador.prestadoresCuidadosVizinhos }}</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td>
+                                        <!-- Nr Familiares -->
+                                        <label style="margin: 0px;" class="form-label">Nrº de Profissionais de Apoio Domiciliário envolvidos na assistência</label>
+                                        <b>{{ formCuidador.prestadoresCuidadosProfissionaisSAD }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Se vive com o participante -->
+                                        <label style="margin: 0px;" class="form-label">Nrº de Profissionais de Centro de Dia envolvidos na assistência</label>
+                                        <b>{{ formCuidador.prestadoresCuidadosProfissionaisCD }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Presta Cuidados -->
+                                        <label style="margin: 0px;" class="form-label">Nrº de Outros envolvidos na assistência</label>
+                                        <b>{{ formCuidador.prestadoresCuidadosOutros }}</b>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <!-- Nivel contribuicao -->
+                                        <label style="margin: 0px;" class="form-label">Envolvimento enquanto cuidador</label>
+                                        <b>{{ formCuidador.nivelContribuicao }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Periodicidade  -->
+                                        <label style="margin: 0px;" class="form-label">Periodicidade do Cuidado Prestado</label>
+                                        <b>{{ formCuidador.periodicidadeCuidado }}</b>
+                                    </td>
+
+                                    <td>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                        <p class="m-0 fw-bold" style="margin: 5px;font-size: 26px;color: #4EB4BE;">
+                                            Caracterização de um dia
+                                        </p>
+                                    </td>
+                                    <td colspan='3'>
+                                        <label style="margin: 0px;" class="form-label">Caracterização de um dia normal, indicando o tempo despendido nas diferentes atividades de apoio realizadas ao longo do dia (com respeito às questões precedentes)</label>
+
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td colspan='2'>
+                                        <label style="margin: 0px;" class="form-label">Descrição de um dia normal</label>
+                                        <b>{{ formCuidador.diaNormal }}</b>
+                                    </td>
+                                
+                                </td>
+                                <td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td>
+                                        <label style="margin: 0px;" class="form-label">Tempo por dia/noite despendido a dormir [horas]</label>
+                                        <b>{{ formCuidador.diaNormal30DiasDormir_minutos }}</b>
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td colspan="2">
+                                        <label style="margin: 0px;" class="form-label">Tempo despendido a ajudar com ir à casa de banho, alimentar-se, vestir-se, arranjar-se, andar e tomar banho [horas]</label>
+                                        <b>{{ formCuidador.diaNormal30DiasTarefasWC_minutos }}</b>
+                                    </td>
+
+                                    <td>
+                                        <label style="margin: 0px;" class="form-label">Dias despendidos a ajudar nestas atividades (Últimos 30 dias)</label>
+                                        <b>{{ formCuidador.diaNormal30DiasTarefasWC_dias }}</b>
+                                    </td>
+
+             
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td colspan="2">
+                                        <label style="margin: 0px;" class="form-label">Tempo despendido a ajudar com ir às compras, preparar as refeições, cuidar da casa, tratar da roupa, transporte, tomar medicação e gerir assuntos financeiros [horas]</label>
+                                        <b>{{ formCuidador.diaNormal30DiasTarefasCasa_minutos }}</b>
+                                    </td>
+
+                                    <td>
+                                        <label style="margin: 0px;" class="form-label">Dias despendidos a ajudar nestas atividades? (Últimos 30 dias)</label>
+                                        <b>{{ formCuidador.diaNormal30DiasTarefasCasa_dias }}</b>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td style="border-bottom: none; ">
+                                    </td>
+                                    <td colspan="2">
+                                        <label style="margin: 0px;" class="form-label">Tempo despendido a supervisionar o doente [horas]</label>
+                                        <b>{{ formCuidador.diaNormal30DiasSupervisao_minutos }}</b>
+                                    </td>
+
+                                    <td>
+                                        <label style="margin: 0px;" class="form-label">Dias despendidos a ajudar nestas atividades? (Últimos 30 dias)</label>
+                                        <b>{{ formCuidador.diaNormal30DiasSupervisao_dias }}</b>
+                                    </td>
+
+                                </tr>
+
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="display: flex; flex-direction: row; justify-content: flex-end; gap: 10px">
+                        <button data-href="{% url 'protocolo:profile_cuidador' cuidador.id %}" class="btn jq-btn mb-btn-outline" style="width: 150px">
+                            <i class="fa-solid fa-times"></i> Cancelar
+                        </button>
+
+                        <button type="submit" data-href="{% url 'protocolo:cuidador_update' cuidador.id %}" class="btn btn-update-profile mb-btn" style="width: 150px; color: white">
+                            <i class="fa fa-floppy-disk"></i> Gravar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

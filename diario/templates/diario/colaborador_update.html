@@ -1,0 +1,230 @@
+{% extends 'diario/base.html' %}
+{% load diario_tags %}
+{% load static %}
+{% block main %}
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                </div>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div style="display: flex;flex-direction: row;justify-content: space-between">
+                                    <div class="card-body" style="padding: 8px">
+                                        <p class="m-0 fw-bold" style="margin: 5px; font-size: 26px; color: #4EB4BE">
+                                            Editar Colaborador</p>
+                                        <br>
+                                        {% if error_message %}
+                                            <p class="m-0 fw-bold fs-5">{{ error_message }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <form action="" class="row g-3" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="container text-start">
+                            <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="3" class="align-content-center align-middle" style="width: 0%">
+                                                    <!-- Imagem -->
+                                                    {% if dinamizador and dinamizador.imagem %}
+                                                        <div class="circle-image">
+                                                            <img src="{{ dinamizador.imagem.url }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        </div>
+                                                    {% elif mentor and mentor.imagem %}
+                                                        <div class="circle-image">
+                                                            <img src="{{ mentor.imagem.url }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        </div>
+                                                    {% elif avaliador and avaliador.imagem %}
+                                                        <div class="circle-image">
+                                                            <img src="{{ avaliador.imagem.url }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="circle-image">
+                                                            <img src="{% static 'protocolo/img/placeholder-avatar.png' %}" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        </div>
+                                                    {% endif %}
+                                                </td>
+
+                                                <td>
+                                                    <div class="fieldWrapper">
+                                                        <label for="{{ formColaborador.nome.id_for_label }}">{{ formColaborador.nome.label }}: </label>
+                                                        <input style="font-weight: bold" type="text" id="{{ formColaborador.nome.id_for_label }}"
+                                                               name="{{ formColaborador.nome.html_name }}"
+                                                               value="{{ colaborador.first_name }} {{ colaborador.last_name }}">
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="fieldWrapper">
+                                                        <label for="{{ formColaborador.sexo.id_for_label }}">Género: </label>
+                                                        <b>{{ formColaborador.sexo }}</b>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div style="display: flex; gap: 8px">
+                                                        <div class="fieldWrapper">
+                                                            <label for="{{ formColaborador.username.id_for_label }}">{{ formColaborador.username.label }}: </label>
+                                                            <input readonly style="font-weight: bold; color: lightslategray;" type="text" id="{{ formColaborador.username.id_for_label }}"
+                                                                   name="{{ formColaborador.username.html_name }}"
+                                                                   {% if dinamizador %}
+                                                                   value="{{ dinamizador.user.username }}"
+                                                                   {% elif mentor %}
+                                                                   value="{{ mentor.user.username }}"
+                                                                    {% else %}
+                                                                   value="{{ colaborador.username }}"
+                                                                    {% endif %}
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <div style="display: flex; gap: 8px">
+                                                        <div class="fieldWrapper">
+                                                            <label for="{{ formColaborador.telemovel.id_for_label }}">{{ formColaborador.telemovel.label }}: </label>
+                                                            {% if dinamizador and dinamizador.telemovel %}
+                                                                <input style="font-weight: bold" type="text"
+                                                                       id="{{ formColaborador.telemovel.id_for_label }}"
+                                                                       name="{{ formColaborador.telemovel.html_name }}"
+                                                                       value="{{ dinamizador.telemovel }}">
+                                                            {% elif mentor and mentor.telemovel %}
+                                                                <input style="font-weight: bold" type="text"
+                                                                       id="{{ formColaborador.telemovel.id_for_label }}"
+                                                                       name="{{ formColaborador.telemovel.html_name }}"
+                                                                       value="{{ mentor.telemovel }}">
+                                                            {% elif avaliador and avaliador.telemovel %}
+                                                                <input style="font-weight: bold" type="text"
+                                                                       id="{{ formColaborador.telemovel.id_for_label }}"
+                                                                       name="{{ formColaborador.telemovel.html_name }}"
+                                                                       value="{{ avaliador.telemovel }}">
+                                                            {% else %}
+                                                                <!-- Provide a default value or handle the case when the object is None -->
+                                                                <input style="font-weight: bold" type="text"
+                                                                       id="{{ formColaborador.telemovel.id_for_label }}"
+                                                                       name="{{ formColaborador.telemovel.html_name }}"
+                                                                       value="N/A">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <input type="hidden" name="password" value="@MentHA@23" id="id_password">
+
+                                                <td>
+                                                    <div style="display: flex; gap: 8px">
+                                                        <div class="fieldWrapper">
+                                                            <label for="{{ formColaborador.email.id_for_label }}">{{ formColaborador.email.label }}: </label>
+                                                            {% if dinamizador and dinamizador.email %}
+                                                                <input style="font-weight: bold" type="text" id="{{ formColaborador.email.id_for_label }}"
+                                                                       name="{{ formColaborador.email.html_name }}" value="{{ dinamizador.email }}">
+                                                            {% elif mentor and mentor.email %}
+                                                                <input style="font-weight: bold" type="text" id="{{ formColaborador.email.id_for_label }}"
+                                                                       name="{{ formColaborador.email.html_name }}" value="{{ mentor.email }}">
+                                                            {% elif colaborador and colaborador.email %}
+                                                                <input style="font-weight: bold" type="text" id="{{ formColaborador.email.id_for_label }}"
+                                                                       name="{{ formColaborador.email.html_name }}" value="{{ colaborador.email }}">
+                                                            {% else %}
+                                                                <input style="font-weight: bold" type="text" id="{{ formColaborador.email.id_for_label }}"
+                                                                       name="{{ formColaborador.email.html_name }}" value="N/A">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    <div style="display: flex; gap: 8px">
+                                                        <div class="fieldWrapper">
+                                                            <label for="tipo_colaborador">Que cargos terá este
+                                                                colaborador: </label>
+                                                            <br>
+                                                            <div style="border: #4eb4be 1px solid; border-radius: 5px; padding: 5px">
+                                                                <div>
+                                                                <div style="display: flex">
+                                                                    <input style="font-weight: bold; margin-bottom: 5px;" type="checkbox" name="tipo_colaborador"
+                                                                           value="dinamizador"
+                                                                            {% if dinamizador %}
+                                                                           checked
+                                                                            {% endif %}
+                                                                           id="dinamizador"
+                                                                    >
+                                                                    <label for="dinamizador" style="color:black; margin-left: 5px; margin-bottom: 5px;"><b>Dinamizador</b></label>
+                                                                </div>
+                                                                </input>
+
+                                                                <div style="display: flex">
+                                                                    <input style="font-weight: bold; margin-bottom: 5px;" type="checkbox" name="tipo_colaborador"
+                                                                           value="mentor"
+                                                                            {% if mentor %}
+                                                                           checked
+                                                                            {% endif %}
+                                                                           id="mentor"
+                                                                    >
+                                                                    <label for="mentor" style="color:black; margin-left: 5px; margin-bottom: 5px;"><b>Mentor</b></label>
+                                                                    </input>
+                                                                </div>
+
+                                                                <div style="display: flex">
+                                                                    <input style="font-weight: bold;" type="checkbox" name="tipo_colaborador"
+                                                                           value="avaliador"
+                                                                            {% if avaliador %}
+                                                                           checked
+                                                                            {% endif %}
+                                                                           id="avaliador"
+                                                                    >
+                                                                    <label for="avaliador" style="color:black; margin-left: 5px;"><b>Avaliador</b></label>
+                                                                    </input>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="fieldWrapper">
+                                                        <label for="{{ formColaborador.nascimento.id_for_label }}">{{ formColaborador.nascimento.label }}: </label>
+                                                        <b>{{ formColaborador.nascimento }}</b>
+                                                    </div>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                <div style="display: flex; flex-direction: row; justify-content: flex-end; gap: 10px;">
+                                    <button type="submit" class="btn mb-btn-outline" style="width: 150px">
+                                        <i class="fa-solid fa-times"></i> Cancelar
+                                    </button>
+
+                                    <button type="submit" class="btn mb-btn"
+                                            style="width: 150px; color: white">
+                                        <i class="fa fa-floppy-disk"></i> Gravar
+                                    </button>
+                                </div>
+                                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

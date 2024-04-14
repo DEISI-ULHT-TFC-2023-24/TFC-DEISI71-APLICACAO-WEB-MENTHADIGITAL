@@ -1,0 +1,125 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                </div>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div style="display: flex;flex-direction: row;justify-content: space-between">
+                                    <div class="card-body" style="padding: 8px">
+                                        <p class="m-0 fw-bold" style="margin: 5px; font-size: 26px; color: #4EB4BE">
+                                            Editar Mentor</p>
+                                        <br>
+                                        {% if error_message %}
+                                            <p class="m-0 fw-bold fs-5">{{ error_message }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <form action="{% url 'diario:group_members' grupo_id %}">
+                                            <button type="submit" class="btn mb-btn-outline" style="width: 150px">
+                                                <i class="fa-solid fa-angle-left"></i> Anterior
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <form action="" class="row g-3" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div style="display: flex;gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 70%">
+                                                        <label for="{{ formMentor.nome.id_for_label }}">{{ formMentor.nome.label }}: </label>
+                                                        <input type="text" id="{{ formMentor.nome.id_for_label }}"
+                                                               name="{{ formMentor.nome.html_name }}"
+                                                               value="{{ mentor.nome }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 30%">
+                                                        <label for="{{ formMentor.sexo.id_for_label }}">{{ formMentor.sexo.label }}: </label>
+                                                        {{ formMentor.sexo }}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 100%">
+                                                        <label for="{{ formMentor.username.id_for_label }}">{{ formMentor.username.label }}: </label>
+                                                        <input type="text" id="{{ formMentor.username.id_for_label }}"
+                                                               name="{{ formMentor.username.html_name }}"
+                                                               value="{{ mentor.user.username }}">
+                                                    </div>
+                                                    </div>
+
+                                                    <input type="hidden" name="password" value="@MentHA@23" id="id_password">
+                                                </div>
+                                                <div class="fieldWrapper" style="width: 100%">
+                                                    <label for="{{ formMentor.email.id_for_label }}">{{ formMentor.email.label }}: </label>
+                                                    <input type="text"
+                                                           id="{{ formMentor.email.id_for_label }}"
+                                                           name="{{ formMentor.email.html_name }}"
+                                                           value="{{ mentor.email }}">
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formMentor.nacionalidade.id_for_label }}">{{ formMentor.nacionalidade.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formMentor.nacionalidade.id_for_label }}"
+                                                               name="{{ formMentor.nacionalidade.html_name }}"
+                                                               value="{{ mentor.nacionalidade }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formMentor.telemovel.id_for_label }}">{{ formMentor.telemovel.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formMentor.telemovel.id_for_label }}"
+                                                               name="{{ formMentor.telemovel.html_name }}"
+                                                               value="{{ mentor.telemovel }}">
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formMentor.localizacao.id_for_label }}">{{ formMentor.localizacao.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formMentor.localizacao.id_for_label }}"
+                                                               name="{{ formMentor.localizacao.html_name }}"
+                                                               value="{{ mentor.localizacao }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formMentor.nascimento.id_for_label }}">{{ formMentor.nascimento.label }}: </label>
+                                                        {{ formMentor.nascimento }}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; flex-direction: row; justify-content: flex-start">
+                                                    <div class="col-md-6">
+                                                        <button type="submit" class="btn mb-btn-outline"
+                                                                style="width: 150px; color: white">
+                                                            <i class="fa fa-floppy-disk"></i> Editar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

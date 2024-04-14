@@ -1,0 +1,651 @@
+:root{
+    --mentha-blue: #4EB4BE;
+    --mentha-blue-dark: #1e7d85;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans';
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+p, li {    color: black;}
+
+main{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+}
+
+#myVideo {
+    object-fit: cover;
+    object-position: left top;
+    min-height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: -1;
+    filter: brightness(40%);
+}
+
+header {
+    position: sticky;
+    /* width: 100vw; */
+    height: 7em;
+    top: 0;
+    z-index: 5;
+    color: gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2em;
+    background-color: none;
+    opacity: 1;
+    transition: opacity 0.5s, background-color 0.5s;
+}
+
+#content {
+    z-index: 0;
+    overflow:hidden;
+}
+
+/* #content > div {
+    height: calc(100vh - 4em - 7em);
+} */
+
+header img {
+    height: 4em;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: whitesmoke;
+    padding: 0.2em 0.5em;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+#aplicacoes .aplicacao:hover,
+#programa .caixa {
+  cursor: pointer;
+}
+
+
+
+#mentha-cog
+#a-videoconferencia,
+#a-logout {
+    display: none;
+}
+
+.espacolista,
+div.hero {
+    height: calc(100vh - 7em - 5em);
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    padding: 3em 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.espacolista {
+    height: 0;
+    padding: 1em 0;
+}
+
+.slogan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10vw;
+}
+
+.slogan .tituloSlogan {
+    font-weight: 600;
+    font-size: 4em;
+    color: #4EB4BE;
+    text-align: center;
+}
+
+.slogan .textoSlogan {
+    font-size: 1.5em;
+    font-style: italic;
+    color: whitesmoke;
+    line-height: 2;
+    text-align: center;
+    max-width: 40ch;
+}
+
+
+.next {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    font-size: 1.5em;
+
+    color: white;
+    padding: 0;
+    line-height: 0.9em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.material-symbols-outlined {
+    padding: 0;
+    margin: 0;
+    font-size: 1.5em;
+    color: white;
+}
+
+.blue,
+.branco {
+    font-size: 1em;
+    width: 100vw;
+    max-width: 900px;
+    margin: auto;
+    padding: 5ch 5ch;
+    border-radius: 1ch;
+/*    box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+*/
+    background: whitesmoke;
+    opacity: 0.8;
+}
+
+input { font-size: 2em; color:black;}
+.blue {
+    background: #4EB4BE;
+}
+
+.branco {
+    background: whitesmoke;
+}
+
+.titulo {
+    padding: 0.5em 0 0.5em 0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.branco .titulo {
+    color: #4EB4BE;
+}
+
+.blue .titulo {
+    color: white;
+}
+
+.subtitulo {
+    padding: 0.5em 0 0.5em 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.blue .subtitulo {
+    color: white;
+}
+
+.branco .subtitulo {
+    color: #4EB4BE;
+}
+
+.texto p {
+    text-align: justify;
+    line-height: 1.5;
+    /* margin: 0 0 0.7em 0; */
+}
+
+.blue b {
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+.branco b {
+    font-weight: bold;
+    color: #4EB4BE;
+}
+
+li {
+    line-height: 1.5;
+    margin: 0.7em 0 0.7em 1em;
+}
+
+footer {
+    font-size: 0.8em;
+    height: 4em;
+    color: white;
+    /* width: 100vw; */
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    padding: 0 2em;
+    background-color: none;
+    opacity: 1;
+    transition: opacity 0.5s, background-color 0.5s;
+
+}
+
+.close {opacity: 1;}
+
+footer img {
+    height: 2em;
+}
+
+header,
+footer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+footer > * {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+}
+
+footer .parceirosfooter {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0;
+}
+
+footer img {
+    margin: 0 0 0 8px;
+}
+
+
+/******PARCEIROS******************************/
+
+
+/* #parceiros {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+} */
+
+#parceiros .logo {
+    display: block;
+    width: 3em;
+    margin: 1em;
+}
+
+#parceiros a {
+    text-decoration: none;
+    /* font-weight: 600; */
+}
+
+#parceiros .parceiro div.texto {
+    display: none;
+}
+
+#parceiros .parceiro .subtitulo * {
+    display: block;
+    text-align: left;
+}
+
+#parceiros .parceiro .subtitulo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1em;
+}
+
+/****** Equipa ******************************/
+
+/* 
+#equipa a {
+    text-decoration: none;
+    font-weight: 600;
+} 
+*/
+
+#equipa .descricao {
+    display: none;
+    padding-left: 35em;
+}
+
+#equipa .investigador {
+    padding: 2ch 5ch;
+}
+
+#equipa .investigador .nome * {
+    text-align: left;
+}
+
+#equipa .investigador .nome {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1em;
+}
+
+
+/******CONTACTO******************************/
+
+
+#contacto th {
+    color: white;
+    font-weight: normal;
+    text-align: right;
+    padding-right: 3px;
+    vertical-align: top;
+}
+
+#contacto table {
+    border-spacing: 0 1em;
+}
+
+#contacto [for^="id_nome"]::after,
+#contacto [for^="id_email"]::after,
+#contacto [for^="id_assunto"]::after,
+#contacto [for^="id_mensagem"]::after,
+#contacto .nota::before {
+    content: ' *';
+    font-size: 0.7rem;
+    vertical-align: super;
+    color: red;
+}
+
+
+#contacto [for^="id_referenciacao"]::after,
+#contacto [for^="id_telefone"]::after {
+    content: '__';
+    font-size: 0.7rem;
+    color: #4EB4BE;
+}
+
+#contacto .nota {
+    font-size: 0.7em;
+    color: white;
+    font-style: italic;
+}
+
+#contacto tr td:nth-child(2) {
+    width: 100%;
+}
+
+#contacto input {
+    color: black;
+}
+
+/******HOME INDEX******************************/
+
+#home .parceiros div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#home .parceiros .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1em 0 0;
+}
+
+#home .parceiros .logo img {
+    display: block;
+    width: 2em;
+    padding-right: 0.5em;
+}
+
+#home .parceiros {
+    display: grid;
+    grid-template-columns: 4vw 1fr;
+    gap: 1vw;
+}
+
+#home .parceiros a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #4EB4BE;
+}
+
+/******PARCEIROS******************************/
+
+#parceiros {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#parceiros span.material-symbols-outlined {
+    margin-left: auto;
+}
+
+#parceiros .logo {
+    display: block;
+    width: 3em;
+}
+
+#parceiros .subtitulo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#parceiros a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#parceiros .subtitulo {
+    text-align: left;
+}
+
+#parceiros div.texto {
+    display: none;
+}
+
+
+/** noticias ****************************************/
+
+#noticias .subtitulo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#noticias .subtitulo .right {
+    font-size: 0.7em;
+} 
+
+#noticias img {
+   display: block;
+   width: 50%;
+}
+
+
+#noticias .imagem {
+    padding-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+
+/** cronograma *************************************************/
+
+
+#projeto .cronograma {
+    display:block;
+}
+
+
+#projeto .lista {
+    display:none;
+}
+
+.cronograma {
+    position: relative;
+  }
+  
+  .cronograma table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+  .cronograma .agora {
+    position:absolute;
+    border: 1px solid #4EB4BE;
+    filter: brightness(60%);
+    height:100%;
+    background:white;
+    left: calc(40% + 2 / 12 * 60% );
+    bottom:0px;
+  }
+ 
+  .cronograma td {
+    padding: 0.5em;
+    text-align:center;
+    width: calc( 1 / 12 * 60% );
+  }
+  
+  /* ano alinhado à esquerda */ 
+  .cronograma tr:first-child td {
+    font-family: consolas;
+    text-align:left;
+    font-weight: bold;
+  }
+
+  /* nomes dos meses em monospace */
+  .cronograma tr:nth-child(2) td {
+    font-family: consolas;
+  }
+  
+  
+  /* primeira coluna */
+  .cronograma tr td:first-child {
+    text-align:left;
+    width:40%;
+    font-weight: bold;
+    color: #4EB4BE;
+  }
+  
+  .cronograma .task {
+    background: whitesmoke;
+    border: 1px solid #4EB4BE;
+  }
+  
+  .cronograma .done {
+    background: #4EB4BE;
+  }
+
+/** APP LIST **********************************************/
+.mb-btn{
+    color: white!important;
+    background-color: var(--mentha-blue)!important;
+    border-color: var(--mentha-blue)!important;
+}
+
+/** @media query **********************************************/
+
+@media screen and (max-width: 1000px) {
+
+    .objetivos,
+    .expectativas,
+    .impacto {
+        display: none;
+    }
+
+    header img {
+        height: 2em;
+
+    }
+
+    nav {
+        padding-top: 0.5em;
+    }
+
+    /* nav a {
+        font-size: 0.8em;
+    } */
+
+    header {
+        padding-top: 0.5em;
+        align-items: flex-start;
+        /* flex-direction: column;
+        justify-content: center; */
+    } 
+
+    header ul {
+
+        border: 1px solid white;
+        border-radius: 5px;
+        background-color: black;
+    } 
+
+    .blue,
+    .branco {
+        padding: 2ch 5ch;
+    }
+
+    .slogan {
+        padding: 2ch 5ch;
+        text-align: center;
+    }
+
+    .slogan .tituloSlogan {
+        font-size: 2.2em;
+    }
+
+    .slogan .textoSlogan {
+        font-size: 1em;
+    }
+
+    footer {
+        justify-content: center;
+        gap: 1em;
+    }
+
+    footer .parceirosfooter {
+        display: none;
+    }
+
+    form .nota {
+        color: black;
+    }
+
+    #projeto .cronograma {
+        display:none;
+    }
+
+    #projeto .lista {
+        display:block;
+    }
+}
+
+

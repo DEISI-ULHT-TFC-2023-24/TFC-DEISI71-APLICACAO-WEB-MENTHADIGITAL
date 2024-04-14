@@ -1,0 +1,118 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+
+<script>
+    function showPopup() {
+            var popup = document.getElementById('popup');
+            popup.classList.toggle('show');
+    }
+
+    function hidePopup() {
+            var popup = document.getElementById('popup');
+            popup.classList.toggle('show');
+    }
+
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                } else {
+                        tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+</script>
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col align-self-center">
+                <div class="">
+                    <div class="card-body" style="padding: 8px">
+                        <p class="m-0 fw-bold"
+                           style="margin: 5px; font-size: 26px; color: #4eb4be">Proxima Sessão</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="card shadow">
+        <div class="card-body">
+            {% if ss == True %}
+            <div class="table-responsive">
+                <table class="table table-hover" style="vertical-align:middle">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center;"><strong>Grupo</strong></th>
+                        <th style="text-align: center;"><strong>Sessão</strong></th>
+                        <th style="text-align: center;"><strong>Data</strong></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td style="text-align: center;">{{ proxima.grupo }}</td>
+                        <td style="text-align: center;">{{ proxima.sessao }}</td>
+                        <td style="text-align: center;">{{ proxima.data }}</td>
+                        <td style="text-align: center; vertical-align: middle;">
+                            <div class="input-group mb-3">
+                                <a href="#" onclick="showPopup()">
+                                    <div style="margin: auto">
+                                        {{ svg|safe }}
+                                    </div>
+                                </a>
+                            </div>
+                        </td>
+                        <a href="#" onclick="showPopup()">
+                            <div id="popup" class="popup">
+                                <div id="div-no-click" class="popup-content" style="pointer-events: none;">
+                                    <div class="input-group mb-3">
+                                        <div style="margin: auto">
+                                            {{ svg_pop|safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <td style="text-align: center; vertical-align: middle;"><p>ou</p></td>
+
+                        <td style="text-align: center;">
+                            <form action="{%  url 'diario:presencas_sessao' proxima.id %}">
+                                <button class="btn mb-btn-outline">
+                                    <i class="fa-solid fa-door-open"></i> Entrar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    </tbody>
+                    <!-- Bold footer line -->
+
+                </table>
+            </div>
+            {% else %}
+            Sem nenhuma sessao brevemente
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<br>
+{% endblock %}

@@ -1,0 +1,191 @@
+{% load static %}
+{% block head %}    
+<script src="{% static 'protocolo/js/parte.js' %}"></script> 
+ {% endblock %}
+
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="container-fluid">
+                <div class="card shadow">
+                    <div class="card-header py-3">  
+                        <p class="text-primary m-0 fw-bold" style="font-size: 20px;">{{ protocol.name }}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                            aria-describedby="dataTable_info">
+                            <table class="table my-0 table-hover-light" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;width: 44%">Partes</th>
+                                        <th style="text-align: left;width: 33%">Progresso</th>
+                                        <th style="text-align: center;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    {% for part,answered,percentage in parts %}
+                                    <!-- Iteration -->
+                                    <!-- Name -->
+                                    <td style="margin-top: 0px;padding-bottom: 0px;">
+                                        <a href="#" class="jq-btn no-decor"
+                                            data-href="{% url 'protocolo:areas' protocol.id part.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                                            <p style="margin-top: 10px;">
+                                                {{ part.part.name }}
+                                            </p>
+                                        </a>
+                                    </td>
+
+                                    <!-- Progress Bar --> <!--Verificar o CSS da barra de progresso-->
+                                    {% if part.part.name != "MentHA-Risk" %}
+                                    <td style="padding-bottom: 0px;">
+                                        <div class="progress" style="text-align: center;margin-top: 10px;">
+                                            <div class="progress-bar" aria-valuenow="{{ percentage }}" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: {{ percentage }}%;">
+                                                {{ percentage }}%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    <p style="margin-top: 10px;">
+                                                {{ part.data }}
+                                            </p>
+                                    </td>
+                                    {% else %}
+                                    <td></td>
+                                    
+                                    <td>
+                                        {{part.data}}
+                                    </td>
+                                    {% comment %} action="{% url 'protocolo:report_risk' %}" {% endcomment %}
+                                    {% endif %}
+                                    <!-- Button -->
+                                    <td style="text-align: right; padding-right:25px;">
+                                        <a href="#" class="jq-btn"
+                                        {% if part.part.name != "MentHA-Risk" %}
+                                            data-href="{% url 'protocolo:areas' protocol.id part.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                                            {% else %}
+                                                {% if part.part.data_atual != part.id %}
+                                                    data-href="{% url 'protocolo:question' protocol.id part.id risk_area.id pergunta_risk.section.dimension.instrument.id pergunta_risk.section.dimension.id pergunta_risk.section.id  patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                                                {% else %}
+                                                    data-href="{% url 'protocolo:nova_pagina_risk_report' %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                                                {% endif %}
+                                            {% endif %}>
+                                            <button class="btn btn-primary" type="button" style="border-radius: 217px;">
+                                                <i class="fa fa-chevron-right"
+                                                    style="border-left-width: 0px;font-size: 15px;text-align: center;"></i>
+                                            </button>
+                                        </a>
+                                    </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    <tr></tr>
+                                </tbody>
+                                <!-- Bold footer line -->
+                                <tfoot>
+                                    <tr>
+                                        <td><strong></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- Buttons -->
+                        <div class="flex-buttons">
+                            <button id="previous" class="btn jq-btn btn-primary flex-left mb-btn"
+                                data-href="{% url 'protocolo:protocol-participants' protocol.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}" type="button">
+                                <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+                            </button>
+                            
+                            <button id="btn-popup" class="btn btn-primary flex-left" type="button"> 
+                                <i class="fa-solid fa-plus"></i>&nbsp; Adicionar
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<br>
+<div id="wrapper-parts" style="display: none">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="container-fluid">
+                <div class="card shadow">
+                    <div class="card-header py-3">  
+                        <p class="text-primary m-0 fw-bold" style="font-size: 20px;"> Partes Disponiveis</p>
+                        <button id="btn-close" class="btn jq-btn btn-primary flex-left mb-btn" style="margin-left: 890px;" type="button"> 
+                                <i class="fa-solid fa-plus"></i>&nbsp;+
+                        </button>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                            aria-describedby="dataTable_info">
+                            <table class="table my-0 table-hover-light" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;width: 44%">Partes</th>
+                                        <th style="text-align: left;width: 33%">Progresso</th>
+                                        <th style="text-align: center;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    {% for part in parte %}
+                                    <!-- Iteration -->
+                                    <!-- Name -->
+                                    <td style="margin-top: 0px;padding-bottom: 0px;">
+                                        <a href="#" class="jq-btn no-decor"
+                                            data-href="{% url 'protocolo:areas' protocol.id part.id patient.id %}">
+                                            <p style="margin-top: 10px;">
+                                                {{ part.name }}
+                                            </p>
+                                        </a>
+                                    </td>
+                                    <td>
+
+                                    </td>
+
+                                    <!-- Button -->
+                                    <td style="text-align: right; padding-right:25px;">
+                                        <form action="javascript:void(0);" method="">
+                                        {% csrf_token %}    
+                                        <input id="part-{{ part.name }}" class="btn btn-primary part-checkbox" type="checkbox" value = "{{part.id}}">
+                                        <input value="{{patient.id}}" type="hidden" id="patientId">
+                                                {% comment %} <i class="fa fa-chevron-right"
+                                                    style="border-left-width: 0px;font-size: 15px;text-align: center;"></i> {% endcomment %}
+                                           
+                                    
+                                        </form>            
+                                    </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    <tr></tr>
+                                </tbody>
+                                <!-- Bold footer line -->
+                                <tfoot>
+                                    <tr>
+                                        <td><strong></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- Buttons -->
+                            <button id="btn-proxima-linha" class="btn btn-primary flex-left"
+                             type="button"> 
+                                <i class="fa-solid fa-plus"></i>&nbsp; Adicionar
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>

@@ -1,0 +1,29 @@
+<div id="login" class="hero">
+
+    <div class="espacolista"></div>
+
+    <div class="branco">
+
+        <div class="titulo">Login</div>
+        <div class="texto">
+            <p id="mensagem"></p>
+
+            <form id="form-login" action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <p><input type="text" name="username" placeholder="username" class="form-control"></p>
+                <p><input type="password" name="password" placeholder="password" class="form-control"></p>
+                <p><input type="submit" class="btn btn-secondary  btn-lg btn-block" value="Login"
+                          style="opacity:1; background-color:#4EB4BE;color:white;"></p>
+
+            </form>
+            <a style="color: gray;font-size: 1rem;margin-top: 0.5rem;" id="a-forgot" href="{% url 'mentha:forgot_password' %}">Recuperar palavra-passe</a>
+        </div>
+
+        <div class="app-list texto">
+
+        </div>
+    </div>
+
+    <div class="espacolista"></div>
+</div>

@@ -1,0 +1,10 @@
+<div>
+    <h6 class="mb-0 fw-bold">{{instrumento}}</h6>
+    <span class="badge bg-{% if dict_.ansiedade_quotation <= 10 %}success{% elif dict_.ansiedade_quotation <= 14 %}warning{% else %}danger{% endif %}">
+        Estado Ansiedade: {{dict_.ansiedade_evaluation}} ({{ dict_.ansiedade_quotation }})
+    </span>
+    <br>
+    <span class="badge bg-{% if dict_.depressao_quotation <= 10 %}success{% elif dict_.depressao_quotation <= 14 %}warning{% else %}danger{% endif %}">
+        Estado Depressão: {{dict_.ansiedade_evaluation}} ({{ dict_.depressao_quotation }})
+    </span>
+</div>

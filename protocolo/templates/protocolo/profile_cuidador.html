@@ -1,0 +1,531 @@
+{% load static %}
+{% block head %}
+<script src="{% static 'protocolo/js/profile.js' %}"></script>
+{% endblock %}
+{% load tags %}
+
+<style>
+    .circle-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    @media (max-width:1300px) {
+        .bcca-breadcrumb-item span {
+            display:none;
+        }
+    }
+</style>
+    
+<div class="container-fluid">
+    <div style="padding:8px">
+        <div class="bcca-breadcrumb">
+            <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;"></div>
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a href="#" data-href="{% url 'protocolo:profile_cuidador' cuidador.id %}">
+                        <i class="fa-solid fa-address-card" style="color:white;"></i>
+                        <span>{{ cuidador.nome }}</span>
+                    </a>
+                </div>
+
+            <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;"></div>
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a data-href="{% url 'protocolo:participants' %}" class="jq-btn">
+                        <i class="fa-solid fa-user-check" style="color:white;"></i>
+                        <span>MentHA-EVAL</span>
+                    </a>
+                </div>
+        </div>
+            <!-- Perfil-->
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" class="align-content-center align-middle" style="width: 0%">
+                                <!-- Imagem -->
+                                {% if cuidador.imagem %}
+                                    <div class="circle-image">
+                                        <img src="{{ cuidador.imagem.url }}"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                {% else %}
+                                    <div class="circle-image">
+                                        <img src="{% static 'protocolo/img/placeholder-avatar.png' %}"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                {% endif %}
+
+                                <div style="padding-top:10px; text-align:center">
+                                    <button data-href="{% url 'protocolo:cuidador_update' cuidador.id %}" class="btn jq-btn btn-outline-warning"><i class="fa fa-user-pen"></i> Alterar </button>
+                                </div>
+                        
+                            </td>
+
+                            <td class="text-start" style="text-align:center; width: 25%">
+                                <!-- Nome -->
+                                <label class="form-label">Nome</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.nome }}
+                                </p>
+                            </td>
+                            <td class="text-start" style="text-align:center; width: 25%">
+                                <!-- Telemovel -->
+                                <label class="form-label">Telemóvel</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.telemovel }}
+                                </p>
+                            </td>
+
+                            {% if cuidador.referenciacao == None %}
+                                <td class="text-start" style="text-align:center; width: 25%">
+                                    <!-- Referenciacao -->
+                                    <label class="form-label">Referenciação</label>
+                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                        Sem Informação
+                                    </p>
+                                </td>
+                            {% else %}
+                                <td class="text-start" style="text-align:center; width: 25%">
+                                    <!-- Referenciacao -->
+                                    <label class="form-label">Referenciação</label>
+                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                        {{ cuidador.referenciacao }}
+                                    </p>
+                                </td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>
+                                <!-- Data de Nascimento -->
+                                <label class="form-label">Data de Nascimento</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                                    {{ cuidador.nascimento }} ({{ age }} anos)
+                                </p>
+                            </td>
+                            <td>
+                                <!-- E-mail -->
+                                <label class="form-label">E-mail</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.email }}
+                                </p>
+                            </td>
+                            <td>
+                                <!-- Grupo CARE -->
+                                <label class="form-label">Grupo CARE</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                                    {% if not cuidador.grupo.all %}
+                                        Não tem grupo CARE
+                                    {% else %}
+                                        {% for grupo in cuidador.grupo.all %}
+                                            {{ grupo.nome }}
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <!-- Sexo -->
+                                <label class="form-label">Sexo</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.sexo }}
+                                </p>
+                            </td>
+
+                            <td>
+                                <!-- Escolaridade -->
+                                <label class="form-label" style="margin: 0px;">Escolaridade</label>
+                                <b>{{ cuidador.escolaridade }}</b>
+                            </td>
+
+                            <td>
+                                <!-- Pacientes -->
+                                <label class="form-label">Paciente(es)</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {% if not cuidador.participantes.all %}
+                                        Não tem paciente(es)
+                                    {% else %}
+                                        {% for participante in cuidador.participantes.all %}
+                                            {{ participante.nome }}
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            {% if cuidador.nacionalidade == "" %}
+                                <td>
+                                    <!-- Nacionalidade -->
+                                    <label class="form-label">Nacionalidade</label>
+                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                        Sem Informação
+                                    </p>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <!-- Nacionalidade -->
+                                    <label class="form-label">Nacionalidade</label>
+                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                        {{ cuidador.nacionalidade }}
+                                    </p>
+                                </td>
+                            {% endif %}
+
+                            {% if cuidador.localizacao == "" %}
+                                <td>
+                                    <!-- Localizacao -->
+                                    <label class="form-label">Localização</label>
+                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                        Sem Informação
+                                    </p>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <!-- Localizacao -->
+                                    <label class="form-label">Localização</label>
+                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                        {{ cuidador.localizacao }}
+                                    </p>
+                                </td>
+                            {% endif %}
+
+                            {% if not cuidador.participantes.all %}
+                                <td>
+                                    <!-- Grupo COG dos pacientes-->
+                                    <label class="form-label">Grupo COG do(s) paciente(es)</label>
+                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                        Sem Informação
+                                    </p>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <!-- Grupo COG dos pacientes-->
+                                    <label class="form-label">Grupo COG do(s) paciente(es)</label>
+                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                        {% for participante in cuidador.participantes.all %}
+                                            {% if not participante.grupo %}
+                                                Não tem grupo COG
+                                            {% else %}
+                                                {% for grupo in participante.grupo.all %}
+                                                    {{ grupo.nome }}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                </td>
+                            {% endif %}
+                        </tr>
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            
+            <!-- Agendamentos-->
+            <div class="" style="margin-top: 25px">
+                    <div class="card-header py-3">
+                        <p class="m-0 fw-bold mb-text fs-4">Avaliações</p>
+                    </div>
+                    
+                    <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                        aria-describedby="dataTable_info">
+                        <table class="table my-0 tabela-sessao tabletable-hover-light" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center; width:15%">Avaliação</th>
+                                    <th style="text-align:center; width:15%">Data</th>
+                                    <th style="text-align:center; width:15%">Hora</th>
+                                    <th style="text-align:center; width:20%">Progresso</th>
+                                    <th style="text-align:center; width:15%">Gerar Relatório</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="vertical-align:middle;">
+                                    {% for part,answered,percentage in partesdoutilizador %}
+                                    <!-- Part -->
+                                    <td style="vertical-align:middle;">
+                                        <a href="#" class="jq-btn"
+                                            {% if part.part.name != "MentHA-Risk" %}
+                                                data-href="{% url 'protocolo:areas' 1 part.id cuidador.id %}/is_cuidador"
+                                            {% else %}
+                                                data-href="{% url 'protocolo:question' 1 part.id risk_area.id pergunta_risk.section.dimension.instrument.id pergunta_risk.section.dimension.id pergunta_risk.section.id  cuidador.id %}/is_cuidador"
+                                            {% endif %}>
+
+                                            <button class="btn mb-btn" style="width:90%;justify-content: center; flex-start; text-align: left;" type="button">
+                                                <i class="fa-solid fa-eye" style="padding:10px; "></i> {{ part.part.name }}
+                                            </button>
+                                        </a>
+                                    </td>
+                                    
+
+                                    <!-- Date -->
+                                    <td style="vertical-align:middle; text-align:center;">
+                                        <p>
+                                            {{part.data.day}}/{{part.data.month}}/{{part.data.year}}
+                                        </p>
+                                    </td>
+
+                                    <!-- Hour -->
+                                    <td style="vertical-align:middle; text-align:center;">
+                                        <p>
+                                            {{part.time}}
+                                        </p>
+                                    </td>
+
+                                    <!-- Progress Bar -->
+                                    {% if part.part.name != "MentHA-Risk" %}
+                                        <td style="vertical-align: middle">
+                                            <div style="display: flex; flex-direction: column; align-items: center">
+                                                {% if percentage >= 0 and percentage <= 25 %}
+                                                    <div style="width: 80%; text-align: end; font-weight:bold; color: red;">
+                                                        {{ percentage }}%
+                                                    </div>
+                                                {% elif percentage > 25 and percentage < 50 %}
+                                                    <div style="width: 80%; text-align: end; font-weight:bold; color: coral;">
+                                                        {{ percentage }}%
+                                                    </div>
+                                                {% elif percentage >= 50 and percentage < 75 %}
+                                                    <div style="width: 80%; text-align: end; font-weight:bold; color: #DBA800;">
+                                                        {{ percentage }}%
+                                                    </div>
+                                                {% elif percentage >= 75 %}
+                                                    <div style="width: 80%; text-align: end; font-weight:bold; color: mediumseagreen;">
+                                                        {{ percentage }}%
+                                                    </div>
+                                                {% endif %}
+
+                                                <div class="progress" style="display: flex; height: 10px; width: 80%;background-color: white; border: 1px solid lightslategrey">
+                                                    <div class="progress-bar" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100"
+                                                         style="width: {{ percentage }}%; background-color: lightslategrey; font-size: 14px; color: white; height: 100%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {% else %}
+                                            <td style="vertical-align:middle; text-align:center;">
+                                                {% if percentage == 100 %}
+                                                    <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                {% else %}
+                                                    <i class="fa-solid fa-minus gray" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </td>
+                                    {% endif %}
+                                    
+                                    <!-- Report Button -->
+                                    {% if percentage != 0%}
+                                        {% if part.part.name != "MentHA-Risk" %}
+                                            <td style="vertical-align:middle; text-align:center;">
+                                                <a href="#" class="jq-btn" data-href="{% url 'protocolo:areas' 1 part.id cuidador.id %}?flag=cuidador"  style="text-align: center;">
+                                                    <button class="w-10 h-10 mb-btn rounded-circle flex m-auto justify-content-center align-items-center align-self-center" type="button" >
+                                                        <i class="fa fa-file-text-o" style="border-left-width: 0px;font-size: 15px;text-align: center;color:white;"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        {% else %}
+                                            {% comment %} <a href="{{ part.resolution.relatorio.url }}"> {% endcomment %}
+                                            <td style="vertical-align:middle; text-align:center;">
+                                                <a
+                                                    {% if part.risk.relatorio_word.url|length > 0 %}
+                                                        href="{{ part.risk.relatorio_word.url }}"
+                                                    {% else %}
+                                                        href="#"
+                                                    {% endif %} >
+                                                    <button class="w-10 h-10 mb-btn rounded-circle flex m-auto justify-content-center align-items-center align-self-center" type="button" >
+                                                        <i class="fa fa-file-text-o" style="border-left-width: 0px;font-size: 15px;text-align: center;color:white;"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        {% endif %}
+                                    {% else %}
+                                        <td style="vertical-align:middle; text-align:center;">
+                                            <i class="fa-solid fa-minus gray" aria-hidden="true"></i>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                                <form id="appointment-form" action="" method="POST" style="display:flex; align-items:flex-end; gap:10px">
+                                    {% csrf_token %}
+                                        <tr>
+                                            <!-- CUIDADOR -->
+						                    <!-- Os IDS das partes podem ser diferentes localmente e no servidor -->
+                                            <!-- Os IDS em baixo estao feitos para funcionar no servidor :) -->
+                                            <td>
+                                            {% if user_risk %}
+                                                <select name="part" class="form-control" required="" id="id_part">
+                                                    <option value="" selected="">---------</option>
+                                                    <optgroup label="Início">
+                                                    <option value="13">Questionario Sociodemográfico (Cuidador)</option>
+                                                    <optgroup label="MentHA Risk">
+                                                    <option value="9">Rastreio de AVC</option>
+                                                </select>
+                                            {% else %}
+                                                <select name="part" class="form-control" required="" id="id_part">
+                                                    <option value="" selected="">---------</option>
+                                                    <optgroup label="Início">
+                                                    <option value="13">Questionario Sociodemográfico (Cuidador)</option>
+                                                    <optgroup label="MentHA Risk">
+                                                    <option value="9">Rastreio de AVC</option>
+                                                    <optgroup label="MentHA CARE">
+                                                    <option value="10">0 meses</option>
+                                                    <option value="11">2 meses</option>
+                                                    <option value="12">6 meses</option>
+                                                </select>
+                                            {% endif %}
+                                            </td>
+                                            <td>
+                                                <input type="date" name="data" class="form-control" required="" id="id_data">
+                                            </td>
+                                            <td>
+                                                <input type="time" name="time" class="form-control" required="" id="id_time">
+                                            </td>
+                                    </form>
+                                        <td>
+                                            <button id="btn-popup" class="btn btn-primary btn-appointment mb-btn flex-left" type="submit" data-href="{% url 'protocolo:profile_cuidador' cuidador.id %}" style="width:100%;">
+                                                <i class="fa fa-calendar-plus-o"></i>&nbsp Agendar
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Appointment Button -->
+                    {% comment %} <form id="appointment-form" action="" method="POST" style="display:flex; align-items:flex-end; gap:10px">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div style="display:flex; flex-direction:row; align-items:center; text-align:center; width:15%">
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <div style="display:flex; text-align:center; width:20%; justify-content:center">
+                            <button id="btn-popup" class="btn btn-primary btn-appointment mb-btn flex-left" type="submit" data-href="{% url 'protocolo:profile_cuidador' cuidador.id %}" style="max-width:125px;">
+                                <i class="fa fa-calendar-plus-o"></i>&nbsp Agendar
+                            </button>
+                        </div>
+                    </form> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Visao Geral PROTOCOLO MENTHA-->
+            {% if user_risk is None or user_tudo %}
+            <div class="" style="margin-top: 25px">
+                <div class="">
+                    <div class="card-header py-3" style="display:flex; justify-content:space-between; align-items:center;border-radius: 15px;background: #4eb5be30;">
+                        <p style="font-size: 20px" class="m-0 mx-3 fw-bold mb-text fs-4">Visão geral do Protocolo MentHA</p>
+                        <button id="btn-abrir" class="btn btn-primary flex-left mb-btn mx-3" type="button" style="max-width:125px;"> 
+                            <i class="fa fa-chevron-down"></i>&nbsp Expandir
+                        </button>
+                    </div>
+                    <div class="card-body" id="card-profile" style="display:none">
+                        <div class="table-responsive" style="overflow-x:auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="position:sticky; left:0; background-color: rgba(255,255,255, 1); width:15ch;"></th>
+                                        {% for part in partedoutilizador %}
+                                            {% if part.part.name != 'MentHA-Risk' and part.part.name != 'Teste Livre' %}
+                                                <th style="text-align: center; width:15ch;">{{ part.part.name }} <p style="font-weight:normal;">{{part.data.day}}/{{part.data.month}}/{{part.data.year}}</p></th>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for text in overview_list %}
+                                        {% if text != "MentHA-Risk-area - MentHA-Risk-instrument" and text != "None" and text != "None - Fumadores" %}
+                                            <tr>
+                                                <td style="position:sticky; left: 0; background-color: rgba(255,255,255, 1)">{{ text }}</td>
+                                                {% for part in partedoutilizador %}
+                                                    {% if part.part.name != 'MentHA-Risk' and part.part.name != 'Teste Livre' %}
+                                                        {% get_if_done_from_percentage_list percentages part.id text as done_text %}
+                                                            {% if done_text == 'done' %}
+                                                        <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                            <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                                                            {% elif done_text == 'not done' or done_text == None %}
+                                                        <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                            <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                                            {% elif done_text == 'does not exist' %}
+                                                        <td style="background-color: rgba(0,0,0,0.0);text-align: center;">
+                                                            <i class="fas fa-window-minimize" style="color: rgba(0,0,0,0.1)"></i>
+                                                            {% endif %}
+                                                        </td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <tr></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <!-- Visao Geral MENTHA RISK-->
+            <div class="" style="margin-top: 25px">
+                <div class="">
+                    <div class="card-header py-3" style="display:flex; justify-content:space-between; align-items:center;border-radius: 15px;background: #4eb5be30;border-radius: 15px;background: #4eb5be30;">
+                        <p style="font-size: 20px" class="m-0 mx-3 fw-bold mb-text fs-4">Visão geral do MentHA Risk</p>
+                        <button id="btn-fechar" class="btn btn-primary flex-left mb-btn mx-3" style="max-width:125px"> 
+                            <i class="fa fa-chevron-down"></i>&nbsp Expandir
+                        </button> 
+                    </div>
+                    <div class="card-body" id="card-profile-risk" style="display:none">
+                        <div class="table-responsive" style="overflow-x:auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="position:sticky; left:0; background-color: rgba(255,255,255, 1); width:15ch;"></th>
+                                        {% for part in partedoutilizador %}
+                                            {% if part.part.name == 'MentHA-Risk' %}
+                                                <th style="text-align: center; width:15ch;">{{ part.part.name }} <p style="font-weight:normal;">{{part.data.day}}/{{part.data.month}}/{{part.data.year}}</p></th>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                    </tr>
+                                     <tr> 
+                                          
+                                            {% for exist in existing_risk %}
+                                                 {% if forloop.counter == 1 %}
+                                                    <td style="position:sticky; left: 0; background-color: rgba(255,255,255, 1)">Risco:</td> 
+                                                {% endif %}
+                                                {% if exist.risk.concluido  %}
+                                                    <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                                                        {{exist.risk.risco_de_enfarte}} %
+                                                    </td>
+                                                {% else %}
+                                                    <td style="text-align: center;background-color: rgba(255,0,0,0.1)">
+                                                    Por avaliar...
+                                                </td>
+                                                {% endif %}
+                                                {% empty %}
+                                                <td style="text-align: center;background-color: rgba(255,0,0,0.1)">
+                                                    <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                                                </td>
+                                            {% endfor %}
+                                        
+                                        
+                                    </tr>
+                                    <tr></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% comment %} <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                                            <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i> {% endcomment %}
+            
+    </div>
+    {% comment %} js crashava sem isto  {% endcomment %}
+    <div id ="btn-abrir"></div>
+
+</div>
+    
+

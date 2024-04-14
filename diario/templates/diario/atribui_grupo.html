@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Grupos</h1>
+
+<ul>
+    {% for grupo in grupos %}
+        <li>
+            <h4>{{ grupo }}</h4>
+        </li>
+        <ul>
+            <li>{{ grupo.diagnostico }}</li>
+            <li>{{ grupo.localizacao }}</li>
+            <li>{{ grupo.escolaridade }}</li>
+            <li>{{ grupo.localizacao }}</li>
+            <li>{{ grupo.referenciacao }}</li>
+        </ul>
+    {% endfor %}
+</ul>
+
+<h1>Info do Cuidador</h1>
+<ul>
+    <li>{{ cuidador.escolaridade }}</li>
+    <li>{{ cuidador.referenciacao }}</li>
+    <li>{{ cuidador.regime }}</li>
+    <li>{{ cuidador.localizacao }}</li>
+</ul>
+
+<h1>Inscrever no Grupo:</h1>
+<form action="{% url 'diario:atribui_grupo' cuidador.id %}" method="POST">
+{% csrf_token %}
+    <select name="grupo" id="">
+        {% for grupo in grupos %}
+            <option value="{{ grupo.id }}">{{ grupo }}</option>
+            {% endfor %}
+        <input type="submit">
+    </select>
+</form>
+</body>
+</html>

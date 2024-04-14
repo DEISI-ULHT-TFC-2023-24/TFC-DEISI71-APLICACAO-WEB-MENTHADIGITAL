@@ -1,0 +1,117 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                </div>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div style="display: flex;flex-direction: row;justify-content: space-between">
+                                    <div class="card-body" style="padding: 8px">
+                                        <p class="m-0 fw-bold" style="margin: 5px; font-size: 26px; color: #4EB4BE">
+                                            Registar Colaborador</p>
+                                        <br>
+                                        {% if error_message %}
+                                            <p class="m-0 fw-bold fs-5">{{ error_message }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <form action="{% url 'diario:colaboradores' %} ">
+                                            <button type="submit" class="btn mb-btn-outline" style="width: 150px">
+                                                <i class="fa-solid fa-angle-left"></i> Anterior
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <form action="" class="row g-3" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div style="display: flex;gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 70%">
+                                                        <label for="{{ formColaborador.nome.id_for_label }}">{{ formColaborador.nome.label }}: </label>
+                                                        {{ formColaborador.nome }}
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 30%">
+                                                        <label for="{{ formColaborador.sexo.id_for_label }}">{{ formColaborador.sexo.label }}: </label>
+                                                        {{ formColaborador.sexo }}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formColaborador.username.id_for_label }}">{{ formColaborador.username.label }}: </label>
+                                                        {{ formColaborador.username }}
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formColaborador.telemovel.id_for_label }}">{{ formColaborador.telemovel.label }}: </label>
+                                                        {{ formColaborador.telemovel }}
+                                                    </div>
+                                                    <input type="hidden" name="password" value="@MentHA@23"
+                                                           id="id_password">
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formColaborador.email.id_for_label }}">{{ formColaborador.email.label }}: </label>
+                                                        {{ formColaborador.email }}
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="tipo_colaborador">Que cargos terá este
+                                                            colaborador: </label>
+                                                        <br>
+                                                        <div style="border: #4eb4be 1px solid; border-radius: 5px; padding: 5px">
+                                                            <input type="checkbox" id="dinamizador" name="tipo_colaborador" value="dinamizador">
+                                                            <label for="dinamizador">Dinamizador</label>
+                                                            </input>
+                                                            <br>
+                                                            <input type="checkbox" id="mentor" name="tipo_colaborador" value="mentor">
+                                                            <label for="mentor">Mentor</label>
+                                                            </input>
+                                                            <br>
+                                                            <input type="checkbox" id="avaliador" name="tipo_colaborador" value="avaliador">
+                                                            <label for="avaliador">Avaliador</label>
+                                                            </input>
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="fieldWrapper" style="width: 100%">
+                                                        <label for="{{ formColaborador.nascimento.id_for_label }}">{{ formColaborador.nascimento.label }}: </label>
+                                                        {{ formColaborador.nascimento }}
+                                                    </div>
+                                                <div style="display: flex; flex-direction: row; justify-content: flex-start">
+                                                    <div class="col-md-6">
+                                                        <button type="submit" class="btn mb-btn-outline"
+                                                                style="width: 150px; color: white">
+                                                            <i class="fa fa-floppy-disk"></i> Criar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

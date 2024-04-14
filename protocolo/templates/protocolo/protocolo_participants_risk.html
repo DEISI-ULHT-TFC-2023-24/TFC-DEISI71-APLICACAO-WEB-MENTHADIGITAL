@@ -1,0 +1,98 @@
+{% load tags %}
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="container-fluid">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 fw-bold" style="font-size: 20px;">{{ protocolo.name }}</p>
+                    </div>
+                    <div class="card-body">
+                        <p><b>Introdução:</b><br>
+                            Está prestes a realizar uma Avaliação. <br>
+                            Para realizar uma avaliação, prima o botão "Aplicar Teste" referente ao paciente que deseja
+                            avaliar.</p>
+                        <div class="table-responsive">
+                            <table class="table table-hover-light">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;width: 15%">Nome</th>
+                                        <th style="text-align: center;">Idade</th>
+                                        <th style="text-align: center;">Sexo</th>
+                                        <th style="text-align: center;">Teste1</th>
+                                        <th style="text-align: center;">Teste2</th>
+                                        <th style="text-align: center;">teste3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for p in participants %}
+                                    <tr>
+                                        <td><a href="#" class="jq-btn no-decor"
+                                                data-href="{% url 'protocolo:participant' p.id %}">
+                                                {{ p.nome }}
+                                                <svg style="margin-top: 0px;" xmlns="http://www.w3.org/2000/svg"
+                                                    width="16" height="16" fill="currentColor" class="bi bi-link"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z" />
+                                                    <path
+                                                        d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z" />
+                                                </svg>
+                                            </a>
+                                            <a href="#" class="jq-btn no-decor"
+                                                data-href="{% url 'protocolo:participant-overview' p.id %}">
+                                                <br>
+                                                <i class="fas fa-eye"></i> Visão Geral
+                                            </a>
+                                        </td>
+                                        <td style="text-align: center;">{% calculate_age p.nascimento %}</td>
+                                        <td style="text-align: center;">{{ p.sexo|make_list|first }}</td>
+                                        <td style="text-align: center;">Teste 1</td>
+                                        <td style="text-align: center;">Teste 2</td>
+                                        <td style="text-align: center;">Teste 3</td>
+                                        <td style="text-align: center;"><a id="{{ protocoloo.id }}" href="#"
+                                                class="jq-btn"
+                                                data-href="{% url 'protocolo:parts' protocolo.id p.id %}">
+                                                <button class="btn btn-primary" type="button"
+                                                    style="border-radius: 217px;">
+                                                    <i class="fa fa-chevron-right"
+                                                        style="border-left-width: 0px;font-size: 15px;text-align: right;"></i>
+                                                </button>
+                                            </a></td>
+                                    </tr>
+                                    {% empty %}
+                                    Não tem Participantes associados.
+                                    {% endfor %}
+                                    <tr></tr>
+                                </tbody>
+                                <!-- Bold footer line -->
+                                <tfoot>
+                                    <tr>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- Buttons -->
+                        <div class="flex-buttons">
+                            <button id="previous" class="btn jq-btn btn-primary flex-left mb-btn"
+                                data-href="{% url 'protocolo:protocols' %}" type="button">
+                                <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>

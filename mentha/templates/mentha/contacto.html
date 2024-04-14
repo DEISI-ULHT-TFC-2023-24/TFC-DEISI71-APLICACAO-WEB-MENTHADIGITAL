@@ -1,0 +1,51 @@
+<div id="contacto">
+    <div class="espacolista"></div>
+
+    <div class="branco">
+        <div class="titulo">Contacte-nos!</div>
+        <div class="texto">
+            {% if mensagem %}
+
+              <p> {{ mensagem }} </p>
+
+            {% else %}
+
+                <form id="form-contacto" class="form-group" action="{% url 'mentha:contacto' %}" method="post">
+
+                    {% csrf_token %}
+                    {{ form.as_p}}
+                    <p class="nota"> indica campo obrigatório</p>
+
+                    <p><input id="submit-contacto" type="submit" class="btn btn-secondary  btn-lg btn-block" value="Enviar"
+                            style="opacity:1; background-color:#4EB4BE;color:white;"></p>
+                </form>
+
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="hero" style="height:10vh"></div>
+
+
+
+    <div class="branco">
+        <div class="titulo">MentHA Digital</div>
+        <div class="texto">
+            <p><b>Universidade Lusófona</b></p>
+            <p>Departamento de Engenharia Informática e Sistemas de Informação</p>
+            <p>Campo Grande, 376, 1749-024 Lisboa, Portugal</p>
+            <p>tel: 217 515 500</p>
+            <p><a href="http://www.ulusofona.pt">www.ulusofona.pt</a></p>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m19!1m8!1m3!1d99594.61426861591!2d-9.179066!3d38.73315!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0xd1932fc16a21773%3A0xbb910a0db57ce114!2sUniversidade%20Lus%C3%B3fona%20de%20Humanidades%20e%20Tecnologias%2C%20Campo%20Grande%20376%2C%201749-024%20Lisboa!3m2!1d38.758024299999995!2d-9.153115999999999!5e0!3m2!1spt-PT!2spt!4v1651969754092!5m2!1spt-PT!2spt"
+                width="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            {% load static %}
+            <p><a href="http://www.ulusofona.pt"><img src="{% static 'mentha/logos/ulht.png' %}" alt=""></a></p>
+
+        </div>
+    </div>
+
+    <div class="hero" style="height:20vh"></div>
+</div>

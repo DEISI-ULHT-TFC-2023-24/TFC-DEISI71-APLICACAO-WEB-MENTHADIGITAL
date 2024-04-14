@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MentHA</title>
+</head>
+<body>
+
+<h1>Protocolos </h1>
+<ul>
+    {% for protocolo in protocolos %}
+    <li><a href="protocolo/{{ protocolo.id }}/"> {{ protocolo.nome }}; </a></li>
+    {% endfor %}
+
+
+</ul>
+</body>
+</html>

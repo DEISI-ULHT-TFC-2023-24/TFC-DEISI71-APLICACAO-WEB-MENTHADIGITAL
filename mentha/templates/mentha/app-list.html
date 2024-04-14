@@ -1,0 +1,36 @@
+{% load static %}
+
+<div class="app-list" 
+style="
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+align-content: center;
+margin-top:15px;
+gap:15px;
+">
+    {% if 'COG' in show %}
+        <a href="{% url 'diario:dashboard_Care' %}?flag=cog">
+            <button class="btn mb-btn">
+                <img src="{% static 'diario/img/cog.svg' %}" style="width:20px;display:inline-block"></i>
+                MentHA-COG
+            </button> 
+        </a>
+    {% endif %}
+    {% if 'CARE' in show %}
+        <a href="{% url 'diario:dashboard_Care' %}?flag=care">
+            <button class="btn mb-btn">
+                <i class="fa-solid fa-user-doctor"></i>
+                MentHA-CARE
+            </button>
+        </a>
+    {% endif %}
+    {% if 'Protocolo' in show %}
+        <a href="{% url 'protocolo:dashboard' %}">
+            <button class="btn mb-btn">
+                <i class="fa-solid fa-user-check"></i>
+                MentHA-EVAL
+            </button> 
+        </a>
+    {% endif %}
+</div>

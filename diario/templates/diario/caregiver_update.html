@@ -1,0 +1,194 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                </div>
+                <div class="container-fluid">
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div style="display: flex;flex-direction: row;justify-content: space-between">
+                                    <div class="card-body">
+                                        <p class="m-0 fw-bold" style="margin: 5px; font-size: 26px; color: #4EB4BE">
+                                            Editar Cuidador</p>
+                                    </div>
+                                    <br>
+                                    {% if error_message %}
+                                        <p class="m-0 fw-bold fs-5">{{ error_message }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <form id="question-form" action="" class="row g-3" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="container text-start">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                            <tr>
+                                                <td rowspan="4" class="align-content-center align-middle" style="width: 0%">
+                                                    <!-- Imagem -->
+                                                    {% if cuidador.imagem %}
+                                                        <div class="circle-image">
+                                                            <img src="{{ cuidador.imagem.url }}"
+                                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="circle-image">
+                                                            <img src="{% static 'protocolo/img/placeholder-avatar.png' %}"
+                                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                                        </div>
+                                                    {% endif %}
+                                                </td>
+
+                                                <td class="text-start" style="text-align:center; width: 25%">
+                                                    <!-- Nome -->
+                                                    <label class="form-label" style="margin: 0px;">Nome</label>
+                                                    <input style="font-weight: bold;" type="text" id="{{ formCuidador.nome.id_for_label }}"
+                                                                   name="{{ formCuidador.nome.html_name }}"
+                                                                   value="{{ cuidador.nome }}">
+                                                    <input  type="hidden" id="{{ formCuidador.username.id_for_label }}"
+                                                                   name="{{ formCuidador.username.html_name }}"
+                                                                   value="{{ cuidador.user.username }}">
+                                                </td>
+
+                                                <td class="text-start" style="text-align:center; width: 25%">
+                                                    <!-- Telemovel -->
+                                                    <label class="form-label" style="margin: 0px;">Telemóvel</label>
+                                                    <input style="font-weight: bold;" type="text"
+                                                       id="{{ formCuidador.telemovel.id_for_label }}"
+                                                       name="{{ formCuidador.telemovel.html_name }}"
+                                                       value="{{ cuidador.telemovel }}">
+                                                </td>
+
+                                                <td class="text-start" style="text-align:center; width: 25%">
+                                                    <!-- Referenciacao -->
+                                                    <label class="form-label" style="margin-bottom: 20px">Referenciação</label>
+                                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                        {{ cuidador.referenciacao }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <!-- Data de Nascimento -->
+                                                    <label class="form-label">Data de Nascimento</label>
+                                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                                                        {{ formCuidador.nascimento }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <!-- E-mail -->
+                                                    <label class="form-label" style="margin: 0px;">E-mail</label>
+                                                    <input style="font-weight: bold;" type="text"
+                                                       id="{{ formCuidador.email.id_for_label }}"
+                                                       name="{{ formCuidador.email.html_name }}"
+                                                       value="{{ cuidador.email }}">
+                                                </td>
+                                                <td>
+                                                    <!-- Grupo CARE -->
+                                                    <label class="form-label" style="margin-bottom: 20px">Grupo CARE</label>
+                                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                                                        {% if not cuidador.grupo %}
+                                                            Não tem grupo CARE
+                                                        {% else %}
+                                                            {% for grupo in cuidador.grupo.all %}
+                                                                {{ grupo.nome }}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <!-- Sexo -->
+                                                    <label class="form-label" style="margin: 0px;">Género</label>
+                                                    <b>{{ formCuidador.sexo }}</b>
+                                                </td>
+
+                                                <td>
+                                                    <!-- Escolaridade -->
+                                                    <label class="form-label" style="margin: 0px;">Escolaridade</label>
+                                                    <b>{{ formCuidador.escolaridade }}</b>
+                                                </td>
+
+                                                <td>
+                                                    <!-- Pacientes -->
+                                                    <label class="form-label" style="margin-bottom: 20px">Paciente(es)</label>
+                                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                        {% if not cuidador.lista_nomes_participantes %}
+                                                            Não tem paciente
+                                                        {% else %}
+                                                            {% for nome in cuidador.lista_nomes_participantes %}
+                                                                <p style="font-size: 15px"><b>{{ nome }}</b></p>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <!-- Nacionalidade -->
+                                                    <label class="form-label" style="margin: 0px;">Nacionalidade</label>
+                                                    <input style="font-weight: bold;" type="text"
+                                                       id="{{ formCuidador.nacionalidade.id_for_label }}"
+                                                       name="{{ formCuidador.nacionalidade.html_name }}"
+                                                       value="{{ cuidador.nacionalidade }}">
+                                                </td>
+
+                                                <td>
+                                                    <!-- Localizacao -->
+                                                    <label class="form-label" style="margin: 0px;">Localização</label>
+                                                    <input style="font-weight: bold;" type="text"
+                                                       id="{{ formCuidador.localizacao.id_for_label }}"
+                                                       name="{{ formCuidador.localizacao.html_name }}"
+                                                       value="{{ cuidador.localizacao }}">
+                                                </td>
+
+                                                <td>
+                                                    <!-- Grupo COG dos pacientes-->
+                                                    <label class="form-label" style="margin-bottom: 20px">Grupo COG do(s) paciente(es)</label>
+                                                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                        {% for paciente in cuidador.participantes.all %}
+                                                            {% if not paciente.grupo %}
+                                                                Não tem grupo COG
+                                                            {% else %}
+                                                                {% for grupo in paciente.grupo.all %}
+                                                                    {{ grupo.nome }}
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </p>
+                                                </td>
+                                            </tr>
+
+                                            <tr></tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div style="display: flex; flex-direction: row; justify-content: flex-end; gap: 10px">
+                                <button data-href="{% url 'diario:group_members' grupo_id %}" class="btn jq-btn mb-btn-outline" style="width: 150px">
+                                    <i class="fa-solid fa-times"></i> Cancelar
+                                </button>
+
+                                <button type="submit" data-href="{% url 'diario:caregiver_update' cuidador.id grupo_id %}" class="btn btn-update-profile mb-btn" style="width: 150px; color: white">
+                                    <i class="fa fa-floppy-disk"></i> Gravar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

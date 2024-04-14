@@ -1,0 +1,152 @@
+#diario-de-bordo .grupo .ver-grupo {
+    grid-area: grupo;
+}
+
+#diario-de-bordo .participantes {
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#diario-de-bordo .diario {
+    grid-gap: 5px;
+}
+
+#diario-de-bordo .diario .ver-notas {
+    grid-area: notas;
+}
+
+#diario-de-bordo .diario .ver-respostas {
+    grid-area: respostas;
+}
+
+#diario-de-bordo .diario .ver-informacoes {
+    grid-area: informacoes;
+}
+
+#diario-de-bordo .diario .ver-partilhas {
+    grid-area: partilhas;
+}
+
+#diario-de-bordo .diario .info {
+    grid-area: info;
+    background-color: whitesmoke;
+    border: 1px solid var(--mentha-blue);
+    margin-top: 5px;
+    border-radius: 6px;
+}
+
+/* configuração dos formulários das notas e partilhas */
+#diario-de-bordo .diario .info form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.2em;
+}
+
+/* configuração da data */
+#diario-de-bordo .info .data {
+    font-size: 0.5em;
+
+    font-style: italic;
+}
+
+/* configuração da lista */
+
+/* configuração do botão "Guardar" dos formulários */
+#diario-de-bordo .info [type='submit'] {
+    border-radius: 6px 6px 6px 6px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+/* configuração da área de texto */
+#diario-de-bordo .diario textarea {
+    resize: none;
+    border-radius: 6px 6px 0 0;
+    /* https://getcssscan.com/css-box-shadow-examples */
+    box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+}
+
+#diario-de-bordo .diario {
+    display: grid;
+    grid-template-areas:
+
+'notas partilhas respostas informacoes'
+'info info info info';
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/***********************************************************/
+/*  configuracao do diarioParticipante.html               **/
+/***********************************************************/
+
+
+#diario-de-bordo #informacoes {
+    flex-direction: column;
+}
+
+#diario-de-bordo #informacoes > div {
+    border-radius: 1em;
+}
+
+#diario-de-bordo .infos {
+    display: none;
+    z-index: 2;
+    top: calc(100%);
+    left: 0px;
+}
+
+/***********************************************************/
+/*  configuracao da tabela                        **/
+/***********************************************************/
+
+
+#diario-de-bordo .title {
+    grid-area: title;
+    background-color: #4EB4BE;
+    text-align: center;
+}
+
+#diario-de-bordo h1 {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 25px;
+}
+
+#diario-de-bordo .menu {
+    background-color: #4EB4BE;
+    color: white;
+    border: 1px solid #4EB4BE;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.btn-save {
+    background-color: var(--mentha-blue) !important;
+    color: white;
+}
+
+.btn:hover {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+#diario-de-bordo #exercicio td, #exercicio th {
+    text-align: left;
+}
+
+#diario-de-bordo h2 {
+   padding: 10px;
+}
+
+#diario-de-bordo li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.progress-bar{
+    background-color: var(--mentha-blue) !important;
+}

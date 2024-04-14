@@ -1,0 +1,89 @@
+{% extends 'diario/base.html' %} {% load static %} {% block main %}
+<div class="container-fluid">
+    <div class="titulo">
+        <div class="card-flex" style="padding: 8px">
+            <div class="bcca-breadcrumb">
+                <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;"></div>
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <i class="fa-solid fa-user-group" style="color:white;"></i>
+                    <span>{{ grupo }}</span>
+                </div>
+
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a href="{% url 'diario:dashboard_Care' %}?flag={{ grupo.programa|lower }}">
+                        <i class="fa-solid fa-user-doctor" style="color:white;"></i>
+                        <span>MentHA {{ grupo.programa }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="table-responsive">
+        <table class="table" style="width: fit-content; margin: auto;">
+            <thead>
+            <tr>
+                <th style="text-align: right">
+                    <strong>Diagnóstico:</strong>
+                </th>
+                <td style="text-align: left">{{ grupo.diagnostico }}</td>
+            </tr>
+
+            <tr>
+                <th style="text-align: right">
+                    <strong>Localização:</strong>
+                </th>
+                <td style="text-align: left">{{ grupo.localizacao_most_frequent }}</td>
+            </tr>
+
+            <tr>
+                <th style="text-align: right">
+                    <strong>Escolaridade:</strong>
+                </th>
+                <td style="text-align: left">{{ grupo.escolaridade_most_frequent }}</td>
+            </tr>
+
+            <tr>
+                <th style="text-align: right">
+                    <strong>Referenciação:</strong>
+                </th>
+                <td style="text-align: left">{{ grupo.referenciacao_most_frequent }}</td>
+            </tr>
+
+            <tr>
+                <th style="text-align: right">
+                    <strong>Nº Membros:</strong>
+                </th>
+                <td style="text-align: left"><i class="fa-solid fa-users"></i> {{ grupo.nr_membros }}</td>
+            </tr>
+            </thead>
+        </table>
+
+        <div class="card-body" style="margin-top: 15px">
+            <div>
+                <div style="display:flex; justify-content:center; flex-direction:row; gap:10px;">
+                    <form action="{% url 'diario:group_sessions' grupo.id %}">
+                        <button
+                                type="submit"
+                                class="btn mb-btn"
+                                style="width: 150px">
+                            <i class="fa-solid fa-list"></i> Sessões
+                        </button>
+                    </form>
+                    <form action="{% url 'diario:group_members' grupo.id %}">
+                        <button
+                                type="submit"
+                                class="btn mb-btn"
+                                style="width: 150px">
+                            <i class="fa-solid fa-users"></i> Membros
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

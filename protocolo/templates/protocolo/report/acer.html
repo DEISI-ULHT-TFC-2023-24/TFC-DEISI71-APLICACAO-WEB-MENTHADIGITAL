@@ -1,0 +1,29 @@
+<div>
+    <h6 class="mb-0 fw-bold">{{instrumento}}</h6>
+    <span class="fw-bold">
+        {% if dict_.total > 79 %}
+            <span class="badge bg-success"> Sem Declíneo Cognitivo</span>
+        {% elif dict_.total <= 68 %}
+            <span class="badge bg-danger"> Demência</span>
+        {% elif dict_.total <= 79 %}
+            <span class="badge bg-danger"> Declíneo Cognitivo Ligeiro</span>
+        {% endif %}
+        <ul class="list-group list-unstyled fw-normal">
+            <li class="">
+                Atenção e Orientação: <span class="fw-bold">{{dict_.acer_atencao_orientacao}}/{{dict_.max_aten_orient}}</span>
+            </li>
+            <li class="">
+                Memória: <span class="fw-bold">{{dict_.acer_memoria}}/{{dict_.max_memoria}}</span>
+            </li>
+            <li class="">
+                Fluência: <span class="fw-bold">{{dict_.acer_fluencia}}/{{dict_.max_fluencia}}</span>
+            </li>
+            <li class="">
+                Linguagem: <span class="fw-bold">{{dict_.acer_linguagem}}/{{dict_.max_linguagem}}</span>
+            </li>
+            <li class="">
+                Visuo-Espacial: <span class="fw-bold">{{dict_.acer_visuo_espacial}}/{{dict_.max_visuo_espacial}}</span>
+            </li>
+        </ul>
+    </span>
+</div>

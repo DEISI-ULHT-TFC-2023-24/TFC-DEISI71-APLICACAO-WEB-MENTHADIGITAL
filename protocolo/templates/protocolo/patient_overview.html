@@ -1,0 +1,92 @@
+{% load tags %}
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p style="font-size: 20px" class="text-primary m-0 fw-bold">Visão Geral da Avaliação a {{ patient.nome }}</p>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width:25% "></th>
+                            <th style="text-align: center">{{ parts.0.name }}</th>
+                            <th style="text-align: center">{{ parts.1.name }}</th>
+                            <th style="text-align: center">{{ parts.2.name }}</th>
+                            <th style="text-align: center">{{ parts.3.name}}</th>
+                            <th style="text-align: center">{{ parts.4.name }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for text in overview_list %}
+                        <tr>
+                            <td>{{ text }}</td>
+                            {% get_if_done_from_percentage_list percentages 1 text as done_text%}
+                            {% if done_text == 'done' %}
+                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                            <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                            {% elif done_text == 'not done' or done_text == None %}
+                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                            {% elif done_text == 'does not exist' %}
+                                <td style="background-color: rgba(0,0,0,0.34)">
+                            {% endif %}
+                            </td>
+                            {% get_if_done_from_percentage_list percentages 2 text as done_text%}
+                            {% if done_text == 'done' %}
+                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                            <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                            {% elif done_text == 'not done' or None %}
+                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                            {% elif done_text == 'does not exist' %}
+                                <td style="background-color: rgba(0,0,0,0.34)">
+                            {% endif %}
+                            </td>
+                            {% get_if_done_from_percentage_list percentages 3 text as done_text%}
+                            {% if done_text == 'done' %}
+                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                            <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                            {% elif done_text == 'not done' or None %}
+                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                            {% elif done_text == 'does not exist' %}
+                                <td style="background-color: rgba(0,0,0,0.34)">
+                            {% endif %}
+                            </td>
+                            {% get_if_done_from_percentage_list percentages 4 text as done_text%}
+                            {% if done_text == 'done' %}
+                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                            <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                            {% elif done_text == 'not done' or None %}
+                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                            {% elif done_text == 'does not exist' %}
+                                <td style="background-color: rgba(0,0,0,0.34)">
+                            {% endif %}</td>
+                            {% get_if_done_from_percentage_list percentages 5 text as done_text%}
+                            {% if done_text == 'done' %}
+                                <td style="text-align: center;background-color: rgba(0,255,0,0.1)">
+                            <i class="fa fa-check" style="color: rgba(0,128,0,0.5)"></i>
+                            {% elif done_text == 'not done' or None %}
+                                <td style="text-align: center; background-color: rgba(255,0,0,0.1)">
+                                <i class="fa fa-close" style="color: rgba(255,0,0,0.5)"></i>
+                            {% elif done_text == 'does not exist' %}
+                                <td style="background-color: rgba(0,0,0,0.34)">
+                            {% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>

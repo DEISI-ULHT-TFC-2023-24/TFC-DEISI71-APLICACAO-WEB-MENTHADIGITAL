@@ -1,0 +1,128 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                </div>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div style="display: flex;flex-direction: row;justify-content: space-between">
+                                    <div class="card-body" style="padding: 8px">
+                                        <p class="m-0 fw-bold" style="margin: 5px; font-size: 26px; color: #4EB4BE">
+                                            Editar Dinamizador</p>
+                                        <br>
+                                        {% if error_message %}
+                                            <p class="m-0 fw-bold fs-5">{{ error_message }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <form action="{% url 'diario:group_members' grupo_id %}">
+                                            <button type="submit" class="btn mb-btn-outline" style="width: 150px">
+                                                <i class="fa-solid fa-angle-left"></i> Anterior
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <form action="" class="row g-3" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div style="display: flex;gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 70%">
+                                                        <label for="{{ formDinamizador.nome.id_for_label }}">{{ formDinamizador.nome.label }}: </label>
+                                                        <input type="text" id="{{ formDinamizador.nome.id_for_label }}"
+                                                               name="{{ formDinamizador.nome.html_name }}"
+                                                               value="{{ dinamizador.nome }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 30%">
+                                                        <label for="{{ formDinamizador.sexo.id_for_label }}">{{ formDinamizador.sexo.label }}: </label>
+                                                        {{ formDinamizador.sexo }}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 100%">
+                                                        <label for="{{ formDinamizador.username.id_for_label }}">{{ formDinamizador.username.label }}: </label>
+                                                        <input type="text" id="{{ formDinamizador.username.id_for_label }}"
+                                                               name="{{ formDinamizador.username.html_name }}"
+                                                               value="{{ dinamizador.user.username }}">
+                                                    </div>
+
+                                                    <input type="hidden" name="password" value="@MentHA@23" id="id_password">
+                                                </div>
+                                                <div class="fieldWrapper" style="width: 100%">
+                                                    <label for="{{ formDinamizador.email.id_for_label }}">{{ formDinamizador.email.label }}: </label>
+                                                    <input type="text"
+                                                           id="{{ formDinamizador.email.id_for_label }}"
+                                                           name="{{ formDinamizador.email.html_name }}"
+                                                           value="{{ dinamizador.email }}">
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formDinamizador.nacionalidade.id_for_label }}">{{ formDinamizador.nacionalidade.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formDinamizador.nacionalidade.id_for_label }}"
+                                                               name="{{ formDinamizador.nacionalidade.html_name }}"
+                                                               value="{{ dinamizador.nacionalidade }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formDinamizador.telemovel.id_for_label }}">{{ formDinamizador.telemovel.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formDinamizador.telemovel.id_for_label }}"
+                                                               name="{{ formDinamizador.telemovel.html_name }}"
+                                                               value="{{ dinamizador.telemovel }}">
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 33%">
+                                                        <label for="{{ formDinamizador.funcao.id_for_label }}">{{ formDinamizador.funcao.label }}: </label>
+                                                        {{ formDinamizador.funcao }}
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 33%">
+                                                        <label for="{{ formDinamizador.localizacao.id_for_label }}">{{ formDinamizador.localizacao.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formDinamizador.localizacao.id_for_label }}"
+                                                               name="{{ formDinamizador.localizacao.html_name }}"
+                                                               value="{{ dinamizador.localizacao }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 33%">
+                                                        <label for="{{ formDinamizador.nascimento.id_for_label }}">{{ formDinamizador.nascimento.label }}: </label>
+                                                        {{ formDinamizador.nascimento }}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; flex-direction: row; justify-content: flex-start">
+                                                    <div class="col-md-6">
+                                                        <button type="submit" class="btn mb-btn-outline"
+                                                                style="width: 150px; color: white">
+                                                            <i class="fa fa-floppy-disk"></i> Editar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

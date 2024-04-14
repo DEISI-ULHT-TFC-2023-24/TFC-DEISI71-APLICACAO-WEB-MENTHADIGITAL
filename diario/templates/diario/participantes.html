@@ -1,0 +1,32 @@
+{%  extends 'diario\base.html' %}
+
+{% block style %}
+    nav a:nth-child(4) {
+    color: black;
+    font-weight: 600;
+    }
+{% endblock %}
+
+
+{% block main %}
+
+<h1>Participantes MentHA</h1>
+
+<p>Lista de participantes:</p>
+<ul>
+    {% for participante in participantes %}
+    <li>{{ participante }}
+        <ul>
+            <li>Cuidador:
+                {% for cuidador in participante.cuidador.all %}
+                {{ cuidador }}
+                {% endfor %}
+            </li>
+            <li>
+                Avaliador: {{ participante.avaliador }}
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

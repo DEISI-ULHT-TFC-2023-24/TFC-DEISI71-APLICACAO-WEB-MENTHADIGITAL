@@ -1,0 +1,319 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+<div class="container-fluid">
+        <div style="padding:8px">
+            <!-- Perfil-->
+        <div class="card-flex">
+            <p class="m-0 fw-bold mb-text fs-4">Perfil</p>
+            <a class="jq-btn no-decor" href="{% url 'diario:group_members' grupo.id %}">
+                <button id="btn-popup" class="btn mb-btn-outline" style="width:150px">
+                        <i class="fa-solid fa-chevron-left"></i>&nbsp Anterior
+                </button>
+            </a>
+        </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" class="align-content-center align-middle" style="width: 0%">
+                                <!-- Imagem -->
+                                {% if cuidador.imagem %}
+                                    <div class="circle-image">
+                                        <img src="{{ cuidador.imagem.url }}"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                {% else %}
+                                    <div class="circle-image">
+                                        <img src="{% static 'protocolo/img/placeholder-avatar.png' %}"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td class="text-start" style="text-align:center; width: 25%">
+                                <!-- Nome -->
+                                <label class="form-label">Nome</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.nome }}
+                                </p>
+                            </td>
+                            <td class="text-start" style="text-align:center; width: 25%">
+                                <!-- Telemovel -->
+                                <label class="form-label">Telemóvel</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.telemovel }}
+                                </p>
+                            </td>
+                            <td class="text-start" style="text-align:center; width: 25%">
+                                <!-- Referenciacao -->
+                                <label class="form-label">Referenciação</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.referenciacao }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <!-- Data de Nascimento -->
+                                <label class="form-label">Data de Nascimento</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                                    {{ cuidador.nascimento }} ({{ cuidador.idade }} anos)
+                                </p>
+                            </td>
+                            <td>
+                                <!-- E-mail -->
+                                <label class="form-label">E-mail</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.email }}
+                                </p>
+                            </td>
+                            <td>
+                                <!-- Grupo CARE -->
+                                <label class="form-label">Grupo CARE</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                                    {% if not cuidador.grupo %}
+                                        Não tem grupo CARE
+                                    {% else %}
+                                        {% for grupo in cuidador.grupo.all %}
+                                            {{ grupo.nome }}
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <!-- Sexo -->
+                                <label class="form-label">Sexo</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.sexo }}
+                                </p>
+                            </td>
+
+                            <td>
+                                <!-- Escolaridade -->
+                                <label class="form-label" style="margin: 0px;">Escolaridade</label>
+                                <b>{{ cuidador.escolaridade }}</b>
+                            </td>
+
+                            <td>
+                                <!-- Cuidadores -->
+                                <label class="form-label">Paciente(es)</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {% if not cuidador.lista_nomes_participantes %}
+                                        Não tem paciente
+                                    {% else %}
+                                        {% for nome in cuidador.lista_nomes_participantes %}
+                                            <p style="font-size: 15px"><b>{{ nome }}</b></p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <!-- Nacionalidade -->
+                                <label class="form-label">Nacionalidade</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.nacionalidade }}
+                                </p>
+                            </td>
+
+                            <td>
+                                <!-- Localizacao -->
+                                <label class="form-label">Localização</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {{ cuidador.localizacao }}
+                                </p>
+                            </td>
+
+                            <td>
+                                <!-- Grupo COG dos pacientes-->
+                                <label class="form-label">Grupo COG do(s) paciente(es)</label>
+                                <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                    {% for paciente in cuidador.participantes.all %}
+                                        {% if not paciente.grupo %}
+                                            Não tem grupo COG
+                                        {% else %}
+                                            {% for grupo in paciente.grupo.all %}
+                                                {{ grupo.nome }}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container ">
+                    <div class="row">
+                        <div class="card">
+                            <div class="container ">
+                                <div class="tabs">
+                                    <div class="tab-2">
+                                        <label for="tab2-1" style="color: #4eb4be"><b>Ficheiro</b></label>
+                                        <input class="tab-style" id="tab2-1" name="tabs-two" type="radio" checked="checked">
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <td style="text-align: center;"></td>
+                                                        <th style="text-align: center;"><strong>Nome do
+                                                            Ficheiro</strong>
+                                                        </th>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <th style="text-align: center;"><strong>Descrição</strong>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"><strong>Ficheiro</strong>
+
+                                                        </td>
+                                                        <td style="text-align: center;"></td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for document in documents %}
+                                                    <tr>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;">{{ document.name }}</td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;">{{ document.description }}</td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;">
+                                                            {<a
+                                                                href="" download>
+                                                            download
+                                                        </a>}
+                                                        </td>
+                                                        <td style="text-align: center;"></td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    <tr></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-2">
+                                        <label for="tab2-2" style="color: #4eb4be"><b>Notas</b></label>
+                                        <input id="tab2-2" name="tabs-two" type="radio">
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <th style="text-align: center;"><strong>Título da
+                                                            Nota</strong>
+                                                        </th>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <th style="text-align: center;"><strong>Tipo</strong>
+                                                        <th style="text-align: center;"><strong>Descrição</strong>
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    {% for nota in notas %}
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;">{{ nota.tituloNota }}</td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;"></td>
+                                                        <td style="text-align: center;">{{ nota.tipo }}</td>
+                                                        <td style="text-align: center;">{{ nota.nota }}</td>
+                                                    </tr>
+                                                    <tr></tr>
+                                                    </tbody>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-end">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <button type="button" class="btn mb-btn-outline" data-bs-toggle="modal"
+                                    data-bs-target="#Anexar_Ficheiro">
+                                <i class="fa fa-file-import icon-bg"></i> Anexar Ficheiro
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% comment %} 
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                {% for document in documents %}
+
+
+                <li>{{ document.name }}</li>
+                <li>{{ document.description }}</li>
+
+                <li><a href="{{ document.file }}" download>download</a></li>
+
+
+                {% endfor %}
+            </div>
+            {% endcomment %}
+        </div>
+    </div>
+</div>
+
+
+<!-- Anexar Ficheiro -->
+<div class="modal" id="Anexar_Ficheiro">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Carregar Ficheiro</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="{% url 'diario:p_view' cuidador_id grupo_id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <b>{{ formDocument.name.label }}</b>
+                    <p>{{ formDocument.name }}</p>
+                    <b>{{ formDocument.description.label }}</b>
+                    <p>{{ formDocument.description }}</p>
+                    <b>{{ formDocument.cuidador.label }}</b>
+                    <p>{{ formDocument.cuidador }}</p>
+                    <b>{{ formDocument.file.label }}</b>
+                    <p>{{ formDocument.file }}</p>
+                    <input type="submit" value="Carregar fotografia" class="btn btn-primary" style="margin-left: 300px">
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

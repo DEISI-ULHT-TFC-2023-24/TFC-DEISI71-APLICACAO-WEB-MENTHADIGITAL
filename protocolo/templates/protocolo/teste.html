@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Agendamento de Dias</title>
+    <style>
+      /* Estilos para o calendário */
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center;
+        cursor: pointer;
+      }
+      td:hover {
+        background-color: #eee;
+      }
+      .selected {
+        background-color: #008080;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Agendamento de Dias</h1>
+    <p>Selecione o(s) dia(s) que deseja agendar:</p>
+    <table>
+      <tr>
+        <td></td>
+        <td>Seg</td>
+        <td>Ter</td>
+        <td>Qua</td>
+        <td>Qui</td>
+        <td>Sex</td>
+        <td>Sab</td>
+        <td>Dom</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+      </tr>
+      <!-- continuar para mais semanas -->
+    </table>
+    <br>
+    <button onclick="agendar()">Agendar</button>
+
+    <script>
+      // Obtém todas as células de dias na tabela
+      const days = document.querySelectorAll(".day");
+
+      // Adiciona um ouvinte de eventos de clique a cada célula de dia
+      days.forEach((day) => {
+        day.addEventListener("click", () => {
+          // Adiciona ou remove a classe 'selected' para destacar o dia selecionado
+          day.classList.toggle("selected");
+        });
+      });
+
+      function agendar() {
+        // Obtém todas as células de dias selecionados
+        const selectedDays = document.querySelectorAll(".selected");
+
+        // Cria um array de datas selecionadas
+        const dates = [];
+        selectedDays.forEach((day) => {
+          const date = day.textContent + "/" + day.parentNode.parentNode.rowIndex;
+          dates.push(date);
+        });}
+
+        // Exibe uma mensagem com as datas selecionadas
+
+</script>

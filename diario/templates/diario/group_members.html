@@ -1,0 +1,392 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+
+{% block style %}
+    #content{
+    flex-direction: column;
+    justify-content: flex-start;
+    }
+{% endblock %}
+{% block main %}
+<div class="page-content">
+    <div class="column-orientation">
+        <div class="container-fluid">
+            <div class="container text-start">
+                <div class="row">
+                    <div class="col align-self-center">
+                        <div class="titulo" style="display: flex;flex-direction: row;justify-content: space-between">
+                            <div class="" style="padding: 8px">
+                                <p class="m-0 fw-bold"
+                                   style="margin: 5px; font-size: 26px; color: #4eb4be">Membros do Grupo:
+                                    {{ grupo }}</p>
+                            </div>
+                            <div>
+                                <form action="{% url 'diario:grupo_details' grupo.id %}">
+                                    <button type="submit" class="btn mb-btn-outline" style="width: 150px">
+                                        <i class="fa-solid fa-angle-left"></i> Anterior
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="">
+                    <div class="">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;"><strong>Nome</strong></th>
+                                    <th style="text-align: center;"><strong>E-mail</strong></th>
+                                    <th style="text-align: center;"><strong>Telefone</strong></th>
+                                    {% if grupos_permissoes.exists %}
+                                        <th style="text-align: center;"><strong>0 meses</strong></th>
+                                        <th style="text-align: center;"><strong>2 meses</strong></th>
+                                        <th style="text-align: center;"><strong>6 meses</strong></th>
+                                        <th style="text-align: center;"><strong>Sessões (Atendidas / Realizadas)</strong></th>
+                                        <th></th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for cuidador, 0m, 2m, 6m in cuidadores %}
+                                    <tr style="vertical-align: middle;">
+                                        <td class="btn-link" style="text-align: center;">
+                                            {% if grupos_permissoes.exists %}
+                                                <a style="color: #4eb4be;"
+                                                   href="{% url 'diario:p_view' cuidador.id grupo.id %}">
+                                                    {{ cuidador }}
+                                                </a>
+                                            {% else %}
+                                                {{ cuidador }}
+                                            {% endif %}
+                                        </td>
+
+                                        <td style="text-align: center;">{{ cuidador.email }}</td>
+
+                                        <td style="text-align: center;">{{ cuidador.telemovel }}</td>
+
+                                        {% if grupos_permissoes.exists %}
+                                        <td style="text-align: center;">
+                                            
+                                            <a href="#" class="jq-btn no-decor" data-href="{% url 'protocolo:profile_cuidador' cuidador.id %}">
+                                                <div class="w-10 h-10 mb-bg rounded-circle flex m-auto justify-content-center align-items-center align-self-center">
+                                                    {% if 0m == 0 %}
+                                                        <i class="fa-solid fa-minus" style="color: lightslategray; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% elif 0m < 100 %}
+                                                        <i class="fa-solid fa-hourglass" style="color: #4eb4be; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% else %}
+                                                        <i class="fa-solid fa-check" style="color: #4eb4be; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% endif %}
+                                                </div>
+                                            </a>
+                                            
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                            <a href="#" class="jq-btn no-decor" data-href="{% url 'protocolo:profile_cuidador' cuidador.id %}">
+                                                <div class="w-10 h-10 mb-bg rounded-circle flex m-auto justify-content-center align-items-center align-self-center">
+                                                    {% if 2m == 0 %}
+                                                        <i class="fa-solid fa-minus" style="color: lightslategray; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% elif 2m < 100 %}
+                                                        <i class="fa-solid fa-hourglass" style="color: #4eb4be; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% else %}
+                                                        <i class="fa-solid fa-check" style="color: #4eb4be; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% endif %}
+                                                </div>
+                                            </a>
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                            <a href="#" class="jq-btn no-decor" data-href="{% url 'protocolo:profile_cuidador' cuidador.id %}">
+                                                <div class="w-10 h-10 mb-bg rounded-circle flex m-auto justify-content-center align-items-center align-self-center">
+                                                    {% if 6m == 0 %}
+                                                        <i class="fa-solid fa-minus" style="color: lightslategray; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% elif 6m < 100 %}
+                                                        <i class="fa-solid fa-hourglass" style="color: #4eb4be; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% else %}
+                                                        <i class="fa-solid fa-check" style="color: #4eb4be; font-size: 1.5rem" aria-hidden="true"></i>
+                                                    {% endif %}
+                                                </div>
+                                            </a>
+                                        </td>
+
+
+                                        <td style="text-align: center;">
+                                            {{ cuidador.nrPresencas }}/{{grupo.sessoes_realizadas}}
+                                        </td>
+                                        
+                                        
+                                        <td style="text-align: center;">
+                                            {% if dina_mento == "Dinamizador" %}
+                                                <form action="{% url 'diario:caregiver_update' cuidador.id grupo.id %}">
+                                                    <button class="btn btn-outline-warning"><i
+                                                            class="fa fa-user-pen"></i> Alterar
+                                                    </button>
+                                                </form>
+                                            {% else %}
+                                                <form action="{% url 'diario:participante_update' cuidador.id grupo.id %}">
+                                                    <button class="btn btn-outline-warning"><i
+                                                            class="fa fa-user-pen"></i> Alterar
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if grupos_permissoes.exists %}
+                <div class="container-fluid">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="d-grid gap-4 d-md-flex justify-content-md-center" style="padding: 25px">
+                                <button class="btn mb-btn-outline" type="button" style="border-radius: 8px"
+                                        data-bs-toggle="modal" data-toggle="modal" data-target="#Cuidador_grupo"
+                                        data-bs-target="#Cuidador_grupo">
+                                    <i class="fa fa-user-tag"></i> Associar {{ cuida_parti }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+
+        <div class="container-fluid">
+            <div class="container text-start">
+                <div class="row">
+                    <div class="col align-self-center">
+                        <div class="titulo">
+                            <div class="" style="padding: 8px">
+                                <p class="m-0 fw-bold"
+                                   style="margin: 5px; font-size: 26px; color: #4eb4be;">{{ dina_mento }}es do
+                                    Grupo: {{ grupo }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class=" ">
+                    <div class="">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;"><strong>Nome</strong></th>
+                                    <th style="text-align: center;"><strong>E-mail</strong></th>
+                                    <th style="text-align: center;"><strong>Telefone</strong></th>
+                                    <th></th>
+                                    {% if grupos_permissoes.exists %}
+                                        <th></th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for dinamizador in dinamizadores %}
+                                    <tr style="vertical-align: middle;">
+                                        <td style="text-align: center;">{{ dinamizador }}</td>
+                                        <td style="text-align: center;">{{ dinamizador.email }}</td>
+                                        <td style="text-align: center;">{{ dinamizador.telemovel }}</td>
+                                        <td style="text-align: center;"></td>
+                                        {% if grupos_permissoes.exists %}
+                                            <td>
+                                                {% if dina_mento == "Dinamizador" %}
+                                                    <form action="{% url 'diario:dinamizador_update' dinamizador.id grupo.id %}">
+                                                        <button class="btn btn-outline-warning"><i
+                                                                class="fa fa-user-pen"></i> Alterar
+                                                        </button>
+                                                    </form>
+
+                                                {% else %}
+                                                    <form action="{% url 'diario:mentor_update' dinamizador.id grupo.id %}">
+                                                        <button class="btn btn-outline-warning"><i
+                                                                class="fa fa-user-pen"></i> Alterar
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if grupos_permissoes.exists %}
+                <div class="container-fluid">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="d-grid gap-4 d-md-flex justify-content-md-center" style="padding: 25px">
+                                <button type="button" class="btn mb-btn-outline" data-bs-toggle="modal"
+                                        data-bs-target="#Dinamizador_sem_grupo">
+                                    <i class="fa fa-user-tag"></i> Associar {{ dina_mento }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                </div>
+            {% endif %}
+        </div>
+
+
+        <!-- Create_dinamizador -->
+        <div class="modal" id="Create_dinamizador">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Criação de um novo {{ dina_mento }}</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <b>{{ formDinamizador.nome.label }}</b>
+                            <p>{{ formDinamizador.nome }}</p>
+                            <b>{{ formDinamizador.funcao.label }}</b>
+                            <p>{{ formDinamizador.funcao }}</p>
+                            <button type="submit" class="btn btn-primary">
+                                Guardar
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn mb-btn-outline-danger" data-bs-dismiss="modal">Cancelar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Dinamizador_sem_grupo -->
+        <div class="modal" id="Dinamizador_sem_grupo">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Lista de {{ dina_mento }}es</h4>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar por ..."
+                               style="background-position: 10px 12px;width: 100%;font-size: 16px;padding: 12px 20px 12px 40px;border: 1px solid #ddd;margin-bottom: 12px;border-radius: 10px;">
+                        <table class="table table-hover" id="myTable">
+                            <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Função</th>
+                            </tr>
+                            </thead>
+                            {% for dinamizador in dinamizadores_sem_grupo %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ dinamizador }}</td>
+                                    <td>{{ dinamizador.funcao }}</td>
+                                    <td>
+                                        {% if dina_mento == "Dinamizador" %}
+                                            <form action="{% url 'diario:assign_dinamizador' grupo.id dinamizador.id %}">
+                                        {% else %}
+                                            <form action="{% url 'diario:assign_mentor' grupo.id dinamizador.id %}">
+                                        {% endif %}
+                                        <button class="btn mb-btn" style="border-radius: 10px">Atribuir
+                                            grupo
+                                        </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- The Modal  Cuidador sem grupo -->
+        <div class="modal" id="Cuidador_grupo">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Lista de Candidatos</h4>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar por ..."
+                               style="background-position: 10px 12px;width: 100%;font-size: 16px;padding: 12px 20px 12px 40px;border: 1px solid #ddd;margin-bottom: 12px;border-radius: 10px;">
+                        <table class="table table-hover" id="myTable">
+                            <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Escolaridade</th>
+                                <th>Referência</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            {% for cuidador in cuidadores_sem_grupo %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ cuidador }}</td>
+                                    <td>{{ cuidador.escolaridade }}</td>
+                                    <td>
+                                        {{ cuidador.referenciacao }}
+                                    </td>
+                                    <td>
+                                        {% if dina_mento == "Dinamizador" %}
+                                            <form action="{% url 'diario:assign_caregiver' grupo.id cuidador.id %}">
+                                        {% else %}
+                                            <form action="{% url 'diario:assign_participante' grupo.id cuidador.id %}">
+                                        {% endif %}
+                                            <button class="btn mb-btn" style="border-radius: 10px">Atribuir
+                                                grupo
+                                            </button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                                <tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal"
+                                data-bs-dismiss="modal">Cancelar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

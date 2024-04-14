@@ -1,0 +1,1515 @@
+[
+{
+  "model": "protocolo.question",
+  "pk": 190,
+  "fields": {
+    "name": "Sente vontade de fugir da situaτπo em que se encontra?",
+    "description": "Se sair desta pßgina antes de submeter, o progresso nπo serß gravado.",
+    "order": 1,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 191,
+  "fields": {
+    "name": "Considera que, tomar conta do seu familiar Θ psicologicamente difφcil?",
+    "description": null,
+    "order": 2,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 192,
+  "fields": {
+    "name": "Sente-se cansado(a) e esgotada(a) por estar a cuidar do seu familiar?",
+    "description": null,
+    "order": 3,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 193,
+  "fields": {
+    "name": "Entra em conflito consigo pr≤pria por estar a tomar conta do seu familiar?",
+    "description": null,
+    "order": 4,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 194,
+  "fields": {
+    "name": "Pensa que o seu estado de sa·de tem piorado por estar a cuidar do seu familiar?",
+    "description": null,
+    "order": 5,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 195,
+  "fields": {
+    "name": "Cuidar do seu familiar tem exigido um grande esforτo fφsico?",
+    "description": null,
+    "order": 6,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 196,
+  "fields": {
+    "name": "Sente que perdeu o controlo da sua vida desde que o seu familiar adoeceu?",
+    "description": null,
+    "order": 7,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 197,
+  "fields": {
+    "name": "Os planos que tinha feito para esta fase da vida tΩm sido alterados em virtude de estar a tomar conta do seu familiar?",
+    "description": null,
+    "order": 8,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 198,
+  "fields": {
+    "name": "Acha que se dedica demasiado tempo a cuidar do seu familiar e que o tempo Θ insuficiente para si?",
+    "description": null,
+    "order": 9,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 199,
+  "fields": {
+    "name": "Sente que a vida lhe pregou uma partida?",
+    "description": null,
+    "order": 10,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 200,
+  "fields": {
+    "name": "╔ difφcil planear o futuro dado que as necessidades do seu familiar nπo se podem prever?",
+    "description": null,
+    "order": 11,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 201,
+  "fields": {
+    "name": "Tomar conta do seu familiar dß-lhe a sensaτπo de estar preso(a)?",
+    "description": null,
+    "order": 12,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 202,
+  "fields": {
+    "name": "Evita convidar amigos para sua casa, por causa dos problemas do seu familiar?",
+    "description": null,
+    "order": 13,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 203,
+  "fields": {
+    "name": "A sua vida social (p.ex. fΘrias, conviver, com familiares e amigos) tem siso prejudicada por estar a cuidar do seu familiar?",
+    "description": null,
+    "order": 14,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 204,
+  "fields": {
+    "name": "Sente-se s≤ e isolado(a) por estar a cuidar do seu familiar?",
+    "description": null,
+    "order": 15,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 205,
+  "fields": {
+    "name": "Tem sentido dificuldades econ≤micas por estar a cuidar do seu familiar?",
+    "description": null,
+    "order": 16,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 206,
+  "fields": {
+    "name": "Sente que o seu futuro econ≤mico Θ incerto, por estar a cuidar do seu familiar?",
+    "description": null,
+    "order": 17,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 207,
+  "fields": {
+    "name": "Jß se sentiu ofendido(a) e zangado(a) com o comportamento do seu familiar?",
+    "description": null,
+    "order": 18,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 208,
+  "fields": {
+    "name": "Jß se sentiu embaraτado(a) com o comportamento do seu familiar?",
+    "description": null,
+    "order": 19,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 209,
+  "fields": {
+    "name": "Sente que o seu familiar o(a) solicita demasiado para situaτ⌡es desnecessßrias?",
+    "description": null,
+    "order": 20,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 210,
+  "fields": {
+    "name": "Sente-se manipulado(a) pelo seu familiar?",
+    "description": null,
+    "order": 21,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 211,
+  "fields": {
+    "name": "Sente que nπo tem tanta privacidade como gostaria, por estar a cuidar do seu familiar?",
+    "description": null,
+    "order": 22,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 212,
+  "fields": {
+    "name": "Consegue fazer a maioria das coisas de que necessita, apesar do tempo que gasta a tomar conta do seu familiar?",
+    "description": null,
+    "order": 23,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 213,
+  "fields": {
+    "name": "Sente-se com capacidade para continuar a tomar conta do seu familiar?",
+    "description": null,
+    "order": 24,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 214,
+  "fields": {
+    "name": "Considera que tem conhecimentos e experiΩncia para cuidar do seu familiar?",
+    "description": null,
+    "order": 25,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 215,
+  "fields": {
+    "name": "A famφlia (que nπo vive consigo) reconhece o trabalho que tem, em cuidar do seu familiar?",
+    "description": null,
+    "order": 26,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 216,
+  "fields": {
+    "name": "Sente-se apoiado(a) pelos seus familiares?",
+    "description": null,
+    "order": 27,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 217,
+  "fields": {
+    "name": "Sente-se bem por estar a tomar conta do seu familiar?",
+    "description": null,
+    "order": 28,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 218,
+  "fields": {
+    "name": "O seu familiar mostra gratidπo pelo que estß a fazer por ele?",
+    "description": null,
+    "order": 29,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 219,
+  "fields": {
+    "name": "Fica satisfeito(a) quando o seu familiar mostra agrado por pequenas coisas (como mimos)?",
+    "description": null,
+    "order": 30,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 220,
+  "fields": {
+    "name": "Sente-se mais pr≤ximo(a) do seu familiar por estar a cuidar dele?",
+    "description": null,
+    "order": 31,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 221,
+  "fields": {
+    "name": "Cuidar do seu familiar tem vindo a aumentar a sua auto-estima, fazendo-o(a) sentir-se uma pessoa especial, com mais valor?",
+    "description": null,
+    "order": 32,
+    "question_type": 3,
+    "instruction": "",
+    "section": 114,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 222,
+  "fields": {
+    "name": "Refugio-me noutras atividades para me abstrair da situaτπo",
+    "description": null,
+    "order": 1,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 223,
+  "fields": {
+    "name": "Concentro os meus esforτos para fazer alguma coisa que me permita enfrentar a situaτπo",
+    "description": null,
+    "order": 2,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 224,
+  "fields": {
+    "name": "Tenho dito para mim pr≤prio(a): ôisto nπo Θ verdadeö",
+    "description": null,
+    "order": 3,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 225,
+  "fields": {
+    "name": "Refugio-me no ßlcool ou noutras drogas (comprimidos, etc.) para me sentir melhor",
+    "description": null,
+    "order": 4,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 226,
+  "fields": {
+    "name": "Procuro apoio emocional de alguΘm (famφlia, amigos)",
+    "description": null,
+    "order": 5,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 227,
+  "fields": {
+    "name": "Simplesmente desisto de tentar lidar com isto",
+    "description": null,
+    "order": 6,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 228,
+  "fields": {
+    "name": "Tomo medidas para tentar melhorar a minha situaτπo",
+    "description": null,
+    "order": 7,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 229,
+  "fields": {
+    "name": "Recuso-me a acreditar que isto esteja a acontecer comigo",
+    "description": null,
+    "order": 8,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 230,
+  "fields": {
+    "name": "Fico aborrecido e expresso os meus sentimentos",
+    "description": null,
+    "order": 9,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 231,
+  "fields": {
+    "name": "Peτo conselhos e ajuda a outras pessoas para enfrentar melhor a situaτπo",
+    "description": null,
+    "order": 10,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 232,
+  "fields": {
+    "name": "Uso ßlcool ou outras drogas (comprimidos) para me ajudar a ultrapassar os problemas",
+    "description": null,
+    "order": 11,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 233,
+  "fields": {
+    "name": "Tento analisar a situaτπo de maneira diferente, de forma a tornß-la mais positiva",
+    "description": null,
+    "order": 12,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 234,
+  "fields": {
+    "name": "Faτo crφticas a mim pr≤prio",
+    "description": null,
+    "order": 13,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 235,
+  "fields": {
+    "name": "Tento encontrar uma estratΘgia que me ajude no que tenho que fazer",
+    "description": null,
+    "order": 14,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 236,
+  "fields": {
+    "name": "Procuro o conforto e compreensπo de alguΘm",
+    "description": null,
+    "order": 15,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 237,
+  "fields": {
+    "name": "Desisto de me esforτar para lidar com a situaτπo",
+    "description": null,
+    "order": 16,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 238,
+  "fields": {
+    "name": "Procuro algo positivo em tudo o que estß a acontecer",
+    "description": null,
+    "order": 17,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 239,
+  "fields": {
+    "name": "Enfrento a situaτπo levando-a para a brincadeira",
+    "description": null,
+    "order": 18,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 240,
+  "fields": {
+    "name": "Faτo outras coisas para pensar menos na situaτπo, tal como ir ao cinema, ver TV, ler, sonhar, ou ir αs compras",
+    "description": null,
+    "order": 19,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 241,
+  "fields": {
+    "name": "Tento aceitar as coisas tal como estπo a acontecer",
+    "description": null,
+    "order": 20,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 242,
+  "fields": {
+    "name": "Sinto e expresso os meus sentimentos de aborrecimento",
+    "description": null,
+    "order": 21,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 243,
+  "fields": {
+    "name": "Tento encontrar conforto na minha religiπo ou crenτa espiritual",
+    "description": null,
+    "order": 22,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 244,
+  "fields": {
+    "name": "Peτo conselhos e ajuda a pessoas que passaram pelo mesmo",
+    "description": null,
+    "order": 23,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 245,
+  "fields": {
+    "name": "Tento aprender a viver com a situaτπo",
+    "description": null,
+    "order": 24,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 246,
+  "fields": {
+    "name": "Penso muito sobre a melhor forma de lidar com a situaτπo",
+    "description": null,
+    "order": 25,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 247,
+  "fields": {
+    "name": "Culpo-me pelo que estß a acontecer",
+    "description": null,
+    "order": 26,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 248,
+  "fields": {
+    "name": "Rezo ou medito",
+    "description": null,
+    "order": 27,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 249,
+  "fields": {
+    "name": "Enfrento a situaτπo com sentido de humor",
+    "description": null,
+    "order": 28,
+    "question_type": 3,
+    "instruction": "",
+    "section": 115,
+    "quotation_max": 4,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      306,
+      307,
+      308,
+      309
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 250,
+  "fields": {
+    "name": "Quantos familiares vΩ ou fala pelo menos uma vez por mΩs?",
+    "description": null,
+    "order": 1,
+    "question_type": 3,
+    "instruction": "**FAM═LIA:** Considerando as pessoas de quem Θ familiar por nascimento, casamento, adoτπo, etcà\r\n\r\n**AMIGOS:** Considerando todos os seus amigos, incluindo aqueles que vivem na sua vizinhanτaà",
+    "section": 116,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      310,
+      311,
+      312,
+      313,
+      314,
+      315
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 251,
+  "fields": {
+    "name": "De quantos familiares se sente pr≤ximo de tal forma que possa ligar-lhes para pedir ajuda?",
+    "description": null,
+    "order": 2,
+    "question_type": 3,
+    "instruction": "",
+    "section": 116,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      310,
+      311,
+      312,
+      313,
+      314,
+      315
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 252,
+  "fields": {
+    "name": "Com quantos familiares se sente α vontade para falar sobre assuntos pessoais?",
+    "description": null,
+    "order": 3,
+    "question_type": 3,
+    "instruction": "",
+    "section": 116,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      310,
+      311,
+      312,
+      313,
+      314,
+      315
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 253,
+  "fields": {
+    "name": "Quantos amigos vΩ ou fala pelo menos uma vez por mΩs?",
+    "description": null,
+    "order": 4,
+    "question_type": 3,
+    "instruction": "",
+    "section": 116,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      310,
+      311,
+      312,
+      313,
+      314,
+      315
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 254,
+  "fields": {
+    "name": "De quantos amigos se sente pr≤ximo de tal forma que possa ligar-lhes a pedir ajuda?",
+    "description": null,
+    "order": 5,
+    "question_type": 3,
+    "instruction": "",
+    "section": 116,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      310,
+      311,
+      312,
+      313,
+      314,
+      315
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 255,
+  "fields": {
+    "name": "Com quantos amigos se sente α vontade para falar sobre assuntos pessoais?",
+    "description": null,
+    "order": 6,
+    "question_type": 3,
+    "instruction": "",
+    "section": 116,
+    "quotation_max": 5,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": [
+      310,
+      311,
+      312,
+      313,
+      314,
+      315
+    ]
+  }
+},
+{
+  "model": "protocolo.question",
+  "pk": 256,
+  "fields": {
+    "name": "Questionßrio Sociodemogrßfico (Cuidador)",
+    "description": "Cuidador",
+    "order": 0,
+    "question_type": 13,
+    "instruction": "",
+    "section": 117,
+    "quotation_max": 0,
+    "quotation_min": 0,
+    "pdf_page": 0,
+    "helping_images": [],
+    "possible_answers": []
+  }
+}
+]

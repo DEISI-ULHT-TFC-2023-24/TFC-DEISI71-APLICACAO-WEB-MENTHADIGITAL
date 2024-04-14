@@ -1,0 +1,16 @@
+{% load static %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="{% static 'protocolo/js/visualizacao_risk.js' %}"></script>
+
+{% for risco in form_report_risk %}
+<p>teste</p>
+    <p>Idade: {{ form_report_risk.idade }}</p>
+    <p>Sexo: {{ form_report_risk.sexo }}</p>
+    <p>Fumador: {{ form_report_risk.fumador }}</p>
+    <p>Pressao_arterial: {{ form_report_risk.pressao_arterial }}</p>
+    <p>Risco: {{ form_report_risk.risco_de_enfarte }}</p>
+    <p>Comentário: {{ form_report_risk.comentario }}</p>
+
+{% endfor %}
+</div>
+

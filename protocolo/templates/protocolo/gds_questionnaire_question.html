@@ -1,0 +1,259 @@
+<form class="flex-container" id="question-form" action="" method="post">
+    <input type="hidden" name="type" value="0">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th style="width: 5%;">Estadio</th>
+                <th>Descrição&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="estadio-level">1</td>
+                <td style="color: var(--bs-blue);font-weight: bold;">Ausência de queixas subjectivas de défice de
+                    memória. Sem défice de memória evidente durante a entrevista clínica
+                    {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '1' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td class="estadio-level">2</td>
+                <td style="color: var(--bs-blue);font-weight: bold;">Queixas subjectivas de défice de memória, mais
+                    frequentemente nas seguintes áreas:<br>
+                {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '2' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td class="estadio-level">3</td>
+                <td style="color: var(--bs-blue);font-weight: bold;">Ocorrências precoces de défice claro. Manifestações
+                    em mais do que uma das seguintes áreas:<br>
+                {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '3' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td class="estadio-level">4</td>
+                <td style="color: var(--bs-blue);font-weight: bold;">Défices claramente evidentes em entrevista clínica
+                    cuidadosa.<br>
+                    {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '4' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                    <br>Frequentemente ausência de défice nas seguintes áreas:<br>
+                    {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '4 - 2' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <td class="estadio-level">5</td>
+                <td style="font-weight: bold;color: var(--bs-blue);">O paciente não consegue sobreviver sem alguma
+                    assistência. Durante a entrevista, o paciente é incapaz de se recordar de aspectos relevantes da sua
+                    vida actual, p. ex.:<br>
+                {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '5' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                <br>
+                {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '5 - 2' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td class="estadio-level">6</td>
+                <td style="color: var(--bs-blue);font-weight: bold;">Podem ocasionalmente esquecer-se do nome do cônjuge
+                    de quem dependem inteiramente para sobreviver.<br>
+                    {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '6' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                    <br>
+                    Necessitarão de alguma assistência nas
+                    actividades da vida diária: <br>
+                    {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '6 - 2' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}<br>
+                {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '6 - 3' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                    <br>
+                É frequente continuarem a ser capazes de distinguir, no meio em que vivem, as pessoas conhecidas das não
+                conhecidas. Ocorrem alterações emocionais e da personalidade. São muito variáveis e incluem:
+                {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '6 - 4' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td class="estadio-level">7</td>
+                <td style="color: var(--bs-blue);font-weight: bold;">Ao longo deste nível vão sendo perdidas todas as
+                    faculdades verbais.<br>
+                {% for answer in question.possible_answers.all %}
+                        {% if answer.description == '7' %}
+                            <label>
+                                <input class="" id="{{ answer.id }}" name="choice" type="checkbox"
+                                       value="{{ answer.id }}"
+                                        {% if answer.id in existing_answer_id %}
+                                       checked="checked"
+                                        {% endif %}
+                                />
+                                <span class="standard-text">{{ answer.name }}</span>
+                            </label>
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex-textarea flex-item padding-top-25">
+        <label><b>Apontamentos</b></label>
+        <textarea style="white-space: pre-line" class="notes-area form-control" id="notes"
+                  name="notes">{{ notes }}</textarea>
+    </div>
+    <br>
+
+    <div class="flex-buttons">
+        <button class="btn jq-btn btn-primary flex-left mb-btn"
+                {% if question.section.dimension.number_of_questions > 1 %}
+                data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% else %}
+                data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% endif %}
+                type="button">
+            <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+        </button>
+        <button class="btn btn-submit btn-primary mb-btn flex-right"
+                data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                style="" type="submit">
+            <i class="fa fa-check"></i>&nbsp; Submeter
+        </button>
+    </div>
+
+</form>

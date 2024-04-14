@@ -1,0 +1,60 @@
+[
+{
+  "model": "protocolo.instrument",
+  "pk": 20,
+  "fields": {
+    "name": "QASCI",
+    "description": null,
+    "order": 1,
+    "tooltip": "",
+    "area": [
+      56,
+      65,
+      74
+    ]
+  }
+},
+{
+  "model": "protocolo.instrument",
+  "pk": 21,
+  "fields": {
+    "name": "Brief COPE",
+    "description": null,
+    "order": 1,
+    "tooltip": "",
+    "area": [
+      58,
+      67,
+      76
+    ]
+  }
+},
+{
+  "model": "protocolo.instrument",
+  "pk": 22,
+  "fields": {
+    "name": "Lubben",
+    "description": null,
+    "order": 1,
+    "tooltip": "",
+    "area": [
+      57,
+      66,
+      75
+    ]
+  }
+},
+{
+  "model": "protocolo.instrument",
+  "pk": 23,
+  "fields": {
+    "name": "None",
+    "description": null,
+    "order": 0,
+    "tooltip": "",
+    "area": [
+      77
+    ]
+  }
+}
+]

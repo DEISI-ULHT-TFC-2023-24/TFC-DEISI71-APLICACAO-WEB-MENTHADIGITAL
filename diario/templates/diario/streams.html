@@ -1,0 +1,19 @@
+{% load static %}
+
+
+<button id="join-btn">Join Stream</button>
+
+
+<div id="stream-wrapper">
+    <div id="video-streams"></div>
+
+    <div id="stream-controls">
+        <button id="leave-btn">Leave Stream</button>
+        <button id="mic-btn">Mic On</button>
+        <button id="camera-btn">Camera on</button>
+    </div>
+</div>
+
+<!-- <script src="https://download.agora.io/sdk/release/AgoraRTC_N.js"></script> -->
+<script src="{% static 'diario/js/Agora/AgoraRTC_N-4.17.2.js' %}?{% now 'U' %}"></script>
+<script src="{% static 'diario/js/Agora/agora.js' %}?{% now 'U' %}"></script>

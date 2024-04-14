@@ -1,0 +1,82 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+<div class="container-fluid">
+    <div class="container text-start">
+        <div class="row">
+            <div class="col align-self-center">
+                <div class="titulo" style="display: flex;flex-direction: row;justify-content: space-between">
+                    <div class="card-body" style="padding: 8px">
+                        <p class="text-primary m-0 fw-bold"
+                            style="margin: 5px; font-size: 26px">Sessões do
+                            Grupo {{ grupo }}</p>
+                    </div>
+                    <div>
+                        <form action="{% url 'diario:grupo_details' grupo.id %}">
+                            <button type="submit" class="btn btn-outline-primary" style="width: 150px">
+                                Anterior
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container ">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;"><strong>Sessão</strong></th>
+                            <th style="text-align: center;"><strong>Data e hora</strong></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for detalhe in sessoes %}
+                        <tr>
+                            <td style="text-align: center;">Sessão {{ detalhe.numeroSessao }}</td>
+                            <td style="text-align: center;">{{ detalhe.data }}</td>
+                            <td style="text-align: center;">
+
+                                <button class="btn btn-primary " type="button" style="border-radius: 8px"
+                                        data-bs-toggle="modal" data-bs-target="#Visualizar">
+                                    Visualizar
+                                </button>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal  Cuidador sem grupo -->
+<div class="modal" id="Visualizar">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Notas</h4>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                {% for notas in notasGrupo %}
+                <p>{{notas}}</p>
+                {% endfor %}
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

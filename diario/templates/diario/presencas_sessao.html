@@ -1,0 +1,59 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+<div class="container-fluid"  style="display: flex;flex-direction: column;">
+
+    <div class="titulo">
+        <div class="card-flex" style="padding: 8px">
+            <span class="mb-text m-0 fw-bold fs-4">Presenças</span>
+            <a href="{% url 'diario:dashboard_Care' %}" style="float:right">
+                <button class="btn mb-btn-outline" style="border-radius: 8px; width:150px">
+                    <i class="fa-solid fa-angle-left"></i> Anterior
+                </button>
+            </a>
+        </div>
+        
+      </div>
+
+    <form action="{% url 'diario:iniciar_sessao' sessao_grupo.id %}" method="POST">
+        {% csrf_token %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th style="text-align: center;"><strong>Participantes</strong></th>
+                    <th style="text-align: center;"><strong>Online</strong></th>
+                    <th style="text-align: center;"><strong>Presencial</strong></th>
+                    <th style="text-align: center;"><strong>Falta</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for participante in participantes %}
+                <tr>
+                    <td style="text-align: center;">
+                        {{ participante }}
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" data-participante="{{ participante.id }}" value="online"
+                                name="{{ participante.id }}">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" data-participante="{{ participante.id }}"
+                                value="presencial"
+                                name="{{ participante.id }}" checked>
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" data-participante="{{ participante.id }}"
+                                value="naoVeio"
+                                name="{{ participante.id }}">
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <input type="submit" value="Iniciar sessão" class="btn btn-primary mb-btn"
+                style="float:right;margin-top:1ch;border-radius: 8px"/>
+    </form>
+</div>
+{% endblock %}

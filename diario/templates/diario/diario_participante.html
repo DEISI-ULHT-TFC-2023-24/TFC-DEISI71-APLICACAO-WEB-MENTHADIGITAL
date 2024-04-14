@@ -1,0 +1,457 @@
+{% load static %}
+{% load diario_tags %}
+<style>
+    .circle-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .atividades {
+        position: absolute;
+        left: 100px;
+        top: 150px;
+    }
+
+    .notas-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .notas-title {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .notas-list {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .notas-list li {
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .notas-list li:hover {
+        background-color: #e9e9e9;
+    }
+
+    .nota-content {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .nota-date {
+        font-size: 14px;
+        color: #999;
+        margin-right: 10px;
+    }
+
+    .nota-author {
+        font-size: 14px;
+        color: #666;
+        font-style: italic;
+    }
+
+    .no-notas {
+        color: #999;
+        font-style: italic;
+    }
+
+    .note-form textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+
+    .partilhas-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .partilha-form {
+        margin-bottom: 20px;
+    }
+
+    .partilha-form textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+
+    .partilhas-title {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .partilhas-list {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .partilhas-list li {
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .partilhas-list li:hover {
+        background-color: #e9e9e9;
+    }
+
+    .partilha-content {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .partilha-date {
+        font-size: 14px;
+        color: #999;
+        margin-right: 10px;
+    }
+
+    .partilha-author {
+        font-size: 14px;
+        color: #666;
+        font-style: italic;
+    }
+
+    .no-partilhas {
+        color: #999;
+        font-style: italic;
+    }
+</style>
+
+<div id="notas" style="overflow: auto; max-height: 600px; border-radius: 6px;">
+    <div class="notas-container">
+        <div class="note-form">
+            <form id="notaForm" onsubmit='event.preventDefault();
+                    sendFormParticipante(
+                    {{ sessaoGrupo.id }},
+                    {{ participante_id }},
+                    "notaForm"
+                    );' method="post">
+                {% csrf_token %}
+                {{ notaForm.nota }}
+                <input type="hidden" name="cuidador" value={{ participante_id }}>
+                <button type="submit" class="btn mb-btn-outline" name="nota">Guardar nota</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <h2 class="notas-title"><b>Notas sobre {{ participante.info_sensivel.nome }}</b></h2>
+
+        <ul class="notas-list">
+            {% if notas|length > 0 %}
+                {% for nota in notas %}
+                    {% if grupos_permissoes.exists %}
+                        {% if nota.anotador_dinamizador or nota.anotador_mentor %}
+                            <li>
+                                <div class="nota-content">{{ nota }}</div>
+                                <span class="nota-date">{{ nota.data_str }}</span>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        {% if nota.anotador_dinamizador is None and nota.anotador_mentor is None %}
+                            <li>
+                                <div class="nota-content">{{ nota }}</div>
+                                <span class="nota-date">{{ nota.data_str }}</span>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <li class="no-notas">Sem notas</li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div id="partilhas" style="overflow: auto; max-height: 600px; border-radius: 6px;">
+    <div class="partilhas-container">
+        <div class="partilha-form">
+            <form id="partilhaForm"
+                  onsubmit='event.preventDefault(); sendFormParticipante({{ sessaoGrupo.id }}, {{ participante_id }}, "partilhaForm");'
+                  method="post">
+                {% csrf_token %}
+                {{ partilhaForm.partilha }}
+                <input type="hidden" name="participante" value={{ participante_id }}>
+                <div class="botoes"
+                     style="border-radius: 6px 6px 6px 6px;margin-left: 3px;margin-right: 3px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px">
+                    <label for="id_imagem" class="btn mb-btn-outline">Carregar Imagem</label>
+                    {{ partilhaForm.imagem }}
+                    <label for="id_ficheiro" class="btn mb-btn-outline">Carregar Documento</label>
+                    {{ partilhaForm.ficheiro }}
+                </div>
+                <button type="submit" class="btn mb-btn-outline" name="partilha">Guardar partilha</button>
+            </form>
+        </div>
+
+        <h2 class="partilhas-title"><b>Partilhas da Sessão</b></h2>
+
+        <div class="partilhas-list">
+            <ul>
+                {% if grupos_permissoes.exists %}
+                    {% if partilhas|length > 0 %}
+                        {% for partilha in partilhas %}
+                            {% if partilha.cuidador.id == participante_id %}
+                                <li class="{% if not partilha.aprovada %} por-aprovar {% endif %}">
+                                    <div class="partilha-content">
+                                        {{ partilha }}
+                                    </div>
+                                    {% if partilha.ficheiro|length > 0 %}
+                                        <a href="{{ partilha.ficheiro.url }}" download>
+                                            <div class="w-10 h-10 mb-bg rounded-circle flex m-auto justify-content-center align-items-center align-self-center">
+                                                <i class="fa fa-file-lines icon-bg" aria-hidden="true"
+                                                   style="font-size:31px;"></i>
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                    {% if partilha.imagem|length > 0 %}
+                                        <img src="{{ partilha.imagem.url }}" width="15%"
+                                             style="margin-right: 10px; border-radius: 5px">
+                                    {% endif %}
+                                    <span class="partilha-date">
+                                        {{ partilha.data_str }}
+                                    </span>
+                                </li>
+                            {% elif partilha.participante.id == participante_id %}
+                                <li class="{% if not partilha.aprovada %} por-aprovar {% endif %}">
+                                    <div class="partilha-content">{{ partilha }}</div>
+                                    {% if partilha.ficheiro|length > 0 %}
+                                        <a href="{{ partilha.ficheiro.url }}" download>
+                                            <div class="w-10 h-10 mb-bg rounded-circle flex m-auto justify-content-center align-items-center align-self-center">
+                                                <i class="fa fa-file-lines icon-bg" aria-hidden="true"
+                                                   style="font-size:31px;"></i>
+                                            </div>
+                                        </a>
+
+                                    {% endif %}
+                                    {% if partilha.imagem|length > 0 %}
+                                        <img src="{{ partilha.imagem.url }}" width="15%"
+                                             style="margin-right: 10px; border-radius: 5px">
+                                    {% endif %}
+                                    <span class="partilha-date">{{ partilha.data_str }}</span>
+                                    <span class="partilha-author">{{ partilha.participante.nome }}</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <li class="no-partilhas">Sem partilhas</li>
+                    {% endif %}
+                {% else %}
+                    {% if partilhas|length > 0 %}
+                        {% for partilha in partilhas %}
+                            <li class="{% if not partilha.aprovada %} por-aprovar {% endif %}">
+                                <div class="partilha-content">
+                                    {{ partilha }}
+                                </div>
+                                {% if partilha.ficheiro|length > 0 %}
+                                    <a href="{{ partilha.ficheiro.url }}" download>
+                                        <div class="w-10 h-10 mb-bg rounded-circle flex m-auto justify-content-center align-items-center align-self-center">
+                                            <i class="fa fa-file-lines icon-bg" aria-hidden="true"
+                                               style="font-size:31px;"></i>
+                                        </div>
+                                        <span class="partilha-date">{{ partilha.ficheiro|filename }}</span>
+                                    </a>
+                                {% endif %}
+                                {% if partilha.imagem|length > 0 %}
+                                    <img src="{{ partilha.imagem.url }}" width="15%"
+                                         style="margin-right: 10px; border-radius: 5px">
+                                {% endif %}
+                                <span class="partilha-date">{{ partilha.data_str }}</span>
+                                {% if partilha.cuidador %}
+                                    <span class="partilha-author">{{ partilha.cuidador.nome }}</span>
+                                {% elif partilha.participante %}
+                                    <span class="partilha-author">{{ partilha.participante.nome }}</span>
+                                {% elif partilha.partilha_dinamizador %}
+                                    <span class="partilha-author">{{ partilha.partilha_dinamizador.nome }}</span>
+                                {% elif partilha.partilha_mentor %}
+                                    <span class="partilha-author">{{ partilha.partilha_mentor.nome }}</span>
+                                {% endif %}
+                                
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="no-partilhas">Sem partilhas</li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="respostas" style="display: none" data-participante="{{ participante.id }}">
+    {% for pergunta,parte,pg,form in form_list %}
+        <div id="flex-container">
+            <div class="row">
+                <div class="w-50" style="padding-top: 10px;
+                    padding-left: 25px;">
+                    {{ pergunta.nome }}
+                </div>
+                <div class="w-50" style="padding-top: 10px;
+                    padding-right: 25px;">
+                    {% if pergunta.tipo_resposta == 'UPLOAD_FOTOGRAFIA' %}
+                        <form action="preventDefault()" enctype="multipart/form-data">
+                            {% for field in form %}
+                                <div>
+                                    {{ field }}
+                                    <span data-parteid="{{ parte.id }}" data-partegrupoid="{{ pg.id }}"
+                                          data-perguntaid="{{ pergunta.id }}" style="display:none"></span>
+                                </div>
+                            {% endfor %}
+                        </form>
+                    {% elif pergunta.tipo_resposta == 'ESCOLHA_MULTIPLA' %}
+                        {% include 'diario/escolha_multipla.html' %}
+                    {% else %}
+                        {% for field in form %}
+                            <div>
+                                {{ field }}
+                                <span data-parteid="{{ parte.id }}" data-partegrupoid="{{ pg.id }}"
+                                      data-perguntaid="{{ pergunta.id }}"
+                                      style="display:none"></span>
+                            </div>
+                            {% if pergunta.postexto %}
+                                <label>
+                                    {{ pergunta.postexto }}
+                                </label>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    {% endfor %}
+    <button style="float:right;margin-top:15px" onclick="submete_diario({{ sessaoGrupo.id }}, {{ participante.id }})"
+            class="btn btn-primary">Submeter
+    </button>
+</div>
+
+<div id="informacoes" style="display: none">
+    <table style="width:100%">
+        <tr style="color:white; background-color:#4EB4BE;">
+            <th>
+                <div class="titulo">Nome Completo:</div>
+            </th>
+            <td style="padding:10px; text-align: left">
+                <div class="detalhe">{{ participante.info_sensivel.nome }}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <div class="titulo">Idade:</div>
+            </th>
+            <td style="padding:10px; text-align: left">
+                <div class="detalhe">{{ participante.idade }}</div>
+            </td>
+        </tr>
+
+        <tr style="color:white; background-color:#4EB4BE;">
+            <th>
+                <div class="titulo">Sexo:</div>
+            </th>
+            <td style="padding:10px; text-align: left">
+                <div class="detalhe">{{ participante.sexo }}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <div class="titulo">Data de Nascimento:</div>
+            </th>
+            <td style="padding:10px; text-align: left">
+                <div class="detalhe">{{ participante.nascimento }}</div>
+            </td>
+        </tr>
+
+        <tr style="color:white; background-color:#4EB4BE;">
+            <th>
+                <div class="titulo">Nacionalidade:</div>
+            </th>
+            <td style="padding:10px; text-align: left">
+                <div class="detalhe">{{ participante.nacionalidade }}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <div class="titulo">Diagnósticos:</div>
+            </th>
+            <td style="padding:10px; text-align: left">
+                <div class="detalhe">
+                    {{ participante.doencas_string }}
+                </div>
+            </td>
+        </tr>
+
+        <tr style="color:white; background-color:#4EB4BE;">
+            <th>
+                <div class="titulo">Telemóvel:</div>
+            </th>
+            <td style="padding:10px; text-align: left">
+                <div class="detalhe">{{ participante.info_sensivel.telemovel }}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <div class="titulo">Email:</div>
+            </th>
+            <td style="padding:10px; text-align: left">
+                <div class="detalhe">{{ participante.info_sensivel.email }}</div>
+            </td>
+        </tr>
+    </table>
+
+    <div style="background-color: #4eb4be; border-radius: 0; padding: 15px 0 15px 0; display: flex; justify-content: center;">
+        {% if participante.info_sensivel.imagem %}
+            <div class="circle-image">
+                <img src="{{ participante.info_sensivel.imagem.url }}"
+                     style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        {% else %}
+            <div class="circle-image">
+                <img src="{% static 'protocolo/img/placeholder-avatar.png' %}"
+                     style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div id="presencas" style="display: none"></div>

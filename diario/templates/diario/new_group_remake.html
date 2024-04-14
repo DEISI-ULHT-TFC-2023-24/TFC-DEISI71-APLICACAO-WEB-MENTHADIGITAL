@@ -1,0 +1,131 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% load diario_tags %}
+
+{% block head %}
+    <script src="{% static 'diario/js/cria_grupo.js' %}?{% now 'U' %}"></script>
+{% endblock %}
+
+{% block main %}
+
+
+    <div id="wrapper" style="padding-top:15px;width:100%">
+        <div class="container-fluid card" style="width:75%">
+            <div class="card-body" style="padding: 8px">
+                <p class="m-0 fw-bold"
+                   style="margin: 5px; font-size: 26px; color:#4EB4BE">Criar Novo Grupo
+                </p>
+                {% csrf_token %}
+                <div class="flex-container" style="flex-direction: row; justify-content: space-between;">
+                    <div style="width:45%">
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" class="form-control">
+                    </div>
+                    <div style="width:45%">
+                        <label for="programa">Programa: </label>
+                        <select class="form-control" onchange="atualiza_filtros(), atualiza_candidatos()"
+                                name="programa"
+                                id="programa">
+                            <option selected disabled value="">Escolha o programa</option>
+                            {% if grupos_permissoes_care %}
+                                <option value="CARE">MentHA-CARE</option>
+                            {% endif %}
+                            {% if grupos_permissoes_cog %}
+                                <option value="COG">MentHA-COG</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive" style="padding-top:15px">
+                <table class="table">
+                    <tbody>
+                    <tr class="filtro_care" style="display:none;">
+                        {% for campo,opcoes in lista_pesquisa_cuidadores.items %}
+                            <td class="opcao">
+                                <select name="{{ campo }}_care" onchange="atualiza_candidatos()" id="{{ campo }}_care"
+                                        style="width:100%" class="form-control shadow-on-hover">
+                                    {% if referenciacao is not None and campo == "Referenciações" %}
+                                        <option value="{{ referenciacao.pk }}">{{ referenciacao }}</option>
+                                    {% else %}
+                                        <option value="" disabled selected>{{ campo }} disponíveis</option>
+                                        <option value="">------</option>
+                                        {% for opcao in opcoes %}
+                                            {% if opcao != None %}
+                                                {% if campo == "Referenciações" or campo == "Diagnósticos" %}
+                                                    <option value='{{ opcao.id }}'>{{ opcao }}</option>
+                                                {% else %}
+                                                    <option value='{{ opcao }}'>{{ opcao }}</option>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% empty %}
+                                            <option value="">Sem registos</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </td>
+                        {% endfor %}
+                        <td>
+                        </td>
+
+                    </tr>
+                    <tr class="filtro_cog" style="display:none;">
+                        {% for campo,opcoes in lista_pesquisa_participantes.items %}
+                            <td class="opcao">
+                                <select name="{{ campo }}_cog" onchange="atualiza_candidatos()" id="{{ campo }}_cog"
+                                        style="width:100%" class="form-control shadow-on-hover">
+                                    {% if referenciacao is not None and campo == "Referenciações" %}
+                                        <option value="{{ referenciacao.pk }}">{{ referenciacao }}</option>
+                                    {% else %}
+                                        <option value="" disabled selected>{{ campo }} disponíveis</option>
+                                        <option value="">------</option>
+                                        {% for opcao in opcoes %}
+                                            {% if opcao != None %}
+                                                {% if campo == "Referenciações" or campo == "Diagnósticos" %}
+                                                    <option value='{{ opcao.id }}'>{{ opcao }}</option>
+                                                {% else %}
+                                                    <option value='{{ opcao }}'>{{ opcao }}</option>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% empty %}
+                                            <option value="">Sem registos</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </td>
+                        {% endfor %}
+                        <td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container-fluid card" style="margin-top:15px;width:75%;display:none">
+            <div class="card-body" style="padding: 8px">
+
+                <p class="m-0 fw-bold"
+                   style="margin: 5px; font-size: 26px; color:#4EB4BE">Candidatos
+                </p>
+
+                <div class="table-responsive" style="padding-top:15px">
+                    <table class="table container-candidatos">
+
+                    </table>
+                    <button type="submit" class="left btn mb-btn" onclick="cria_grupo()"
+                            style="margin-top:15px;float:right;">
+                        <i class="fa-solid fa-user-group"></i> Criar Grupo
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="container-fluid card" style="width: 20%;float:right; border: none">
+            <button class="btn mb-btn" onclick="history.back();"
+                    style="padding-left: 10px;padding-right: 10px;margin-right: 20px">
+                <i class="fa-solid fa-times"></i> Cancelar
+            </button>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,496 @@
+{% extends 'diario/base.html' %}
+
+{% block style %}
+
+.grupo .ver-grupo{
+grid-area: grupo;
+}
+.participantes {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+}
+.diario .ver-notas {
+grid-area: notas;
+}
+.diario .ver-respostas {
+grid-area: respostas;
+}
+.diario .ver-informacoes {
+grid-area: informacoes;
+}
+.diario .ver-partilhas {
+grid-area: partilhas;
+}
+.diario .info {
+grid-area: info;
+height: 600px;
+background-color: whitesmoke;
+border: 1px solid #4EB4BE;
+border-radius: 6px;
+
+}
+/* configuração dos formulários das notas e partilhas */
+.diario .info form {
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+gap: 0.2em;
+
+}
+/* configuração da data */
+.info .data {
+font-size: 0.5em;
+
+font-style: italic;
+}
+/* configuração da lista */
+
+/* configuração do botão "Guardar" dos formulários */
+.info [type='submit'] {
+border-radius: 0 0 6px 6px;
+}
+
+/* configuração da área de texto */
+.diario textarea {
+resize: none;
+border-radius: 6px 6px 0 0;
+/* https://getcssscan.com/css-box-shadow-examples */
+box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
+}
+
+.diario {
+display: grid;
+grid-template-areas:
+
+'notas partilhas respostas informacoes'
+'info info info info';
+grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+/***********************************************************/
+/*  configuracao do diarioParticipante.html               **/
+/***********************************************************/
+
+.detail-info-container{
+<!--position:relative;-->
+}
+#informacoes{
+<!--display: flex;-->
+flex-direction:column;
+gap: 2em;
+}
+#informacoes > div {
+border-radius:1em;
+}
+.infos{
+
+display:none;
+<!--position: absolute;-->
+z-index:2;
+top: calc(100%);
+left:0px;
+}
+.titulo{
+border:0.08em;
+border-radius:5px;
+border-style:solid;
+}
+.selectedButton{
+}
+.ignoredButton{
+display
+}
+
+/***********************************************************/
+/*  configuracao da tabela                        **/
+/***********************************************************/
+
+
+.title {
+grid-area: title;
+background-color: #4EB4BE;
+text-align: center;
+}
+h1{
+margin-top: auto;
+margin-bottom: auto;
+margin-right: auto;
+margin-left: auto;
+font-size: 25px;
+}
+
+.menu{
+background-color:#4EB4BE;
+text-color:white
+border: 0px;
+border: 1px solid #4EB4BE;
+border-radius: 6px;
+padding:8px;
+
+}
+
+#exercicio td, #exercicio th{
+text-align:left;
+}
+
+{% endblock %}
+// Em falta, criar botao de respostas e de informacoes com o seu conteudo
+
+{% block script %}
+var menuAtivo;
+function ativaBotaoParticipante(id) {
+// desativa todos os botões
+document.querySelectorAll('.participantes button').forEach(button => {
+button.style.backgroundColor = 'whitesmoke';
+button.style.color = 'black';
+button.style.font_weight = '600';
+});
+//mostra botao respostas
+let buttonAnswer = document.querySelector('[data-menu="respostas"]');
+buttonAnswer.style.display='block';
+//esconde botao presencas
+let buttonPresences = document.querySelector('[data-menu="presencas"]');
+buttonPresences.style.display='none';
+// desativa o botao do grupo
+document.querySelectorAll('.grupo button').forEach(button => {
+button.style.backgroundColor = 'white';
+button.style.color = 'black';
+button.style.font_weight = '600';
+});
+// obtém e ativa o botão do participante
+let buttonAtivo = document.querySelector(`[data-id="${id}"]`);
+buttonAtivo.style.backgroundColor = '#4EB4BE';
+buttonAtivo.style.color = 'white';
+buttonAtivo.style.font_weight = '600';
+}
+//Grupo
+function ativaBotaoGrupo(idGrupo) {
+// desativa todos os botões
+document.querySelectorAll('.participantes button').forEach(button => {
+button.style.backgroundColor = 'white';
+button.style.color = 'black';
+button.style.font_weight = '600';
+});
+// obtém e ativa o botão do grupo
+let buttonAtivo = document.querySelector(`[data-idGrupo="${idGrupo}"]`);
+buttonAtivo.style.backgroundColor = '#4EB4BE';
+buttonAtivo.style.color = 'white';
+buttonAtivo.style.font_weight = '600';
+let buttonPresences = document.querySelector('[data-menu="presencas"]');
+buttonPresences.style.display='block';
+//esconde botao respostas
+let buttonAnswer = document.querySelector('[data-menu="respostas"]');
+buttonAnswer.style.display='none';
+}
+//Fim grupo
+function ativaMenu() {
+// põe botões de menu a branco + esconde respetiva info
+document.querySelectorAll('.menu').forEach(m => {
+m.style.backgroundColor = 'white';
+m.style.color = 'black';
+m.font_weight = 'normal';
+document.querySelector(`#${m.dataset.menu}`).style.display = 'none';
+});
+menuAtivo.style.color = 'white';
+menuAtivo.style.font_weight = 'bold';
+menuAtivo.style.backgroundColor = '#4EB4BE';
+document.querySelector(`#${menuAtivo.dataset.menu}`).style.display = 'block';
+}
+function descarregaInfoParticipante(id) {
+/* vai buscar a informação do participante id */
+fetch('/diario_participante/' + id)
+.then(response => response.text())
+.then(text => document.querySelector('.info').innerHTML = text)
+.then(() => ativaMenu());
+}
+
+//Grupo
+function descarregaInfoGrupo(idGrupo) {
+/* vai buscar a informação do grupo id */
+fetch('/diario_grupo/' + idGrupo)
+.then(response => response.text())
+.then(text => document.querySelector('.info').innerHTML = text)
+.then(() => ativaMenu());
+}
+
+/***************************************************************************/
+/********** DOMContentLoaded ***********************************************/
+/***************************************************************************/
+document.addEventListener('DOMContentLoaded', function () {
+menuAtivo = document.querySelector("[data-menu='notas']");
+document.querySelector("[data-menu='respostas']").style.display = 'none';
+// onclick num participante
+document.querySelectorAll('.participantes button').forEach(botaoParticipante => {
+botaoParticipante.onclick = () => {
+ativaBotaoParticipante(botaoParticipante.dataset.id);
+descarregaInfoParticipante(botaoParticipante.dataset.id);
+}
+});
+//Grupo
+// onclick num grupo
+document.querySelectorAll('.grupo button').forEach(botaoGrupo => {
+botaoGrupo.onclick = () => {
+ativaBotaoGrupo(botaoGrupo.dataset.idgrupo);
+descarregaInfoGrupo(botaoGrupo.dataset.idgrupo);
+}
+});
+// onclick num botão de menu
+document.querySelectorAll('.menu').forEach(menu => {
+menu.onclick = () => {
+menuAtivo = menu;
+ativaMenu();
+}
+});
+});
+/* vai buscar ao formulario com id formId
+os dados e envia para servidor,
+e espera por info atualizada do participante */
+<!--document.querySelectorAll('.participantes button').forEach(button => {-->
+function sendForm(id, formId) {
+let data = new FormData(document.getElementById(formId));
+fetch(`/diario_participante/${id}`, {method: "POST", body: data})
+.then(response => response.text())
+.then(text => {
+document.querySelector('.info').innerHTML = text;
+ativaMenu();
+ativaBotaoParticipante(id);
+});
+return false;
+}
+<!--}-->
+//Grupo
+/* vai buscar ao formulario com id formId
+os dados e envia para servidor,
+e espera por info atualizada do participante */
+<!--document.querySelectorAll('.grupo button').forEach(button => {-->
+function sendForm(idgrupo, formId) {
+let data = new FormData(document.getElementById(formId));
+fetch(`/diario_grupo/${idgrupo}`, {method: "POST", body: data})
+.then(response => response.text())
+.then(text => {
+document.querySelector('.info').innerHTML = text;
+ativaMenu();
+ativaBotaoGrupo(idgrupo);
+});
+return false;
+}
+<!--}-->
+
+
+document.addEventListener('DOMContentLoaded', function() {
+document.querySelectorAll('.ee button').forEach(button => {
+button.onclick = () => {
+parte_id = button.dataset.parte;
+fetch('/parteDetalhes/'+ parte_id)
+.then(response =>  response.text())
+.then(data => {
+
+const div = document.querySelector('div#exercicio');
+div.innerHTML = data;
+})
+.then(data => {
+
+<!-- timer -->
+{% if estado != "ver" %}
+function startTimer(duration, display) {
+timer = duration;
+
+setInterval(function () {
+minutes = parseInt(timer / 60, 10);
+seconds = parseInt(timer % 60, 10);
+
+display.innerHTML = minutes +':' + seconds;
+
+timer++;
+}, 1000);
+}
+display = document.querySelector('#timer'); // selecionando o timer
+
+var duration = parseInt(display.innerHTML,10) * 60; // Converter para segundos  -  {{ part.duracao }} *
+startTimer(duration, display); // iniciando o timer
+{% endif %}
+});
+
+}
+});
+});
+
+
+function showHtmlDiv() {
+var htmlShow = document.getElementById("html-show");
+if (htmlShow.style.display === "none") {
+htmlShow.style.display = "block";
+} else {
+htmlShow.style.display = "none";
+}
+}
+
+{% endblock %}
+
+{% block main %}
+{% load markdownify %}
+<body>
+
+<!--Esquerda-->
+<div class="card"
+     style="width:50%;min-height: 150vh; height:100%; float: left; padding-left:15px; border-color: white; margin-top:80px">
+    DETALHES SESSAO
+    <div class="card-body">
+        <br>
+        <div id="exercicio" class="ee">
+
+            <h5 class="text-primary m-0 fw-bold">
+                Sessão {{ sessaoGrupo.sessao.numeroSessao}}: {{ sessaoGrupo.sessao.nome }}
+            </h5>
+            <br>
+
+            <h5 class="text-primary m-0 fw-bold">
+                Tema
+            </h5>
+            {{ sessaoGrupo.sessao.tema | markdownify }}
+
+            <h5 class="text-primary m-0 fw-bold">
+                Planificação da Sessão </h5>
+
+            <br>
+            <div style=" border: 1px solid #4EB4BE; padding:10px;border-radius:10px; ">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col">Fase</th>
+                        <th scope="col">Objetivo</th>
+                        <th></th>
+                        <th scope="col">Duração</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    {% for parte_do_grupo in partesGrupo %}
+                    <tr>
+                        <td>
+                            {% if parte_do_grupo.parte.fase == 'I' %}
+                            Inicial
+                            {% endif %}
+                            {% if parte_do_grupo.parte.fase == 'D' %}
+                            Desenvolvimento
+                            {% endif %}
+                            {% if parte_do_grupo.parte.fase == 'F' %}
+                            Final
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ parte_do_grupo.parte.objetivo }}
+                        </td>
+                        <td style="color:dodgerblue">
+                            {% if parte_do_grupo.concluido == True %}
+                            ✔
+                            {% else %}
+                            X
+                            {% endif %}
+
+                        </td>
+                        <td style="text-align:center">
+                            {% if parte_do_grupo.duracao != None %}
+                            {{ parte_do_grupo.duracao }}/{{ parte_do_grupo.parte.duracao }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if parte_do_grupo.parte.id == proxima_parte and parte_do_grupo.inicio == None %}
+                            <button type="button" class="btn btn-outline-primary iniciar"
+                                    data-parte="{{parte_do_grupo.parte.id}}/{{id}}/{{grupo.id}}"
+                                    style="width:11ch">
+                                <i class="fa-solid fa-play"></i> Iniciar
+                            </button>
+                            {% elif parte_do_grupo.parte.id == proxima_parte and parte_do_grupo.inicio != None %}
+                            <button type="button" class="btn btn-outline-primary continuar"
+                                    data-parte="{{parte_do_grupo.parte.id}}/{{id}}/{{grupo.id}}"
+                                    style="width:11ch">
+                                <i class="fa-solid fa-angles-right"></i> Continuar
+                            </button>
+                            {% elif parte_do_grupo.parte.id != proxima_parte %}
+                            <button type="button" class="btn btn-outline-secondary ver"
+                                    data-parte="{{parte_do_grupo.parte.id}}/{{id}}/{{grupo.id}}"
+                                    style="width:11ch">
+                                <i class="fa-solid fa-eye"></i> Ver
+                            </button>
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div>
+            <button onclick="showHtmlDiv()" class="btn btn-outline-danger" style="margin-left:400px">
+                Esconder parte direita
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<!--Direita-->
+
+<div class="card"
+     style="width: 50%; min-height: 130vh; height: 100%; float: right;padding:5px;border-color: white; margin-top:80px">
+    <div class="container text-start">
+        <div class="row">
+            <div class="col align-self-center">
+
+                <div style="margin-left:70%; padding-top: 20px;">
+                    <form action="{% url 'diario:group_sessions' grupo.id %}">
+                        <button type="submit" class="btn btn-outline-primary" style="width: 150px">
+                            Anterior
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="html-show">
+        <div id="boxRight" class="card-body">
+
+            <!-- Participantes -->
+            <div class="participantes" style="padding:10px;">
+                {% for participante in participantes %}
+                <button type="button" class="btn btn-primary" data-id="{{ participante.id }}"
+                        style="margin:10px; padding:8px">{{ participante }}
+                </button>
+                {% endfor %}
+            </div>
+
+            <!-- Grupo -->
+            <div class="grupo" style="padding-left:10px;padding-right:30px;">
+                <button type="button" class="btn btn-primary" data-idgrupo="{{ grupo.id }}"
+                        style="width:100%; margin-left:10px">Grupo
+                </button>
+            </div>
+            <!--class="btn btn-primary" -->
+            <!-- Parte de Baixo da informacao-->
+            <div class="diario" style="padding:20px;">
+
+                <button class="menu" data-menu="informacoes"
+                        style="color:white;margin-rigth:10px ; margin-top:10px; margin-bottom:10px">Informações
+                </button>
+                <button class="menu" data-menu="presencas" style="margin:10px;color:white">Presenças
+                </button>
+                <button class="menu" data-menu="respostas" style="margin:10px;color:white">Respostas
+                </button>
+                <button class="menu" data-menu="notas" style="margin:10px;color:white">Notas
+                </button>
+                <button class="menu" data-menu="partilhas"
+                        style="color:white; margin-left:10px; margin-top:10px; margin-bottom:10px">Partilhas
+                </button>
+
+                <div class="info"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+{% endblock %}

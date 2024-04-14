@@ -1,0 +1,314 @@
+{% load static %}
+
+<style>
+    .circle-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    }
+
+    @media (max-width:1300px) {
+        .bcca-breadcrumb-item span {
+            display:none;
+        }
+    }
+</style>
+
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+            </div>
+            <div class="container-fluid">
+                <div style="display: flex;flex-direction: row;justify-content: space-between">
+                    <div class="card-body">
+                        <p class="m-0 fw-bold" style="margin: 5px; font-size: 26px; color: #4EB4BE">
+                            Editar Participante</p>
+                    </div>
+                </div>
+
+                <form action="" id="update-form" class="row g-3" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="4" class="align-content-center align-middle" style="width: 0%">
+                                        <!-- Imagem -->
+                                        {% if participante.imagem %}
+                                            <div class="circle-image">
+                                                <img src="{{ participante.imagem.url }}"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                        {% else %}
+                                            <div class="circle-image">
+                                                <img src="{% static 'protocolo/img/placeholder-avatar.png' %}"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                        {% endif %}
+                                    </td>
+
+                                    <td class="text-start" style="text-align:center; width: 25%">
+                                        <!-- Nome -->
+                                        <label class="form-label" style="margin: 0px;">Nome do Paciente</label>
+                                        <input style="font-weight: bold;" type="text" id="{{ formParticipante.nome.id_for_label }}" name="{{ formParticipante.nome.html_name }}" value="{{ participante.nome }}">
+                                    </td>
+
+                                    <td class="text-start" style="text-align:center; width: 25%">
+                                        <!-- Telemovel -->
+                                        <label class="form-label" style="margin: 0px;">Telemóvel</label>
+                                        <input style="font-weight: bold;" type="text"
+                                            id="{{ formParticipante.telemovel.id_for_label }}"
+                                            name="{{ formParticipante.telemovel.html_name }}"
+                                            value="{{ participante.telemovel }}">
+                                    </td>
+
+                                    {% if patient.referenciacao == None %}
+                                        <td class="text-start" style="text-align:center; width: 25%">
+                                            <!-- Referenciacao -->
+                                            <label style="margin-bottom:20px;" class="form-label">Referenciação</label>
+                                            <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                Sem Informação
+                                            </p>
+                                        </td>
+                                    {% else %}
+                                        <td class="text-start" style="text-align:center; width: 25%">
+                                            <!-- Referenciacao -->
+                                            <label style="margin-bottom:20px;" class="form-label">Referenciação</label>
+                                            <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                {{ patient.referenciacao }}
+                                            </p>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <!-- Data de Nascimento -->
+                                        <label class="form-label">Data de Nascimento *</label>
+                                        <p style="color: var(--bs-gray-dark); padding-top: 0px; margin-top: -10px; font-weight: bold;">
+                                            {{ formParticipante.nascimento }}
+                                        </p>
+                                    </td>
+
+                                    <td>
+                                        <!-- E-mail -->
+                                        <label class="form-label" style="margin: 0px;">E-mail *</label>
+                                        <input style="font-weight: bold;" type="text"
+                                        
+                                           id="{{ formParticipante.email.id_for_label }}"
+                                           name="{{ formParticipante.email.html_name }}"
+                                           value="{{ participante.email }}">
+                                    </td>
+
+                                    <td>
+                                        <!-- Grupo COG -->
+                                        <label style="margin-bottom: 20px" class="form-label">Grupo COG</label>
+                                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                                            {% if not participante.grupo.all %}
+                                                Não tem grupo COG
+                                            {% else %}
+                                                {% for grupo in participante.grupo.all %}
+                                                    {{ grupo.nome }}
+                                                {% endfor %}
+                                            {% endif %}
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <!-- Sexo -->
+                                        <label class="form-label">Género</label>
+                                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                            {{ formParticipante.sexo }}
+                                        </p>
+                                    </td>
+
+                                    <td>
+                                        <!-- Dados (Email e telemovel)-->
+                                        <label class="form-label">Os dados de contacto (Email e telemóvel) pertencem a quem?</label>
+                                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                            {{ formParticipante.dadosCuidador }}
+                                        </p>
+                                    </td>
+                             
+
+                                    <td>
+                                        <!-- Escolaridade -->
+                                        <label class="form-label" style="margin: 0px;">Escolaridade</label>
+                                        <b>{{ formParticipante.escolaridade }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Cuidadores -->
+                                        <label style="margin-bottom: 20px" class="form-label">Cuidador(es)</label>
+                                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                            {% if not participante.cuidadores.all %}
+                                                Não tem cuidador
+                                            {% else %}
+                                                {% for cuidador in participante.cuidadores.all %}
+                                                    {{ cuidador.nome }}
+                                                {% endfor %}
+                                            {% endif %}
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <!-- Nacionalidade -->
+                                        <label style="margin: 0px;" class="form-label">Nacionalidade</label>
+                                        <input style="font-weight: bold;" type="text"
+                                           id="{{ formParticipante.nacionalidade.id_for_label }}"
+                                           name="{{ formParticipante.nacionalidade.html_name }}"
+                                           value="{{ participante.nacionalidade }}">
+                                    </td>
+
+                                    <td>
+                                        <!-- Localizacao -->
+                                        <label style="margin: 0px;" class="form-label">Localização</label>
+                                        <input style="font-weight: bold;" type="text"
+                                           id="{{ formParticipante.localizacao.id_for_label }}"
+                                           name="{{ formParticipante.localizacao.html_name }}"
+                                           value="{{ participante.localizacao }}">
+                                    </td>
+
+                                    {% if not patient.cuidadores.all %}
+                                        <td>
+                                            <!-- Grupo CARE dos cuidadores-->
+                                            <label style="margin-bottom:20px;" class="form-label">Grupo CARE do(s) cuidador(es)</label>
+                                            <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                Sem Informação
+                                            </p>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <!-- Grupo CARE dos cuidadores-->
+                                            <label style="margin-bottom:20px;" class="form-label">Grupo CARE do(s) cuidador(es)</label>
+                                            <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                {% for cuidador in patient.cuidadores.all %}
+                                                    {% if not cuidador.grupo %}
+                                                        Não tem grupo CARE
+                                                    {% else %}
+                                                        {% for grupo in cuidador.grupo.all %}
+                                                            {{ grupo.nome }}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </p>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+
+                                <!-- EDITEI A PARTIR DAQUI -->
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <!-- Sit. Laboral -->
+                                        <label style="margin: 0px;" class="form-label">Situação Laboral</label>
+                                        <b>{{ formParticipante.situacaoLaboral }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Profissao -->
+                                        <label style="margin: 0px;" class="form-label">Profissão atual (ou antiga profissão)</label>
+                                        <b>{{ formParticipante.profissaoPrincipal }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Sit. Economica -->
+                                        <label style="margin: 0px;" class="form-label">Sit. Económica (Rendimentos/Despesas)</label>
+                                        <b>{{ formParticipante.situacaoEconomica }}</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <!-- Estado Civil -->
+                                        <label style="margin: 0px;" class="form-label">Estado Civil</label>
+                                        <b>{{ formParticipante.estadoCivil }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Agregado Familiar -->
+                                        <label style="margin: 0px;" class="form-label">Agregado Familiar Atual</label>
+                                        <b>{{ formParticipante.agregadoFamiliar }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Nr Filhos -->
+                                        <label style="margin: 0px;" class="form-label">Número de Filhos</label>
+                                        <b>{{ formParticipante.nrFilhos }}</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <!-- Estado de Saude -->
+                                        <label style="margin: 0px;" class="form-label">Estado de Saúde Atual</label>
+                                        <b>{{ formParticipante.autoAvaliacaoEstadoSaude }}</b>
+                                    </td>
+
+                                    <td>
+                                        <!-- Diagnosticos -->
+                                        <label style="margin: 0px;" class="form-label">Diagnósticos</label>
+                                        {% comment %}
+                                        <select multiple class="form-select form-select-sm" style="font-weight: bold;" name="doenca" id="doenca">
+                                            {% for doenca in doencas %}
+                                                <option {% if doenca in patient.diagnosticos.all %}selected{% endif %}
+                                                        value="{{ doenca.id }}">{{ doenca.nome }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        {% endcomment %}
+                                    </td>
+                                    
+
+                                    <td>
+                                        <!-- Escolha Multipla Teste-->
+                                        <label class="form-label">Principal Diagnóstico:</label>
+                                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                                                {{ formParticipante.diagnosticoPrincipal }}
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <td>
+                                            <!-- Comorbibilidades -->
+                                            <label style="margin: 0px;" class="form-label">Outros Diagnósticos</label>
+                                            <b>{{ formParticipante.comorbilidades }}</b>
+                                            <style>
+                                                /* Adjust the height and width of the comment box */
+                                                textarea[name="comorbilidades"] {
+                                                    width: 150%; /* Adjust the width as needed */
+                                                    height: 250px; /* Adjust the height as needed */
+                                                }
+                                            </style>
+                                        </td>  
+                                    </td>
+                                </tr>                
+                            </tbody>
+                        </table>
+                    </div>
+
+                     <div style="display: flex; flex-direction: row; justify-content: flex-end; gap: 10px">
+                        <button data-href="{% url 'protocolo:participant' participante.id %}" class="btn jq-btn mb-btn-outline" style="width: 150px">
+                            <i class="fa-solid fa-times"></i> Cancelar
+                        </button>
+
+                        <button type="submit" data-href="{% url 'protocolo:participante_update' participante.id %}" class="btn btn-update-profile mb-btn" style="width: 150px; color: white">
+                            <i class="fa fa-floppy-disk"></i> Gravar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

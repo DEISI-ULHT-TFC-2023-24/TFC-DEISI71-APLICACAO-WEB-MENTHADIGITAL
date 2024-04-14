@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MentHA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+
+    <style>
+        {%  load static %}
+
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Open Sans';
+        }
+
+        nav {
+            position: sticky;
+            height: 8vh;
+            top: 0;
+            z-index: 5;
+
+            background-color: #4EB4BE;
+            color: white;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 2em;
+
+            border-bottom: 2px solid lightgray;
+        }
+
+        nav img {
+            margin-right: auto;
+            height: 5vh;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 0 0.5em;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            font-weight: bold;
+        }
+
+        div.hero {
+            height: 85vh;
+            background-image: url("{% static 'mentha/senior_retired_couple_enjoy.jpg' %}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .slogan {
+            position: absolute;
+            left: 5vw;
+            top: 12vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slogan .prim {
+            font-weight: 600;
+            font-size: 3.8vw;
+            color: #4EB4BE;
+            width: 40vw;
+            text-align: justify;
+        }
+
+        .slogan .sec {
+            font-size: 1.2vw;
+            font-style: italic;
+            color: dimgray;
+            font-weight: 600;
+            line-height: 2;
+            text-align: justify;
+            width: 39vw;
+        }
+
+        .next {
+            position: absolute;
+            bottom: 0;
+            width: 100vw;
+            font-weight: 400;
+            font-size: 1.5vw;
+            color: dimgray;
+            padding: 0;
+            margin: 0;
+            line-height: 0.1vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .next span {
+            display: block;
+        }
+
+        .material-symbols-outlined {
+            padding: 0;
+            margin: 0;
+            font-size: 5vw;
+            color: #4EB4BE;
+        }
+
+        #objetivo {
+            font-size: 1em;
+            padding: 5vh 10vw;
+            background: #4EB4BE;
+            display: grid;
+            grid-template-columns: 2.5fr 0.25fr 1fr;
+            gap: 2vw;
+            grid-template-areas:
+                'titulo . .'
+                'texto  . citacao';
+        }
+
+        #objetivo .titulo {
+            grid-area: titulo;
+            color: white;
+            font-size: 2em;
+        }
+
+        #objetivo .texto {
+            grid-area: texto;
+            text-align: justify;
+        }
+
+        #objetivo .citacao {
+            grid-area: citacao;
+            color: white;
+            font-size: 1.75vw;
+            text-align: justify;
+        }
+
+        #objetivo .texto p {
+            line-height: 1.5;
+            margin: 0.7em 0;
+        }
+
+        #objetivo b {
+            color: whitesmoke;
+            font-weight: normal;
+        }
+
+        #descricao {
+            font-size: 1em;
+            background: white;
+            color: black;
+            padding: 5vh 10vw;
+            display: grid;
+            grid-template-columns: 2.5fr 0.25fr 1fr;
+            gap: 2vw;
+            grid-template-areas:
+                'titulo . .'
+                'texto  . citacao';
+        }
+
+        #descricao .titulo {
+            grid-area: titulo;
+            color: #4EB4BE;
+            font-size: 2em;
+        }
+
+        #descricao .texto {
+            grid-area: texto;
+            text-align: justify;
+        }
+
+        #descricao .citacao {
+            grid-area: citacao;
+            font-size: 1.75vw;
+            text-align: justify;
+        }
+
+        #descricao .texto p {
+            line-height: 1.5;
+            margin: 0.7em 0;
+        }
+
+        #descricao b {
+            color: #4EB4BE;
+            font-weight: normal;
+        }
+
+        .azul {
+            font-size: 1em;
+            padding: 5vh 10vw;
+            background: #4EB4BE;
+            display: grid;
+            grid-template-columns: 2.5fr 0.25fr 1fr;
+            gap: 2vw;
+            grid-template-areas:
+                'titulo . .'
+                'texto  . citacao';
+        }
+
+        .azul .titulo {
+            grid-area: titulo;
+            color: white;
+            font-size: 2em;
+        }
+
+        .azul .texto {
+            grid-area: texto;
+        }
+
+        .azul .texto p {
+            grid-area: texto;
+            line-height: 1.75;
+            text-align: justify;
+            margin: 0.7em 0;
+        }
+
+        li {
+            line-height: 1.5;
+            margin: 0.7em 0 0.7em 2em;
+        }
+
+        footer {
+            height: 7vh;
+            background: whitesmoke;
+            color: black;
+            position: sticky;
+            bottom: 0;
+
+            display: flex;
+            flex-direction:row;
+            justify-content: center;
+            align-items: center;
+            gap: 1vw;
+        }
+        footer img {
+            height: 2vw;
+        }
+        footer p {
+            margin-left: 3vw;
+        }
+
+
+    </style>
+</head>
+<body>
+<main>
+
+    <nav class="menu-area">
+        <img src="{% static 'mentha/logos/mentha_w.png' %}" alt="">
+
+        <a href="">Projeto</a>
+
+        <!--
+                <a href="#objetivo">Objetivo</a>
+                <a href="#descricao">Descrição</a>
+                <a href="#impacto">Impacto</a>
+        -->
+        <a href="">Aplicações</a>
+        <a href="">Equipa Técnica</a>
+        <a href="">Parceiros</a>
+        <a href="">Contacto</a>
+    </nav>
+
+    <div class="hero">
+        <div class="slogan">
+            <p class="prim">Melhorar o bem-estar e a qualidade de vida </p>
+            <p class="sec">de adultos mais velhos com demência e dos seus cuidadores através de programas de treino
+                cognitivo e psico-educativos. <span style="display:inline-block; width:48vw"></span></p>
+        </div>
+
+        <div class="next">
+            <span>Projeto MentHA</span>
+            <span class="material-symbols-outlined">expand_more</span>
+        </div>
+    </div>
+
+    <div class="azul">
+        <div class="titulo">Projeto MentHA</div>
+        <div class="texto">
+
+            <p>O projeto MentHA Digital - Mental Health and Ageing, é promovido pela Universidade Lusófona. Ganhou um
+                concurso a financiamento público em janeiro de 2022, no âmbito do Programa Nacional para a Saúde Mental,
+                da Direção Geral da Saúde. Teve início em março 2022 e tem a duração de um ano.</p>
+
+            <p>É uma iniciativa conjunta do Instituto de Serviço Social (ICS) e do Departamento de
+                Engenharia Informática e Sistemas de Informação (DEISI-COPELABS) da Universidade Lusófona. Tem como
+                investigadores principais Pedro Machado dos Santos (ICS) e Lúcio Studer Ferreira (DEISI-COPELABS) e
+                conta com a colaboração de vários alunos finalistas de Engenharia Informática e Informática de
+                Gestão.</p>
+
+            <p>O projeto MentHA Digital vem no seguimento do projeto <a href="http://www.projetomentha.com" target="_blank" style="color:white"; >MentHA</a>,
+                que decorreu entre 2016-2018, financiado pela DGS, onde foram desenvolvidos programas de interação não farmacológica que
+                contribuem para melhorar o bem-estar e a qualidade de vida de adultos mais velhos com patologia mental
+                crónica e dos seus cuidadores formais e informais.</p>
+
+            <p>O projeto MentHA Digital irá desenvolver uma plataforma aplicacional multilingue composta por várias
+                aplicações web:</p>
+            <ul type="i">
+                <li>um programa de estimulação cognitiva para ajudar a retardar perdas cognitivas em adultos
+                    mais velhos com princípios de demência,
+                </li>
+                <li>um protocolo de avaliação neuropsicológica para validação do treino cognitivo, e</li>
+                <li>um programa de acompanhamento psicoeducativo dos seus cuidadores informais e formais.</li>
+            </ul>
+            <p>
+                Contará com o envolvimento de investigadores e alunos de Engenharia Informática e Informática de
+                Gestão da Lusófona. Este projeto está a ser co-desenvolvido com os seus utilizadores finais. Tal é
+                possível graças a
+                protocolos que foram estabelecidos entre a COFAC e importantes parceiros que trabalham na área de
+                intervenção:</p>
+            <ul>
+                <li>Associação de Apoio aos Doentes Depressivos e Bipolares (ADEB)
+                </li>
+                <li>Associação de Saúde Mental do Algarve (ASMAL)</li>
+                <li>Associação para Integração e Apoio ao Deficiente Jovem e Adulto (Elo Social)</li>
+                <li>Cruz Vermelha Portuguesa</li>
+                <li>Federação Portuguesa das Associações das familias de pessoas com experiência de Doença Mental
+                    (FamiliarMente)
+                </li>
+                <li>GIRA (Grupo de Intervenção e Reabilitação Activa)</li>
+            </ul>
+
+            <p>Esta plataforma permitirá que profissionais de saúde realizem intervenções psicossociais em modo
+                misto - presencial e remoto - por forma a ultrapassar os efeitos do agravamento do estado de saúde,
+                da alteração de contexto geográfico, do distanciamento social e/ou de situação de isolamento.
+                Através da DGS, pretende-se que a plataforma aplicacional MentHA Digital será disponibilizada a
+                instituições e técnicos da área, em todo o país, potencializando a viabilidade deste projeto em
+                grande escala. A sua internacionalização está igualmente a ser contemplada, a plataforma indo ser
+                multilingue.</p>
+        </div>
+    </div>
+
+
+    <div class="hero" style="height: 30vh;">
+        <div class="next">
+            <span>Objetivos</span>
+            <br>
+            <span class="material-symbols-outlined">expand_more</span>
+        </div>
+    </div>
+
+    <div id="objetivo">
+        <div class="titulo">Objetivos do Projeto MentHA</div>
+        <div class="texto">
+            <p>O projecto MentHA pretende globalmente desenvolver acções que contribuam para <b>melhorar o bem-estar e a
+                qualidade de vida</b> de adultos mais velhos com patologia mental crónica e dos seus cuidadores formais
+                e informais.</p>
+
+            <p>Estas ações contemplam a implementação de <b>programas de interação não farmacológica</b> validados e
+                adaptados a um
+                modo misto - presencial e remoto - por forma a contrariar os efeitos do agravamento do estado de saúde,
+                da
+                alteração de contexto geográfico, do distanciamento social e/ou de situação de isolamento.</p>
+
+            <p>Na prática, o projeto promove o <b>desenvolvimento e utilização de aplicações web</b> que permitem
+                realizar
+                intervenções
+                psicossociais - avaliação neuropsicológica (Protocolo MentHA), programa de treino cognitivo (MentHA COG)
+                e
+                programa psicoeducativo para
+                cuidadores (Protocolo CARE) - por profissionais com formação e supervisão, em diferentes contextos, por
+                forma a prevenir e
+                retardar perdas cognitivas em estados iniciais de demência.</p>
+        </div>
+        <div class="citacao">Prevenir e retardar perdas cognitivas em estados iniciais de demência.</div>
+
+
+    </div>
+
+
+    <div class="hero" style="height: 30vh;">
+        <div class="next">
+            <span>Descrição</span>
+            <br>
+            <span class="material-symbols-outlined">expand_more</span>
+        </div>
+    </div>
+
+
+    <div id="descricao">
+        <div class="titulo">Descrição do Projeto</div>
+        <div class="texto">
+            <p>O projecto MentHA - “Mental Health and Aging” é um empreendimento colaborativo de investigadores
+                e instituições público-privadas, sem fins lucrativos.</p>
+            <p>Pretende criar uma plataforma digital
+                que integre um conjunto de aplicações web que permitam desenvolver, aperfeiçoar e validar por via
+                presencial ou remota:</p>
+            <ol type="i">
+
+                <li>A <b>intervenção individual e colectiva</b> através de programas sistematizados e devidamente
+                    validados
+                    de treino cognitivo (intervenção não farmacológica).
+                </li>
+                <li>A <b>avaliação compreensiva</b> de pessoas mais velhas com defeito cognitivo ou demência leve, com e
+                    sem
+                    patologia mental prévia.
+                </li>
+                <li>A <b>intervenção psico-educativa com cuidadores</b>, tendo em consideração as diferentes
+                    necessidades de
+                    saúde e de contexto.
+                </li>
+            </ol>
+
+            <p>Esta plataforma ficará acessível a profissionais de saúde qualificados, através de um
+                registo e acesso autenticado e sempre respeitando a confidencialidade e a proteção dos dados nela
+                contidos. </p>
+
+            <p>Em termo práticos, possibilitará desenvolver de forma presencial ou remota:</p>
+            <ul>
+                <li>A <b>reabilitação neuropsicológica</b> de diferentes grupos clínicos (e.g. Demência, Esquizofrenia,
+                    Perturbação Bipolar e Deficiência Intelectual);
+                </li>
+                <li>A <b>avaliação da qualidade da intervenção</b> não farmacológica através de um protocolo com
+                    instrumentos/testes de forma sistemática e eficiente.
+                </li>
+                <li>O <b>apoio sistematizado e adaptado aos cuidadores</b> informais dos diferentes grupos clínicos;
+                </li>
+            </ul>
+            <p>Neste contexto, prevê-se um acompanhamento próximo (síncrono e assíncrono) de cuidadores, bem como a
+                disponibilização de instruções de monitorização, complementadas com manuais de utilização e com
+                video-tutoriais que auxiliarão os profissionais de saúde na utilização das mesmas.</p>
+
+            <p>Está ainda prevista a existência de um sistema tecnológico com capacidade para congregar os dados das
+                aplicações (em estrito respeito a qualidade das intervenções comunitárias, através da comparação e
+                correlação de dados. Tal permitirá identificar novos requisitos que contribuirão</p>
+            <ul type="i">
+                <li>para a criação/disponibilização de novas ferramentas, para os profissionais em diferentes contextos
+                    (clínicos e geográficos) e
+                </li>
+                <li>para melhoria da intervenção no contexto da saúde mental dos adultos mais velhos.</li>
+            </ul>
+
+            <p>
+                Considera-se, assim, que este o Projeto Digital MentHA e as intervenções inerentes contribuem para o
+                âmbito
+                do acesso universal aos cuidados de saúde mental e para a remoção de diferentes barreiras de acesso,
+                provocadas pelo estigma, pela
+                distância geográfica e pelas desigualdades sociais, todas, incrementadas pelo distanciamento social e
+                pelas
+                alterações das condição de
+                saúde dos adultos mais velhos com déficit cognitivos e com deficiência ou doença mental crónica.
+            </p>
+        </div>
+        <div class="citacao"><img src="{% static 'mentha/logos/mentha_cores.png' %}" alt=""></div>
+
+    </div>
+
+
+    <div class="hero" style="height: 30vh;">
+        <div class="next">
+            <span>Impacto</span>
+            <br>
+            <span class="material-symbols-outlined">expand_more</span>
+        </div>
+    </div>
+
+
+    <div class="azul">
+        <div class="titulo">Impacto previsto</div>
+        <div class="texto">
+            <p>A implementação deste projecto procura dar respostas, baseadas na evidência, às recomendações do Plano
+                Nacional de Saúde, do Plano Nacional de Saúde Mental e do Programa Nacional para a Saúde Mental, bem
+                como às
+                principais orientações defendias pela União Europeia e pela Organização Mundial de Saúde, no âmbito da
+                saúdas mental das pessoas mais velhas.
+            </p>
+            <p>
+                Em acordo o Plano Nacional de Saúde Mental, o presente projecto compreende uma estratégia de promoção e
+                desenvolvimento de equipas e unidades dedicadas à saúde mental comunitária, em sectores geo-demográficos
+                destintos (rurais e urbanos) e, simultaneamente, contribuir para a implementação de programas de apoio a
+                doentes idosos (Resumo Executivo, Plano Nacional de Saúde Mental ).
+            </p>
+            <p>
+                Na prática, prevê-se um impacto significativo ao nível dos doentes mais velhos (com diferentes
+                patologias
+                mentais) e das suas famílias, com base em respostas (i) diferenciadas, (ii) adequadas aos diferentes
+                estádios da doença e (ii) integradas numa rede progressiva de cuidados. Garante-se, também, o devido
+                suporte
+                às famílias, aos serviços de saúde e da ação social locais, e criam-se condições mais favoráveis à
+                manutenção da pessoa no seu domicílio/comunidade
+            </p>
+        </div>
+    </div>
+
+
+    <footer>
+
+        <p>Entidade promotora: COFAC</p>
+        <img src="{% static 'mentha/parceiros_sm/cofac.png' %}" alt="">
+
+        <p>Entidade financiadora: DGS</p>
+        <img src="{% static 'mentha/parceiros_sm/dgs.png' %}" alt="">
+
+        <p>Parceiros:</p>
+
+        <img src="{% static 'mentha/parceiros_sm/adebe.png' %}" alt="">
+
+        <img src="{% static 'mentha/parceiros_sm/asmal.png' %}" alt="">
+
+        <img src="{% static 'mentha/parceiros_sm/cvp.jpg' %}" alt="">
+
+        <img src="{% static 'mentha/parceiros_sm/elo.png' %}" alt="">
+
+        <img src="{% static 'mentha/parceiros_sm/familiarmente.jpg' %}" alt="">
+
+        <img src="{% static 'mentha/parceiros_sm/gira.png' %}" alt="">
+    </footer>
+</main>
+
+</body>
+</html>

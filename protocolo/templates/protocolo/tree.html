@@ -1,0 +1,201 @@
+{% load tags %}
+{% block script %}
+    <script>
+        var firstBreadcrumbItem = $(".bcca-breadcrumb-item a:first");
+        if (firstBreadcrumbItem.length > 0) {
+            firstBreadcrumbItem.removeClass("jq-btn");
+        }
+
+        var conditionCounter = 0;
+
+        function incrementCounter() {
+            conditionCounter++;
+        }
+
+        {% if area is not None and area.name != "None" and 'Risk' not in area.name %}
+            {% if instrument is not None and instrument.name == "None" %}
+                {% if dimension.name == "None" and section.name == "None" %}
+                    incrementCounter();
+                {% else %}
+                    {% if section.name is not None %}
+                        incrementCounter();
+                    {% endif %}
+                    incrementCounter();
+                {% endif %}
+            {% else %}
+                {% if section is not None and section.name != "None" and 'Risk' not in section.name %}
+                    incrementCounter();
+                {% endif %}
+
+                {% if dimension is not None and dimension.name != "None" %}
+                    incrementCounter();
+                {% endif %}
+
+                {% if dimension.name == "None" and instrument.name != "None" and 'Risk' not in instrument.name %}
+                    incrementCounter();
+                {% elif instrument is not None and instrument.name != "None" %}
+                    incrementCounter();
+                {% endif %}
+                incrementCounter();
+            {% endif %}
+        {% endif %}
+
+        {% if part.part is not None and 'Risk' not in part.part.name %}
+            incrementCounter();
+        {% endif %}
+
+        {% if 'Risk' in part.part.name %}
+            incrementCounter();
+        {% endif %}
+
+        {% if protocol is not None %}
+            incrementCounter();
+        {% endif %}
+    </script>
+{% endblock %}
+
+<style>
+    @media (max-width:1300px) {
+        .bcca-breadcrumb-item span {
+            display:none;
+        }
+    }
+</style>
+
+<div class="bcca-breadcrumb">
+    <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;">
+    </div>
+    {% if area is not None and area.name != "None" and 'Risk' not in area.name %}
+        {% if instrument is not None and instrument.name == "None" %}
+            {% if dimension.name == "None" and section.name == "None" %}
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a class="jq-btn" style="display: contents;" role="button"
+                       data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                        <i class="fa-solid fa-question" style="color:white;"></i>
+                        <span>Pergunta</span>
+                    </a>
+                </div>
+            {% else %}
+                {% if section.name is not None %}
+                    <div class="bcca-breadcrumb-item fw-normal fs-5">
+                        <a class="jq-btn" style="display: contents;" role="button"
+                            data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                            <i class="fa-solid fa-question" style="color:white;"></i>
+                            <span>Pergunta</span>
+                        </a>
+                    </div>
+                {% endif %}
+
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a class="jq-btn" style="display: contents;" role="button"
+                       data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                        <i class="fa-solid fa-list-check" style="color:white;"></i>
+                        <span>Dimensões</span>
+                    </a>
+                </div>
+            {% endif %}
+        {% else %}
+            {% if section is not None and section.name != "None" and 'Risk' not in section.name %}
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a class="jq-btn" style="display: contents;" role="button"
+                        data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                        <i class="fa-solid fa-question" style="color:white;"></i>
+                        <span>Pergunta</span>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if dimension is not None and dimension.name != "None" %}
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a class="jq-btn" style="display: contents;" role="button"
+                        data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                        <i class="fa-solid fa-section" style="color:white;"></i>
+                        <span>Secções</span>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if dimension.name == "None" and instrument.name != "None" and 'Risk' not in instrument.name%}
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a class="jq-btn" style="display: contents;" role="button"
+                        data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                        <i class="fa-solid fa-question" style="color:white;"></i>
+                        <span>Pergunta</span>
+                    </a>
+                </div>
+            {% elif instrument is not None and instrument.name != "None" %}
+                <div class="bcca-breadcrumb-item fw-normal fs-5">
+                    <a class="jq-btn" style="display: contents;" role="button"
+                       data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                        <i class="fa-solid fa-list-check" style="color:white;"></i>
+                        <span>Dimensões</span>
+                    </a>
+                </div>
+            {% endif %}
+
+            <div class="bcca-breadcrumb-item fw-normal fs-5">
+                <a class="jq-btn" style="display: contents;" role="button"
+                    data-href="{% url 'protocolo:instruments' protocol.id part.id area.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+                    <i class="fa-solid fa-pen-ruler" style="color:white;"></i>
+                    <span>Instrumentos</span>
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if part.part is not None and 'Risk' not in part.part.name %}
+    <div class="bcca-breadcrumb-item fw-normal fs-5">
+        <a href="#" class="jq-btn" data-href="{% url 'protocolo:areas' protocol.id part.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+            <i class="fa-solid fa-clipboard-list" style="color:white;"></i>
+            <span>{{ part.part.name }}</span>
+        </a>
+    </div>
+    {% endif %}
+
+    {% if 'Risk' in part.part.name %}
+    <div class="bcca-breadcrumb-item fw-normal fs-5">
+        <a href="#" class="jq-btn" data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}">
+            <i class="fa-solid fa-clipboard-list" style="color:white;"></i>
+            <span>{{ part.part.name }}</span>
+        </a>
+    </div>
+    {% endif %}
+
+    {% if protocol is not None and is_cuidador == 'is_cuidador' %}
+        <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;"></div>
+        <div class="bcca-breadcrumb-item fw-normal fs-5">
+            <a data-href="{% url 'protocolo:profile_cuidador' patient.id %}" class="jq-btn">
+                <i class="fa-solid fa-address-card" style="color:white;"></i>
+                <span class="esconde">{{ patient.nome }}</span>
+            </a>
+        </div>
+    {% elif protocol is not None and is_cuidador != 'is_cuidador' %}
+        <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;"></div>
+        <div class="bcca-breadcrumb-item fw-normal fs-5">
+            <a data-href="{% url 'protocolo:participant' patient.id %}" class="jq-btn">
+                <i class="fa-solid fa-address-card" style="color:white;"></i>
+                <span class="esconde">{{ patient.nome }}</span>
+            </a>
+        </div>
+    {% endif %}
+
+    <div class="bcca-breadcrumb-item fw-normal fs-5">
+        <a data-href="{% url 'protocolo:participants' %}" class="jq-btn">
+            <i class="fa-solid fa-user-check" style="color:white;"></i>
+            <span class="esconde">MentHA-EVAL</span>
+        </a>
+    </div>
+</div>
+
+<script>
+    function esconde_breadcrumb_item() {
+        if (conditionCounter >= 3) {
+            document.querySelectorAll('.esconde').forEach(item => item.style.display = 'None');
+        }
+    }
+
+    esconde_breadcrumb_item();
+
+    document.addEventListener('DOMContentLoaded', esconde_breadcrumb_item);
+    window.addEventListener('resize', esconde_breadcrumb_item);
+</script>

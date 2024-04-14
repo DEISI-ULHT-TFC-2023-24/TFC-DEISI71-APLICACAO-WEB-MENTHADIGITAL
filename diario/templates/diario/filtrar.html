@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+    <h1>Filtro de grupos</h1>
+
+    <form action="{% url 'diario:filtrar' %}" method="POST">
+        {% csrf_token %}
+        {% for campo,opcoes in lista_pesquisa.items %}
+        <div class="opcao">
+            {{campo|title}}:
+            <select name="{{campo}}" id="">
+                <option value=""></option>
+                {% for opcao in opcoes %}
+                <option value="{{ opcao }}">{{ opcao }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endfor %}
+        <input type="submit">
+    </form>
+
+    <h1>Grupos que satisfazem requisito:</h1>
+    <ul>
+        {% for grupo in grupos %}
+        <li>{{ grupo }}
+            <ul>
+                <li>{{ grupo.diagnostico }}</li>
+                <li>{{ grupo.localizacao }}</li>
+                <li>{{ grupo.escolaridade }}</li>
+                <li>{{ grupo.localizacao }}</li>
+                <li>{{ grupo.referenciacao }}</li>
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

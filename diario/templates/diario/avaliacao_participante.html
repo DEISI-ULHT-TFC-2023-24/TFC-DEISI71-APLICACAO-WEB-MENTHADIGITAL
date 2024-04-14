@@ -1,0 +1,211 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+
+{% block script %}
+function submete_avaliacao_participantes(sg_id){
+  event.preventDefault();
+  var participante_list = [];
+  var interesse_list = [];
+  var comunicacao_list = [];
+  var iniciativa_list = [];
+  var satisfacao_list = [];
+  var humor_list = [];
+  var eficacia_relacional_list = [];
+  var observacoes;
+  document.querySelectorAll(".avaliacao_participante").forEach((i) => {
+    if (i.name == "participante"){
+        participante_list.push(i.value);
+    }
+    if (i.name == "interesse"){
+      interesse_list.push(i.value);
+    }
+    if (i.name == "comunicacao"){
+      comunicacao_list.push(i.value);
+    }
+    if (i.name == "iniciativa"){
+      iniciativa_list.push(i.value);
+    }
+    if (i.name == "satisfacao"){
+      satisfacao_list.push(i.value);
+    }
+    if (i.name == "humor"){
+      humor_list.push(i.value);
+    }
+    if (i.name == "eficacia_relacional"){
+        eficacia_relacional_list.push(i.value);
+    }
+  });
+
+  observacao = document.querySelector('#obs_part').value
+  
+    for (let i = 0; i < participante_list.length; i++) {
+      formData = new FormData();
+      csrfmiddlewaretoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+      formData.append('csrfmiddlewaretoken',csrfmiddlewaretoken);
+      formData.append('participante', participante_list[i]);
+      formData.append('interesse', interesse_list[i]);
+      formData.append('comunicacao', comunicacao_list[i]);
+      formData.append('iniciativa', iniciativa_list[i]);
+      formData.append('satisfacao', satisfacao_list[i]);
+      formData.append('humor', humor_list[i]);
+      formData.append('eficacia_relacional', eficacia_relacional_list[i]);
+      formData.append('observacao', observacao )
+      fetch('/diario/guarda_avaliacao_participante/' + sg_id, {
+        method: "POST",
+        body: formData,
+      });    
+    }
+}
+
+function submete_avaliacao_sessao(sg_id){
+    formData = new FormData();
+    csrfmiddlewaretoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    formData.append('csrfmiddlewaretoken',csrfmiddlewaretoken);
+    formData.append('observacao', document.querySelector('#obs_sessao').value);
+    formData.append('planificacao_conteudos', document.querySelector('#id_planificacao_conteudos').value);
+    formData.append('adq_conteudos', document.querySelector('#id_adq_conteudos').value);
+    formData.append('adq_materias', document.querySelector('#id_adq_materiais').value);
+    formData.append('adq_tempo', document.querySelector('#id_adq_tempo').value);
+    formData.append('grau_dominio', document.querySelector('#id_grau_dominio').value);
+    formData.append('necessidade_treino', document.querySelector('#id_necessidade_treino').value);
+    formData.append('tipo_treino_competencias', document.querySelector('#id_tipo_treino_competencias').value);
+    formData.append('apreciacao_global', document.querySelector('#id_apreciacao_global').value);
+    
+    fetch('/diario/guarda_avaliacao_sessao/' + sg_id, {
+        method: "POST",
+        body: formData,
+      }); 
+}
+{% endblock %}
+
+{% block main %}
+            <div class="container-fluid">  
+                <form onsubmit="return false" method="POST">
+                    {% csrf_token %}
+                    <div style="margin-top:15px;"class="card shadow">
+                        <div class="card-body">
+                            <div class="titulo">
+                                <div class="card-body" style="padding: 8px">
+                                    <p class="text-primary m-0 fw-bold"
+                                       style="margin: 5px; font-size: 26px">Avaliação dos Participantes</p>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th style="text-align: center;width:15%;"><strong>Nome</strong></th>
+                                        <th style="text-align: center;"><strong>Interesse</strong></th>
+                                        <th style="text-align: center;"><strong>Comunicação</strong></th>
+                                        <th style="text-align: center;"><strong>Iniciativa</strong></th>
+                                        <th style="text-align: center;"><strong>Satisfação</strong></th>
+                                        <th style="text-align: center;"><strong>Humor</strong></th>
+                                        <th style="text-align: center;"><strong>Eficácia relacional facilitador-participante</strong></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for participante,form in participantes_form_list %}
+                                        <tr>
+                                            <td style="text-align: center;">
+                                            <input type="hidden" value="{{participante.id}}" class="avaliacao_participante" name="participante">
+                                                {{ participante }}
+                                            </td>
+                                            <td style="text-align: center;">
+                                            {{ form.interesse }}
+                                            </td>
+                                            <td style="text-align: center;">
+                                            {{ form.comunicacao }}
+                                            </td>
+                                            <td style="text-align: center;">
+                                            {{ form.iniciativa }}
+                                            </td>
+                                            <td style="text-align: center;">
+                                            {{ form.satisfacao }}
+                                            </td>
+                                            <td style="text-align: center;">
+                                            {{ form.humor }}
+                                            </td>
+                                            <td style="text-align: center;">
+                                            {{ form.eficacia_relacional }}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1" class="text-primary h5">Observações</label>
+                                <textarea class="form-control" id="obs_part" rows="3">{{obs_part}}</textarea>
+                            </div>
+                             <button onclick="submete_avaliacao_participantes({{sg_id}})" class="btn btn-primary"
+                           style="float:right;margin-top:1ch;border-radius: 8px">Submeter</button>
+                        </div>                 
+                    </div>
+                </form>
+
+                    {% csrf_token %}
+                    <div style="margin-top:15px;"class="card shadow">
+                        <div class="card-body">
+                            <div class="titulo">
+                                <div class="card-body" style="padding: 8px">
+                                    <p class="text-primary m-0 fw-bold"
+                                       style="margin: 5px; font-size: 26px">Avaliação da Sessão</p>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th rowspan="2" style="text-align: center;"><strong>Planificação dos conteúdos</strong></th>
+                                        <th colspan="3" style="text-align: center;"><strong>Adequação</strong></th>
+                                        <th colspan="4" style="text-align: center;"><strong>Qualidade da sessão</strong></th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center%;"><strong>Conteúdos</strong></th>
+                                        <th style="text-align: center;"><strong>Materiais</strong></th>
+                                        <th style="text-align: center;"><strong>Tempo</strong></th>
+                                        <th style="text-align: center;"><strong>Grau de domínio</strong></th>
+                                        <th style="text-align: center;"><strong>Necessidade de Treino</strong></th>
+                                        <th style="text-align: center;"><strong>Indique o tipo de treino de competências</strong></th>
+                                        <th style="text-align: center;"><strong>Apreciação global</strong></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            {{ form_sessao.planificacao_conteudos }}
+                                        </td>
+                                        <td style="text-align: center;">
+                                           {{ form_sessao.adq_conteudos }}
+                                        </td>
+                                        <td style="text-align: center;">
+                                           {{ form_sessao.adq_materiais }}
+                                        </td>
+                                        <td style="text-align: center;">
+                                           {{ form_sessao.adq_tempo }}
+                                        </td>
+                                        <td style="text-align: center;">
+                                           {{ form_sessao.grau_dominio }}
+                                        </td>
+                                        <td style="text-align: center;">
+                                           {{ form_sessao.necessidade_treino }}
+                                        </td>
+                                        <td style="text-align: center;">
+                                           {{ form_sessao.tipo_treino_competencias }}
+                                        </td>
+                                        <td style="text-align: center;">
+                                           {{ form_sessao.apreciacao_global }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1" class="text-primary h5">Observações</label>
+                                <textarea class="form-control" id="obs_sessao" rows="3"> {{ obs_sessao }}</textarea>
+                            </div>
+                             <button  onclick="submete_avaliacao_sessao({{sg_id}})"value="Submeter" class="btn btn-primary"
+                           style="float:right;margin-top:1ch;border-radius: 8px">Submeter</button>
+                        </div>                 
+                    </div>
+{% endblock %}

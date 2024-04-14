@@ -1,0 +1,75 @@
+{% block tree %}
+    <div class="tree">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                {% if section is not None %}
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:parts' protocol.id %}">{{ protocol.name }}</a></li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:areas' protocol.id part.id %}">
+                        {% if part.part_number > 0 %}
+                            Parte {{ part.part_number }}: {{ part.name }}
+                        {% else %}
+                            {{ part.name }}
+                        {% endif %}</a>
+                    </li>
+                    <li class="breadcrumb-item"><a class="jq-btn btn"
+role="button"                             data-href="{% url 'protocolo:instruments' protocol.id part.id area.id %}">{{ area.name }}</a></li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn"
+role="button"                             data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id %}">{{ instrument.name }}</a>
+                    </li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn"
+role="button"                             data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id %}">{{ dimension.name }}</a>
+                    </li>
+                    <li aria-current="page" class=" breadcrumb-item active">{{ section.name }}</li>
+                {% elif dimension is not None %}
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:parts' protocol.id %}">{{ protocol.name }}</a></li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:areas' protocol.id part.id %}">
+                        {% if part.part_number > 0 %}
+                            Parte {{ part.part_number }}: {{ part.name }}
+                        {% else %}
+                            {{ part.name }}
+                        {% endif %}</a>
+                    </li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn"
+role="button"                             data-href="{% url 'protocolo:instruments' protocol.id part.id area.id %}">{{ area.name }}</a></li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn"
+role="button"                             data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id %}">{{ instrument.name }}</a>
+                    </li>
+                    <li aria-current="page" class=" breadcrumb-item active">{{ dimension.name }}</li>
+                {% elif instrument is not None %}
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:parts' protocol.id %}">{{ protocol.name }}</a></li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:areas' protocol.id part.id %}">
+                        {% if part.part_number > 0 %}
+                            Parte {{ part.part_number }}: {{ part.name }}
+                        {% else %}
+                            {{ part.name }}
+                        {% endif %}</a>
+                    </li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn"
+role="button"                             data-href="{% url 'protocolo:instruments' protocol.id part.id area.id %}">{{ area.name }}</a></li>
+                    <li aria-current="page" class=" breadcrumb-item active">{{ instrument.name }}</li>
+                {% elif area is not None %}
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:parts' protocol.id %}">{{ protocol.name }}</a></li>
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:areas' protocol.id part.id %}">
+                        {% if part.part_number > 0 %}
+                            Parte {{ part.part_number }}: {{ part.name }}
+                        {% else %}
+                            {{ part.name }}
+                        {% endif %}</a>
+                    </li>
+                    <li aria-current="page" class=" breadcrumb-item active">{{ area.name }}</li>
+                {% elif part is not None %}
+                    <li class=" breadcrumb-item"><a class="jq-btn btn" role="button" data-href="{% url 'protocolo:parts' protocol.id %}">{{ protocol.name }}</a></li>
+                    <li aria-current="page" class=" breadcrumb-item active">
+                        {% if part.part_number > 0 %}
+                            Parte {{ part.part_number }}: {{ part.name }}
+                        {% else %}
+                            {{ part.name }}
+                        {% endif %}
+                    </li>
+                {% elif protocol is not None %}
+                    <li aria-current="page" class=" breadcrumb-item active">{{ protocol.name }}</li>
+                {% endif %}
+            </ol>
+        </nav>
+    </div>
+{% endblock %}

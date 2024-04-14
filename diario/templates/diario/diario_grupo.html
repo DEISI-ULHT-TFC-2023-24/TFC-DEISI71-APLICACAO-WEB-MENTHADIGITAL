@@ -1,0 +1,401 @@
+{% block script %}
+    <script>
+        function sendInput(id, name, checked) {
+            let data = new FormData();
+            data.append('nome', name);
+            data.append('checked', checked);
+            csrfmiddlewaretoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+            data.append('csrfmiddlewaretoken', csrfmiddlewaretoken);
+
+            // fazer view para isto
+            fetch('user/${id}', {
+                method: "POST",
+                body: data
+            })
+                .then(response => response);
+            return false;
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input').forEach(input => {
+                input.onchange = () => {
+                    sendInput(input.dataset.id, input.nome, input.checked);
+                }
+            });
+        });
+
+
+        function showContent1(element) {
+            element.style.display = "block";
+            document.querySelector("#" + element.id + " > .detalhe").style.display = "block"
+            console.log(element.id);
+        }
+
+        function hideContent1(element) {
+            document.querySelector("#" + element.id + " > .detalhe").style.display = "none"
+        }
+
+
+    </script>
+{% endblock %}
+
+<!-- Não está a aplicar o styling no ficheiro css -->
+<style>
+    .notes-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .notas-title {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .notes-list {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .notes-list li {
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .notes-list li:hover {
+        background-color: #e9e9e9;
+    }
+
+    .note-content {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .note-date {
+        font-size: 14px;
+        color: #999;
+        margin-right: 10px;
+    }
+
+    .note-author {
+        font-size: 14px;
+        color: #666;
+        font-style: italic;
+    }
+
+    .no-notes {
+        color: #999;
+        font-style: italic;
+    }
+
+    .note-form textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+
+    .partilhas-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .partilha-form {
+        margin-bottom: 20px;
+    }
+
+    .partilha-form textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+
+    .partilhas-title {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .partilhas-list {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .partilhas-list li {
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .partilhas-list li:hover {
+        background-color: #e9e9e9;
+    }
+
+    .partilha-content {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .partilha-date {
+        font-size: 14px;
+        color: #999;
+        margin-right: 10px;
+    }
+
+    .partilha-author {
+        font-size: 14px;
+        color: #666;
+        font-style: italic;
+    }
+
+    .no-partilhas {
+        color: #999;
+        font-style: italic;
+    }
+
+</style>
+
+<div id="notas" style="overflow: auto; max-height: 600px; border-radius: 6px;">
+    <div class="notes-container">
+        <!-- https://code-boxx.com/post-form-data-javascript-fetch/ -->
+        <div class="note-form">
+            <form id="notaGrupoForm" style="margin-bottom:20px;"
+                  onsubmit='event.preventDefault(); sendForm({{ sessaoGrupo.id }}, "notaGrupoForm");'
+                  method="post">
+                {% csrf_token %}
+                {{ notaGrupoForm.notaGrupo }}
+                <input type="hidden" name="grupo" value={{ grupo_id }}>
+
+                <button type="submit" name="nota" class="btn mb-btn-outline">Guardar nota</button>
+            </form>
+        </div>
+
+        <h2 class="notas-title">
+            Notas de {{ grupo.nome }}
+        </h2>
+
+        <ul class="notes-list">
+            {% if notasGrupo|length > 0 %}
+                {% for nota in notasGrupo %}
+                    <li>
+                        <div class="note-content">{{ nota }}</div>
+                        <span class="note-date">{{ nota.data_str }}</span>
+                        {% if nota.anotador_dinamizador %}
+                            <span class="note-author">{{ nota.anotador_dinamizador.nome }}</span>
+                        {% elif nota.mentor %}
+                            <span class="note-author">{{ nota.anotador_mentor.nome }}</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="no-notes">Sem notas</li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div id="partilhas" style="overflow: auto; max-height: 600px; border-radius: 6px;">
+    <div class="partilhas-container">
+        <div class="partilha-form">
+            <form id="partilhaGrupoForm"
+                  onsubmit='event.preventDefault(); sendForm({{ sessaoGrupo.id }}, "partilhaGrupoForm");' method="post">
+                {% csrf_token %}
+                {{ partilhaGrupoForm.descricao }}
+                <input type="hidden" name="grupo" value={{ sessaoGrupo.id }}>
+                <div class="botoes"
+                     style="border-radius: 6px 6px 6px 6px;margin-left: 3px;margin-right: 3px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px">
+                    <label id="label_imagem" for="id_imagem" class="btn mb-btn-outline">Carregar Imagem</label>
+                    {{ partilhaGrupoForm.imagem }}
+                    <label for="id_ficheiro" class="btn mb-btn-outline">Carregar Documento</label>
+                    {{ partilhaGrupoForm.ficheiro }}
+                </div>
+                <button type="submit" class="btn mb-btn-outline" name="partilha">Guardar partilha</button>
+            </form>
+        </div>
+
+        <h2 class="partilhas-title">Partilhas de {{ grupo.nome }}</h2>
+
+        <ul class="partilhas-list">
+            {% if partilhas|length > 0 %}
+                {% for partilha in partilhas %}
+                    <li>
+                        <div style="display: flex; flex-direction: column">
+                            {% if not partilha.aprovada %}
+                                <div style="display: inline-flex; gap: 5px; margin-right: 9px; background: white; font-size: 10px; padding: 3px;">
+                                Validar esta partilha?
+                                    <a href="#" onclick="valida_partilha({{ partilha.id }})"><i style="color: #4eb4be"
+                                            class="fa fa-check"
+                                            aria-hidden="true"></i></a>
+                                    <a href="#" onclick="elimina_partilha({{ partilha.id }})"><i style="color: #4eb4be"
+                                            class="fa fa-times"
+                                            aria-hidden="true"></i></a>
+                                </div>
+                            {% endif %}
+                            <div style="display: flex; flex-direction: row">
+                                <div class="partilha-content">{{ partilha }}</div>
+                                {% if partilha.ficheiro|length > 0 %}
+                                    <a href="{{ partilha.ficheiro.url }}" download>
+                                        <div class="w-10 h-10 mb-bg rounded-circle flex m-auto justify-content-center align-items-center align-self-center">
+                                            <i class="fa fa-file-lines icon-bg" aria-hidden="true"
+                                               style="font-size:31px;"></i>
+                                        </div>
+                                    </a>
+                                {% endif %}
+                                {% if partilha.imagem|length > 0 %}
+                                    <img src="{{ partilha.imagem.url }}" width="15%"
+                                         style="margin-right: 10px; border-radius: 5px">
+                                {% endif %}
+
+                                <span class="partilha-date">{{ partilha.data_str }}</span>
+                                {% if partilha.cuidador %}
+                                    <span class="partilha-author">{{ partilha.cuidador.nome }}</span>
+                                {% elif partilha.participante %}
+                                    <span class="partilha-author">{{ partilha.participante.nome }}</span>
+                                {% elif partilha.partilha_dinamizador %}
+                                    <span class="partilha-author">{{ partilha.partilha_dinamizador.nome }}</span>
+                                {% elif partilha.partilha_mentor %}
+                                    <span class="partilha-author">{{ partilha.partilha_mentor.nome }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="no-partilhas">Sem partilhas</li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+
+<div id="presencas">
+    <div class="partilhas-container">
+        <form id="atualizaPresencas" onsubmit="event.preventDefault(); atualizaPresencas({{ sessaoGrupo.id }});"
+              method="POST">
+            {% csrf_token %}
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th style="text-align: center; border-radius:6px;"><strong>Participantes</strong></th>
+                    <th style="text-align: center;"><strong>Online</strong></th>
+                    <th style="text-align: center;"><strong>Presencial</strong></th>
+                    <th style="text-align: center; border-radius:6px;"><strong>Falta</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for participante in participantes %}
+                    <tr>
+                        <td style="text-align: center;">
+                            {{ participante }}
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" data-participante="{{ participante.id }}" value="online"
+                                   name="{{ participante.id }}"
+                                    {% if participante.id in online_list %}
+                                   checked
+                                    {% endif %}
+                            >
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" data-participante="{{ participante.id }}"
+                                   value="presencial"
+                                   name="{{ participante.id }}"
+                                    {% if participante.id in presencial_list %}
+                                   checked
+                                    {% endif %}
+                            >
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" data-participante="{{ participante.id }}"
+                                   value="naoVeio"
+                                   name="{{ participante.id }}"
+                                    {% if participante.id in faltou_list %}
+                                   checked
+                                    {% endif %}
+                            >
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn mb-btn-outline" name="presencas" style="font-weight:bold;">Atualizar
+                presenças
+            </button>
+        </form>
+    </div>
+</div>
+
+<div id="informacoes">
+    <table style="width:100%">
+        <tr style="color:white; background-color:#4EB4BE;">
+            <th>
+                <div class="titulo">Diagnóstico:</div>
+            </th>
+            <td style="padding:10px;">
+                <div class="detalhe">{{ grupo.diagnostico }}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <div class="titulo">Localização:</div>
+            </th>
+            <td style="padding:10px;">
+                <div class="detalhe">{{ grupo.localizacao }}</div>
+            </td>
+        </tr>
+
+        <tr style="color:white; background-color:#4EB4BE;">
+            <th>
+                <div class="titulo">Escolaridade:</div>
+            </th>
+            <td style="padding:10px;">
+                <div class="detalhe">{{ grupo.escolaridade }}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <div class="titulo">Referenciação:</div>
+            </th>
+            <td style="padding:10px;">
+                <div class="detalhe">{{ grupo.referenciacao }}</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- As respostas nao fazem parte do grupo -->
+<div id="respostas">
+    <h1>Respostas do grupo {{ grupo_id }}</h1>
+</div>

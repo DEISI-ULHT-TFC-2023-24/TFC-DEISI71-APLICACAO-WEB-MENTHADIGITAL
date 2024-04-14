@@ -1,0 +1,3467 @@
+[
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 1,
+  "fields": {
+    "name": "Alimenta-se normalmente",
+    "description": "",
+    "order": 0,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 2,
+  "fields": {
+    "name": "Necessita parcialmente de auxφlio ou de alimentaτπo",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 3,
+  "fields": {
+    "name": "Necessidade total de ajuda humana ou de alimentaτπo",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 4,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 5,
+  "fields": {
+    "name": "Poucas Vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 6,
+  "fields": {
+    "name": "Algumas Vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 7,
+  "fields": {
+    "name": "Muitas Vezes",
+    "description": null,
+    "order": 4,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 8,
+  "fields": {
+    "name": "Muitφssimas vezes",
+    "description": null,
+    "order": 5,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 9,
+  "fields": {
+    "name": "Efetua-se normalmente",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 10,
+  "fields": {
+    "name": "Necessita de ajuda parcial ou de apoio",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 11,
+  "fields": {
+    "name": "Necessidade total de ajuda",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 12,
+  "fields": {
+    "name": "Necesita de ajuda humana ou tΘcnica",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 13,
+  "fields": {
+    "name": "Necessidade de uma cadeira de rodas ou impossibilidade de deslocaτπo",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 14,
+  "fields": {
+    "name": "Possφvel no exterior ou em casa",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 15,
+  "fields": {
+    "name": "Limitado ao domicφlio",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 16,
+  "fields": {
+    "name": "Limitado α cama",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 17,
+  "fields": {
+    "name": "Expressπo verbal perfeita",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 18,
+  "fields": {
+    "name": "Dificuldade em falar",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 19,
+  "fields": {
+    "name": "Dificuldade na compreensτπo ou afasia",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 20,
+  "fields": {
+    "name": "Normal",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 21,
+  "fields": {
+    "name": "Mß",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 22,
+  "fields": {
+    "name": "Muito mß ou cegueira",
+    "description": "+\\-",
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 23,
+  "fields": {
+    "name": "Muito mß ou surdez",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 24,
+  "fields": {
+    "name": "Faz a sua higiene normalmente",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 25,
+  "fields": {
+    "name": "Necessita de ajuda parcial",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 26,
+  "fields": {
+    "name": "Necessita de ajuda total",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 27,
+  "fields": {
+    "name": "Micτπo e defecaτπo normal",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 28,
+  "fields": {
+    "name": "IncontinΩncia urinßria e fecal ocasional",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 29,
+  "fields": {
+    "name": "IncontinΩncia urinßria e fecal permanente (algßlia ou doente ostomizado)",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 30,
+  "fields": {
+    "name": "Esquecimentos mais ou menos frequentes",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 31,
+  "fields": {
+    "name": "Esquecimentos muito frequentes ou amnΘsia",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 32,
+  "fields": {
+    "name": "Perturbaτ⌡es (minor): teimosia, emotividade, lamentaτπo",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 33,
+  "fields": {
+    "name": "Perturbaτ⌡es (major): agitaτπo, desorientaτπo, fuga",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 34,
+  "fields": {
+    "name": "Tristeza ou irritabilidade",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 35,
+  "fields": {
+    "name": "Apatia ou agressividade",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 36,
+  "fields": {
+    "name": "Nada ou muito ligeiramente",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 37,
+  "fields": {
+    "name": "Um pouco",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 38,
+  "fields": {
+    "name": "Moderadamente",
+    "description": null,
+    "order": 3,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 39,
+  "fields": {
+    "name": "Bastante",
+    "description": null,
+    "order": 4,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 40,
+  "fields": {
+    "name": "Extremamente",
+    "description": null,
+    "order": 5,
+    "quotation": 5,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 41,
+  "fields": {
+    "name": "Utiliza o telefone por iniciativa pr≤pria",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 42,
+  "fields": {
+    "name": "╔ capaz de marcar bem alguns n·meros familiares",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 43,
+  "fields": {
+    "name": "╔ capaz de pedir para telefonar, mas nπo Θ capaz de marcar",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 44,
+  "fields": {
+    "name": "Nπo Θ capaz de usar o telefone",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 45,
+  "fields": {
+    "name": "Realiza todas as compras necessßrias independentemente",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 46,
+  "fields": {
+    "name": "Realiza independentemente pequenas compras",
+    "description": null,
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 47,
+  "fields": {
+    "name": "Necessita de ir acompanhado para fazer qualquer compra",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 48,
+  "fields": {
+    "name": "╔ totalmente incapaz de comprar",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 49,
+  "fields": {
+    "name": "Organiza, prepara e serve as refeiτ⌡es sozinho e adequadamente",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 50,
+  "fields": {
+    "name": "Prepara adequadamente as refeiτ⌡es se se fornecem os alimentos",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 51,
+  "fields": {
+    "name": "Prepara, aquece e serve as refeiτ⌡es, mas nπo segue uma dieta adequada",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 52,
+  "fields": {
+    "name": "Necessita que lhe preparem e sirvam as refeiτ⌡es",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 53,
+  "fields": {
+    "name": "MantΘm a casa sozinho ou com ajuda ocasional (trabalhos pesados)",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 54,
+  "fields": {
+    "name": "Realiza tarefas ligeiras, como lavar pratos ou fazer a cama",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 55,
+  "fields": {
+    "name": "Realiza tarefas ligeiras, mas nπo pode manter um nφvel adequado de limpeza",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 56,
+  "fields": {
+    "name": "Necessita de ajuda em todas as tarefas domΘsticas",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 57,
+  "fields": {
+    "name": "Nπo participa em nenhuma tarefa domΘstica",
+    "description": null,
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 58,
+  "fields": {
+    "name": "Lava sozinho toda a sua roupa",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 59,
+  "fields": {
+    "name": "Lava sozinho pequenas peτas de roupa",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 60,
+  "fields": {
+    "name": "A lavagem da roupa tem de ser feita por terceiros",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 61,
+  "fields": {
+    "name": "Viaja sozinho em transporte p·blico ou conduz o seu pr≤prio carro",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 62,
+  "fields": {
+    "name": "╔ capaz de apanhar um tßxi, mas nπo usa outro transporte",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 63,
+  "fields": {
+    "name": "Viaja em transportes p·blicos quando vai acompanhado",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 64,
+  "fields": {
+    "name": "S≤ utiliza o tßxi ou o autom≤vel com ajuda de terceiros",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 65,
+  "fields": {
+    "name": "Nπo viaja",
+    "description": null,
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 66,
+  "fields": {
+    "name": "╔ capaz de tomar a medicaτπo α hora e dose corretas",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 67,
+  "fields": {
+    "name": "Toma a medicaτπo se a dose Θ preparada previamente",
+    "description": null,
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 68,
+  "fields": {
+    "name": "Nπo Θ capaz de administrar a sua medicaτπo",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 69,
+  "fields": {
+    "name": "Encarrega-se de assuntos financeiros sozinho",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 70,
+  "fields": {
+    "name": "Realiza as compras dißrias, mas necessita de ajuda em grandes compras e no banco",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 71,
+  "fields": {
+    "name": "Incapaz de manusear o dinheiro",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 72,
+  "fields": {
+    "name": "Quase sempre",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 73,
+  "fields": {
+    "name": "Muitas vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 74,
+  "fields": {
+    "name": "Por vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 75,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 76,
+  "fields": {
+    "name": "Tanto como antes",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 77,
+  "fields": {
+    "name": "Nπo tanto agora",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 78,
+  "fields": {
+    "name": "S≤ um pouco",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 79,
+  "fields": {
+    "name": "Quase nada",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 80,
+  "fields": {
+    "name": "Sim e muito forte",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 81,
+  "fields": {
+    "name": "Sim, mas nπo muito forte",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 82,
+  "fields": {
+    "name": "Um pouco, mas nπo me aflige",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 83,
+  "fields": {
+    "name": "De modo algum",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 84,
+  "fields": {
+    "name": "Tanto como antes",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 85,
+  "fields": {
+    "name": "Nπo tanto como antes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 86,
+  "fields": {
+    "name": "Muito menos agora",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 87,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 88,
+  "fields": {
+    "name": "A maior parte do tempo",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 89,
+  "fields": {
+    "name": "Muitas vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 90,
+  "fields": {
+    "name": "Por vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 91,
+  "fields": {
+    "name": "Quase nunca",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 92,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 93,
+  "fields": {
+    "name": "Poucas vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 94,
+  "fields": {
+    "name": "De vez em quando",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 95,
+  "fields": {
+    "name": "Quase sempre",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 96,
+  "fields": {
+    "name": "Quase sempre",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 97,
+  "fields": {
+    "name": "Muitas vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 98,
+  "fields": {
+    "name": "Por vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 99,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 100,
+  "fields": {
+    "name": "Quase sempre",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 101,
+  "fields": {
+    "name": "Muitas vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 102,
+  "fields": {
+    "name": "Por vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 103,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 104,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 105,
+  "fields": {
+    "name": "Por vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 106,
+  "fields": {
+    "name": "Muitas vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 107,
+  "fields": {
+    "name": "Quase sempre",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 108,
+  "fields": {
+    "name": "Completamente",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 109,
+  "fields": {
+    "name": "Nπo dou a atenτπo que devia",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 110,
+  "fields": {
+    "name": "Talvez cuide menos que antes",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 111,
+  "fields": {
+    "name": "Tenho o mesmo interesse de sempre",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 112,
+  "fields": {
+    "name": "Muito",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 113,
+  "fields": {
+    "name": "Bastante",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 114,
+  "fields": {
+    "name": "Nπo muito",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 115,
+  "fields": {
+    "name": "Nada",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 116,
+  "fields": {
+    "name": "Tanto como antes",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 117,
+  "fields": {
+    "name": "Nπo tanto como antes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 118,
+  "fields": {
+    "name": "Bastante menos agora",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 119,
+  "fields": {
+    "name": "Quase nunca",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 120,
+  "fields": {
+    "name": "Muitas vezes",
+    "description": null,
+    "order": 1,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 121,
+  "fields": {
+    "name": "Bastantes vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 122,
+  "fields": {
+    "name": "Por vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 123,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 124,
+  "fields": {
+    "name": "De vez em quando",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 125,
+  "fields": {
+    "name": "Poucas vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 126,
+  "fields": {
+    "name": "Quase nunca",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 127,
+  "fields": {
+    "name": "Dia da Semana",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 128,
+  "fields": {
+    "name": "Dia do MΩs",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 129,
+  "fields": {
+    "name": "MΩs",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 130,
+  "fields": {
+    "name": "Ano",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 131,
+  "fields": {
+    "name": "Estaτπo do Ano",
+    "description": null,
+    "order": 5,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 132,
+  "fields": {
+    "name": "Edifφcio",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 133,
+  "fields": {
+    "name": "Piso/Andar",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 134,
+  "fields": {
+    "name": "Localidade",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 135,
+  "fields": {
+    "name": "Distrito",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 136,
+  "fields": {
+    "name": "Paφs",
+    "description": null,
+    "order": 5,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 137,
+  "fields": {
+    "name": "Limπo",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 138,
+  "fields": {
+    "name": "Chave",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 139,
+  "fields": {
+    "name": "Bola",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 140,
+  "fields": {
+    "name": "Joπo",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 141,
+  "fields": {
+    "name": "Macedo",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 142,
+  "fields": {
+    "name": "Praτa",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 143,
+  "fields": {
+    "name": "Infante",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 144,
+  "fields": {
+    "name": "n║ 53",
+    "description": null,
+    "order": 5,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 145,
+  "fields": {
+    "name": "Trancoso",
+    "description": null,
+    "order": 6,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 146,
+  "fields": {
+    "name": "Guarda",
+    "description": null,
+    "order": 7,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 147,
+  "fields": {
+    "name": "Nome do atual primeiro-ministro",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 148,
+  "fields": {
+    "name": "Nome do primeiro rei de Portugal",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 149,
+  "fields": {
+    "name": "Nome do atual presidente dos EUA",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 150,
+  "fields": {
+    "name": "Nome do candidato presidencial portuguΩs assassinado pela PIDE nos anos 60",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 151,
+  "fields": {
+    "name": "Ano em que se deu a revoluτπo do 25 de Abril",
+    "description": null,
+    "order": 5,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 152,
+  "fields": {
+    "name": "Realizou a tarefa com sucesso",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 153,
+  "fields": {
+    "name": "Pegou com a mπo direita",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 154,
+  "fields": {
+    "name": "Dobrou a folha ao meio",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 155,
+  "fields": {
+    "name": "Colocou a folha no colo",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 156,
+  "fields": {
+    "name": "Hipop≤tamo",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 157,
+  "fields": {
+    "name": "Excentricidade",
+    "description": null,
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 158,
+  "fields": {
+    "name": "Ininteligφvel",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 159,
+  "fields": {
+    "name": "Estatφstica",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 160,
+  "fields": {
+    "name": "Primeira subtraτπo correta",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 161,
+  "fields": {
+    "name": "Segunda subtraτπo correta",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 162,
+  "fields": {
+    "name": "Terceira subtraτπo correta",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 163,
+  "fields": {
+    "name": "Quarta subtraτπo correta",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 164,
+  "fields": {
+    "name": "Quinta subtraτπo correta",
+    "description": null,
+    "order": 5,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 165,
+  "fields": {
+    "name": "O",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 166,
+  "fields": {
+    "name": "D",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 167,
+  "fields": {
+    "name": "N",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 168,
+  "fields": {
+    "name": "U",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 169,
+  "fields": {
+    "name": "M",
+    "description": null,
+    "order": 5,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 170,
+  "fields": {
+    "name": "... a que estß associada α monarquia.",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 171,
+  "fields": {
+    "name": "... a que Θ um reptil.",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 172,
+  "fields": {
+    "name": "... a que estß associada ao deserto.",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 173,
+  "fields": {
+    "name": "... a que estß relacionada com a navegaτπo",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 174,
+  "fields": {
+    "name": "8",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 175,
+  "fields": {
+    "name": "10",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 176,
+  "fields": {
+    "name": "7",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 177,
+  "fields": {
+    "name": "9",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 178,
+  "fields": {
+    "name": "R",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 179,
+  "fields": {
+    "name": "M",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 180,
+  "fields": {
+    "name": "A",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 181,
+  "fields": {
+    "name": "T",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 182,
+  "fields": {
+    "name": "Lapiz",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": "possible_answers_images/lapiz.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 183,
+  "fields": {
+    "name": "Rel≤gio",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": "possible_answers_images/relogio.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 184,
+  "fields": {
+    "name": "Girafa",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": "possible_answers_images/girafa.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 185,
+  "fields": {
+    "name": "Pinguim",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": "possible_answers_images/penguin.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 186,
+  "fields": {
+    "name": "┬ncora",
+    "description": null,
+    "order": 5,
+    "quotation": 1,
+    "image": "possible_answers_images/ancora.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 187,
+  "fields": {
+    "name": "Camelo",
+    "description": null,
+    "order": 6,
+    "quotation": 1,
+    "image": "possible_answers_images/Camelo.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 188,
+  "fields": {
+    "name": "Trompete",
+    "description": null,
+    "order": 7,
+    "quotation": 1,
+    "image": "possible_answers_images/trompete.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 189,
+  "fields": {
+    "name": "Urso",
+    "description": null,
+    "order": 8,
+    "quotation": 1,
+    "image": "possible_answers_images/Urso.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 190,
+  "fields": {
+    "name": "Barril",
+    "description": null,
+    "order": 9,
+    "quotation": 1,
+    "image": "possible_answers_images/Barril.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 191,
+  "fields": {
+    "name": "Coroa",
+    "description": null,
+    "order": 10,
+    "quotation": 1,
+    "image": "possible_answers_images/COROA.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 192,
+  "fields": {
+    "name": "Crocodilo",
+    "description": null,
+    "order": 11,
+    "quotation": 1,
+    "image": "possible_answers_images/crocodilo.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 193,
+  "fields": {
+    "name": "Acordeπo",
+    "description": null,
+    "order": 12,
+    "quotation": 1,
+    "image": "possible_answers_images/acordeao.png"
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 194,
+  "fields": {
+    "name": "Joπo Macedo",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 195,
+  "fields": {
+    "name": "Praτa do Infante",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 196,
+  "fields": {
+    "name": "53",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 197,
+  "fields": {
+    "name": "Trancoso",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 198,
+  "fields": {
+    "name": "Guarda",
+    "description": null,
+    "order": 5,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 199,
+  "fields": {
+    "name": "Mostre-me a sua mπo esquerda",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 200,
+  "fields": {
+    "name": "Mostre-me o seu pΘ direito",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 201,
+  "fields": {
+    "name": "Com a sua mπo direita aponte para o meu ombro direito",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 202,
+  "fields": {
+    "name": "Com a sua mπo esquerda aponte para o seu joelho direito",
+    "description": null,
+    "order": 4,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 203,
+  "fields": {
+    "name": "Amarelo",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 204,
+  "fields": {
+    "name": "Verde",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 205,
+  "fields": {
+    "name": "Branco",
+    "description": null,
+    "order": 3,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 206,
+  "fields": {
+    "name": "Vermelho",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 207,
+  "fields": {
+    "name": "Toque em qualquer peτa verde",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 208,
+  "fields": {
+    "name": "Toque em qualquer quadrado",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 209,
+  "fields": {
+    "name": "Toque em qualquer cφrculo pequeno",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 210,
+  "fields": {
+    "name": "Toque no cφrculo pequeno e amarelo",
+    "description": null,
+    "order": 4,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 211,
+  "fields": {
+    "name": "Toque num quadrado grande e num cφrculo branco",
+    "description": null,
+    "order": 5,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 212,
+  "fields": {
+    "name": "Toque num cφrculo pequeno verde e no quadrado grande vermelho",
+    "description": null,
+    "order": 6,
+    "quotation": 5,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 213,
+  "fields": {
+    "name": "Esquecimento do local onde colocou objectos familiares.",
+    "description": "2",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 214,
+  "fields": {
+    "name": "Esquecimento de nomes antes bem conhecidos.",
+    "description": "2",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 215,
+  "fields": {
+    "name": "Sem dΘfice de mem≤ria objectivo durante a entrevista clφnica.",
+    "description": "2",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 216,
+  "fields": {
+    "name": "Sem  dΘfice objectivo no emprego ou em ocasi⌡es sociais.",
+    "description": "2",
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 217,
+  "fields": {
+    "name": "Preocupaτπo legφtima em relaτπo aos sintomas.",
+    "description": "2",
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 218,
+  "fields": {
+    "name": "O paciente pode ter-se perdido quando viajava para um local desconhecido.",
+    "description": "3",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 219,
+  "fields": {
+    "name": "Os colegas dπo-se conta do desempenho relativamente pobre do paciente.",
+    "description": "3",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 220,
+  "fields": {
+    "name": "As dificuldades em encontrar palavras e/ou nomes tornam-se evidentes para as pessoas mais pr≤ximas.",
+    "description": "3",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 221,
+  "fields": {
+    "name": "O paciente pode ler um texto, ou um livro, e reter relativamente pouco.",
+    "description": "3",
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 222,
+  "fields": {
+    "name": "O paciente pode apresentar facilidade diminuφda em recordar os nomes de pessoas a quem Θ apresentado.",
+    "description": "3",
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 223,
+  "fields": {
+    "name": "O paciente pode ter perdido, ou colocado em local errado, um objecto de valor.",
+    "description": "3",
+    "order": 6,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 224,
+  "fields": {
+    "name": "Os testes clφnicos podem evidenciar dΘfice de concentraτπo.",
+    "description": "3",
+    "order": 7,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 225,
+  "fields": {
+    "name": "DΘfice de mem≤ria objectivo, evidente s≤ no decurso  duma entrevista intensiva.",
+    "description": "3",
+    "order": 8,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 226,
+  "fields": {
+    "name": "Diminuiτπo de desempenho em ocupaτ⌡es laborais de maior exigΩncia, e em situaτ⌡es  sociais.",
+    "description": "3",
+    "order": 9,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 227,
+  "fields": {
+    "name": "O paciente comeτa a manifestar denegaτπo.",
+    "description": "3",
+    "order": 10,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 228,
+  "fields": {
+    "name": "Ansiedade ligeira a moderada que acompanha frequentemente os  sintomas.",
+    "description": "3",
+    "order": 11,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 229,
+  "fields": {
+    "name": "DecrΘscimo no conhecimento de acontecimentos correntes e recentes.",
+    "description": "4",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 230,
+  "fields": {
+    "name": "Pode apresentar algum dΘfice de mem≤ria na sua pr≤pria hist≤ria pessoal.",
+    "description": "4",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 231,
+  "fields": {
+    "name": "DΘfice de concentraτπo evidenciado nas subtracτ⌡es seriadas.",
+    "description": "4",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 232,
+  "fields": {
+    "name": "Diminuiτπo da capacidade para viajar, gerir as finanτas, etc",
+    "description": "4",
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 233,
+  "fields": {
+    "name": "Orientaτπo no tempo e no espaτo.",
+    "description": "4 - 2",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 234,
+  "fields": {
+    "name": "Orientaτπo no tempo e no espaτo.",
+    "description": "4 - 2",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 235,
+  "fields": {
+    "name": "Capacidade de viajar para locais conhecidos.",
+    "description": "4 - 2",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 236,
+  "fields": {
+    "name": "Incapacidade para executar tarefas complexas.",
+    "description": "4 - 3",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 237,
+  "fields": {
+    "name": "A denegaτπo Θ o mecanismo de defesa dominante",
+    "description": "4 - 2",
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 238,
+  "fields": {
+    "name": "Embotamento dos afectos e desistΩncia em situaτ⌡es de desafio",
+    "description": "4 - 2",
+    "order": 6,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 239,
+  "fields": {
+    "name": "Do seu endereτo, ou do seu n·mero de telefone, que tem desde hß muitos anos.",
+    "description": "5",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 240,
+  "fields": {
+    "name": "Dos nomes dos seus familiares mais pr≤ximos (tais como os seus netos).",
+    "description": "5",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 241,
+  "fields": {
+    "name": "Do nome do liceu (escola secundßria), ou da faculdade em que se formou.",
+    "description": "5",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 242,
+  "fields": {
+    "name": "Apresenta frequentemente alguma desorientaτπo relativamente ao tempo (data, dia da semana, estaτπo do ano, etc), ou  ao local.",
+    "description": "5 - 2",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 243,
+  "fields": {
+    "name": "Uma pessoa escolarizada pode ter alguma dificuldade na subtracτπo em sΘries de 4 em 40, ou de 2 em 20.",
+    "description": "5 - 2",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 244,
+  "fields": {
+    "name": "As pessoas neste nφvel retΩm a lembranτa dos factos mais importantes relativamente a si pr≤prios, e a outros.",
+    "description": "5 - 2",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 245,
+  "fields": {
+    "name": "Sabem  invariavelmente os seus pr≤prios nomes, e conhecem, geralmente, os nomes do conjuge e dos filhos.",
+    "description": "5 - 2",
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 246,
+  "fields": {
+    "name": "Nπo precisam de  auxφlio para os cuidados de higiene, nem para as refeiτ⌡es, mas podem ter dificuldade na escolha da roupa adequada  para vestir.",
+    "description": "5 - 2",
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 247,
+  "fields": {
+    "name": "Podem de todo nπo se aperceber de todos os acontecimentos e experiΩncias recentes das suas vidas.",
+    "description": "6",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 248,
+  "fields": {
+    "name": "RetΩm alguma  noτπo do que os rodeia, do ano, da estaτπo do ano, etc.",
+    "description": "6",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 249,
+  "fields": {
+    "name": "Podem ter dificuldade em contar de 1 atΘ 10, em ordem decrescente, e por vezes em ordem crescente.",
+    "description": "6",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 250,
+  "fields": {
+    "name": "Podem ficar incontinentes.",
+    "description": "6 - 2",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 251,
+  "fields": {
+    "name": "Necessitarπo de assistΩncia para viajar, mas poderπo, ocasionalmente, ser capazes de viajar para locais  conhecidos.",
+    "description": "6 - 2",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 252,
+  "fields": {
+    "name": "O ritmo diurno encontra-se frequentemente alterado.",
+    "description": "6 - 3",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 253,
+  "fields": {
+    "name": "Lembram-se quase sempre do seu pr≤prio nome.",
+    "description": "6 - 3",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 254,
+  "fields": {
+    "name": "Comportamento delirante, isto Θ, o paciente pode acusar o seu c⌠njuge de ser uma pessoa impostora; pode falar para  figuras imaginßrias α sua volta, ou para a sua pr≤pria imagem reflectida no espelho.",
+    "description": "6 - 4",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 255,
+  "fields": {
+    "name": "Comportamento delirante, isto Θ, o paciente pode acusar o seu c⌠njuge de ser uma pessoa impostora; pode falar para  figuras imaginßrias α sua volta, ou para a sua pr≤pria imagem reflectida no espelho.C",
+    "description": "6 - 4",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 256,
+  "fields": {
+    "name": "Podem ocorrer: sintomas de ansiedade, de agitaτπo e mesmo um comportamento violento antes inexistente.",
+    "description": "6 - 4",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 257,
+  "fields": {
+    "name": "Abulia cognitiva, isto Θ, perda da forτa de vontade, por o indivφduo nπo conseguir manter um pensamento atΘ  completar uma acτπo",
+    "description": "6 - 4",
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 258,
+  "fields": {
+    "name": "Na fase inicial deste nφvel as palavras e as frases sπo faladas, mas o discurso Θ muito limitado. Mais tarde deixa de  haver discurso û apenas sons grunhidos.",
+    "description": "7",
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 259,
+  "fields": {
+    "name": "Incontinente.",
+    "description": "7",
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 260,
+  "fields": {
+    "name": "Requer assistΩncia na higiene e na alimentaτπo.",
+    "description": "7",
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 261,
+  "fields": {
+    "name": "As competΩncias  psicomotoras bßsicas (como por ex. a capacidade de andar) vπo sendo perdidas com a progressπo deste nφvel.",
+    "description": "7",
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 262,
+  "fields": {
+    "name": "O  cΘrebro parece nπo ser mais capaz de comandar o corpo.",
+    "description": "7",
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 263,
+  "fields": {
+    "name": "Presenτa frequente de sinais e sintomas neurol≤gicos difusos  e corticais.",
+    "description": "7",
+    "order": 7,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 264,
+  "fields": {
+    "name": "Sem Declφnio Cognitivo",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 265,
+  "fields": {
+    "name": "Declφnio Cognitivo Muito Ligeiro",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 266,
+  "fields": {
+    "name": "Declφnio Cognitivo Ligeiro",
+    "description": null,
+    "order": 3,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 267,
+  "fields": {
+    "name": "Declφnio Cognitivo Moderado",
+    "description": null,
+    "order": 4,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 268,
+  "fields": {
+    "name": "Declφnio Cognitivo Moderadamente Grave",
+    "description": null,
+    "order": 5,
+    "quotation": 5,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 269,
+  "fields": {
+    "name": "Declφnio Cognitivo Grave",
+    "description": null,
+    "order": 6,
+    "quotation": 6,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 270,
+  "fields": {
+    "name": "Declφnio Cognitivo Muito Grave",
+    "description": null,
+    "order": 7,
+    "quotation": 7,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 271,
+  "fields": {
+    "name": "Vigil",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 272,
+  "fields": {
+    "name": "Sonolento",
+    "description": null,
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 273,
+  "fields": {
+    "name": "Flutuante",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 274,
+  "fields": {
+    "name": "Normal",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 275,
+  "fields": {
+    "name": "HipercinΘtico",
+    "description": null,
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 276,
+  "fields": {
+    "name": "HipocinΘtico",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 277,
+  "fields": {
+    "name": "Adaptado",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 278,
+  "fields": {
+    "name": "Inadaptado",
+    "description": null,
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 279,
+  "fields": {
+    "name": "Flutuante",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 280,
+  "fields": {
+    "name": "Apatia",
+    "description": null,
+    "order": 4,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 281,
+  "fields": {
+    "name": "Depressπo",
+    "description": null,
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 282,
+  "fields": {
+    "name": "Euforia",
+    "description": null,
+    "order": 6,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 283,
+  "fields": {
+    "name": "Boa",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 284,
+  "fields": {
+    "name": "Razoßvel",
+    "description": null,
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 285,
+  "fields": {
+    "name": "Mß",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 286,
+  "fields": {
+    "name": "Simpatia",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 287,
+  "fields": {
+    "name": "Indiferente",
+    "description": null,
+    "order": 2,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 288,
+  "fields": {
+    "name": "Hostil",
+    "description": null,
+    "order": 3,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 289,
+  "fields": {
+    "name": "Discordo Fortemente",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 290,
+  "fields": {
+    "name": "Discordo",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 291,
+  "fields": {
+    "name": "Neutro",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 292,
+  "fields": {
+    "name": "Concordo",
+    "description": null,
+    "order": 4,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 293,
+  "fields": {
+    "name": "Concordo Fortemente",
+    "description": null,
+    "order": 5,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 294,
+  "fields": {
+    "name": "Discordo Fortemente",
+    "description": null,
+    "order": 1,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 295,
+  "fields": {
+    "name": "Discordo",
+    "description": null,
+    "order": 2,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 296,
+  "fields": {
+    "name": "Neutro",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 297,
+  "fields": {
+    "name": "Concordo",
+    "description": null,
+    "order": 4,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 298,
+  "fields": {
+    "name": "Concordo Fortemente",
+    "description": null,
+    "order": 5,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 299,
+  "fields": {
+    "name": "Sim",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 300,
+  "fields": {
+    "name": "Nπo",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 301,
+  "fields": {
+    "name": "Nunca",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 302,
+  "fields": {
+    "name": "Raramente",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 303,
+  "fields": {
+    "name": "┴s vezes",
+    "description": null,
+    "order": 3,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 304,
+  "fields": {
+    "name": "Quase sempre",
+    "description": null,
+    "order": 4,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 305,
+  "fields": {
+    "name": "Sempre",
+    "description": null,
+    "order": 5,
+    "quotation": 5,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 306,
+  "fields": {
+    "name": "Nunca faτo isto",
+    "description": null,
+    "order": 1,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 307,
+  "fields": {
+    "name": "Faτo isto por vezes",
+    "description": null,
+    "order": 2,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 308,
+  "fields": {
+    "name": "Em mΘdia, Θ isto que faτo",
+    "description": null,
+    "order": 3,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 309,
+  "fields": {
+    "name": "Faτo quase sempre isto",
+    "description": null,
+    "order": 4,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 310,
+  "fields": {
+    "name": "0",
+    "description": null,
+    "order": 1,
+    "quotation": 0,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 311,
+  "fields": {
+    "name": "1",
+    "description": null,
+    "order": 2,
+    "quotation": 1,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 312,
+  "fields": {
+    "name": "2",
+    "description": null,
+    "order": 3,
+    "quotation": 2,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 313,
+  "fields": {
+    "name": "3 ou 4",
+    "description": null,
+    "order": 4,
+    "quotation": 3,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 314,
+  "fields": {
+    "name": "5 a 8",
+    "description": null,
+    "order": 5,
+    "quotation": 4,
+    "image": ""
+  }
+},
+{
+  "model": "protocolo.possibleanswer",
+  "pk": 315,
+  "fields": {
+    "name": "9 e mais",
+    "description": null,
+    "order": 6,
+    "quotation": 5,
+    "image": ""
+  }
+}
+]

@@ -1,0 +1,20 @@
+<div id="outros">
+
+     <form id="partilhaForm" onsubmit='return sendForm({{ participante_id }}, "partilhaForm");' method="post">
+        {% csrf_token %}
+         {{ partilhaForm.partilha }}
+        <input type="hidden" name="participante" value={{ participante_id }}>
+        <button type="submit" name="partilha">Guardar partilha</button>
+    </form>
+
+    <ul>
+        {% if partilhas|length > 0 %}
+            {% for partilha in partilhas %}
+                <li>{{ partilha }} <span class="data">{{ partilha.data }}</span></li>
+            {% endfor %}
+        {% else %}
+            <li>Sem partilhas</li>
+        {% endif %}
+    </ul>
+
+</div>

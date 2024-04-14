@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+         @media (min-width: 1000px) {
+            div.center {
+                width: 80vw;
+            }
+        }
+          .dashboard > div {
+            padding: 0.5em;
+            margin: 1.0em;
+            font-size: 1em;
+            border-radius: 6px;
+            background-color: whitesmoke;
+            box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
+
+        }
+         .dashboard .title {
+            grid-area: title;
+            height: auto;
+            width: 700px;
+            background-color: #4EB4BE;
+            text-align: center;
+             margin: auto;
+             margin-bottom: 20px;
+
+        }
+          h1{
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-right: auto;
+            margin-left: auto;
+            font-size: 20px;
+            font-family:Arial ;
+        }
+           .dashboard .info {
+                padding-left: 50px;
+               padding-right: 50px;
+               padding-top: 20px;
+               padding-bottom: 20px;
+                height: auto;
+                width: 700px;
+               margin: auto;
+               align-items: center;
+                background-color: #4EB4BE;
+
+        }
+           .button3 {
+
+            background-color: #4EB4BE;
+            border: none;
+            color: white;
+            margin: auto;
+        }
+          .button {
+              background-color: #4EB4BE;
+              border: none;
+              color: white;
+              padding: 6px 25px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 15px;
+              margin: auto;
+              cursor: pointer;
+              border-radius: 5px;
+        }
+           button, form {
+               margin: auto;
+            display: inline;
+
+        }
+           table table-hover {
+      width: 60%;
+      position: absolute;
+      right: 10px;
+    }
+
+    </style>
+    </head>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+<body>
+
+<div class="center">
+    <div class="dashboard">
+    <div class="title">
+        <h1>Lista de Candidatos</h1>
+    </div>
+<div class="info" >
+    <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Escolaridade</th>
+                    <th>Referência</th>
+
+                </tr>
+            </thead>
+       {% for cuidador in cuidadores %}
+           <tbody>
+        <tr>
+      <td>{{ cuidador }}</td>
+      <td>{{ cuidador.escolaridade }}</td>
+      <td>{{ cuidador.referenciacao }}</td>
+      <td>
+          <form action="{% url 'diario:filtrar_grupo_para_candidato' cuidador.id %}">
+              <button class="button3">Atribuir grupo</button>
+            </form>
+      </td>
+    </tr>
+           <tbody>
+        {% endfor %}
+    </table>
+</div>
+    <form  action="{% url 'diario:grupos' %}">
+        <button class="button" > Voltar </button>
+    </form>
+</div>
+</div>
+</body>
+
+</html>

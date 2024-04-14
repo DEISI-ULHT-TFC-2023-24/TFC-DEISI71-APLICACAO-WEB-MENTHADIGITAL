@@ -1,0 +1,243 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+            </div>
+            <div class="container-fluid">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <form action="{% url 'diario:dashboard_Care' %}">
+                                    <button type="submit" class="btn mb-btn-outline" style="width: 200px"><i class="fa-solid fa-angle-left"></i> Anterior
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <p class="m-0 fw-bold"
+                               style="margin: 5px; font-size: 23px; color: #4eb4be">Cuidador sem grupo
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table ">
+                                            <thead>
+                                            <tr>
+                                                <th style="text-align: center;">
+                                                    <strong>Nome</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Diagnóstico</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Localização</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Escolaridade</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Referenciação</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td style="text-align: center;">{{ cuidador }}</td>
+                                                <td style="text-align: center;">
+                                                    {% for diagnostico in cuidador.doencas %}
+                                                        {{ diagnostico }} 
+                                                    {% endfor %}</td>
+                                                <td style="text-align: center;">{{ cuidador.localizacao }}</td>
+                                                <td style="text-align: center;">{{ cuidador.escolaridade }}</td>
+                                                <td style="text-align: center;">{{ cuidador.referenciacao }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <p class="m-0 fw-bold"
+                               style="margin: 5px; font-size: 23px; color: #4eb4be">Filtros para Grupos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table ">
+                                            <thead>
+                                            <tr>
+                                                <th style="text-align: center;"></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Diagnóstico</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Localização</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Escolaridade</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Referenciação</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input form="filtro" type="submit" value="Filtrar"
+                                                           class="btn mb-btn-outline">
+                                                </td>
+                                                <form id="filtro"
+                                                      action="{% url 'diario:filter_group' cuidador.id %}"
+                                                      method="POST">
+                                                    {% csrf_token %}
+                                                    {% for campo,opcoes in lista_pesquisa.items %}
+                                                    <td class="opcao">
+                                                        <select name="{{ campo }}" id="">
+                                                            <option value=""></option>
+                                                            {% for opcao in opcoes %}
+                                                                {% if selecoes|get_item:campo == opcao %}
+                                                                    <option value="{{ opcao }}" selected>
+                                                                        {{ opcao }}
+                                                                    </option>
+                                                                {% elif campo == 'diagnostico' or campo == 'referenciacao' %}
+                                                                    <option value="{{ opcao.0 }}">
+                                                                        {{ opcao.1 }}
+                                                                    </option>
+                                                                {% else %}
+                                                                    <option value="{{ opcao }}">
+                                                                        {{ opcao }}
+                                                                    </option>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </select>
+                                                    </td>
+                                                    {% endfor %}
+                                                </form>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <p class="m-0 fw-bold"
+                               style="margin: 5px; font-size: 23px; color: #4eb4be">Resultados dos Grupos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table ">
+                                            <thead>
+                                            <tr>
+                                                <th style="text-align: center;">
+                                                    <strong>Grupo</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Diagnóstico</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Localização</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Escolaridade</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Referenciação</strong></th>
+                                                <th style="text-align: center;">
+                                                    <strong>Nº Membros</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for grupo in grupos %}
+                                            <tr>
+                                                <td style="text-align: center;">{{ grupo }}</td>
+                                                <td style="text-align: center;">
+                                                    {% if grupo.diagnostico != '' %}
+                                                    {{ grupo.diagnostico }}
+                                                    {% else %}
+                                                    -
+                                                    {% endif %}
+
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    {% if grupo.localizacao != '' %}
+                                                    {{ grupo.localizacao }}
+                                                    {% else %}
+                                                    -
+                                                    {% endif %}
+
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    {% if grupo.escolaridade != '' %}
+                                                    {{ grupo.escolaridade }}
+                                                    {% else %}
+                                                    -
+                                                    {% endif %}
+
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    {% if grupo.referenciacao is not None %}
+                                                    {{ grupo.referenciacao }}
+                                                    {% else %}
+                                                    -
+                                                    {% endif %}
+
+                                                </td>
+                                                <td style="text-align: center;">{{ grupo.nr_membros }}</td>
+                                                <td>
+                                                    <form action="{% url 'diario:assign_group' grupo.id cuidador.id %}"
+                                                          method="POST">
+                                                        {% csrf_token %}
+                                                        <button class="btn mb-btn">Inscrever</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

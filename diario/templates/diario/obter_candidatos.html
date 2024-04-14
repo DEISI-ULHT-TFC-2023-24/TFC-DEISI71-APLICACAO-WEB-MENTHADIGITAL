@@ -1,0 +1,67 @@
+{% load static %}
+{% load diario_tags %}
+{% if programa == "CARE" %}
+
+<thead>
+    <tr>
+        <th style="text-align: left;">
+            <strong>Nome</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>Diagnóstico do Paciente</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>Localização</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>Escolaridade</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>Referenciação</strong>
+        </th>
+        <th style="text-align: left;">
+        </th>
+    </tr>
+</thead>
+{% elif programa == "COG" %}
+    <table class="table">
+<thead>
+    <tr>
+        <th style="text-align: left;">
+            <strong>Nome</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>Diagnóstico</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>Localização</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>Escolaridade</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>Referenciação</strong>
+        </th>
+        <th style="text-align: left;">
+            <strong>GDS</strong>
+        </th>
+        <th style="text-align: left;">
+        </th>
+    </tr>
+</thead>
+{% endif %}
+<tbody>
+    {% for p in participantes %}
+    <tr>
+    <td>{% verifica_se_tem_valores p.nome "N/A" %}</td>
+    <td>{% verifica_se_tem_valores p.doencas_string "N/A" %}</td>
+    <td>{% verifica_se_tem_valores p.localizacao "N/A"%}</td>
+    <td>{% verifica_se_tem_valores p.escolaridade "N/A"%}</td>
+    <td>{% verifica_se_tem_valores p.referenciacao.nome "N/A"%}</td>
+    {% if programa == "COG" %}
+        <td>{% verifica_se_tem_valores p.nivel_gds "N/A" %}</td>
+    {% endif%}
+    <td><input name="selecionados" value="{{p.id}}" type="checkbox"></td>
+    </tr>
+    {% endfor %}
+</tbody>

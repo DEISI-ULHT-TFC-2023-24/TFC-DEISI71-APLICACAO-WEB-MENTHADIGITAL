@@ -1,0 +1,63 @@
+<form class="flex-container padding-top-25" id="upl-form" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row row-md-12">
+        <div class="form-group col-md-10">
+            <label><b>{{ form.text_answer.label }}</b></label><br>
+            {{ form.text_answer }}
+        </div>
+        <div class="form-group col-md-2">
+        <label><b> {{ form.quotation.label }}</b></label><br>
+            <select class="form-select form-select-sm"  name="quotation" id="quotation">
+                {% with ''|center:question.quotation_max|add:"1" as range %}
+                    {% for _ in range %}
+                        <option value="{{ forloop.counter0 }}">{{ forloop.counter0 }}</option>
+                    {% endfor %}
+                {% endwith %}
+            </select>
+        </div>
+    </div>
+
+    {% if submitted_answer is not None %}
+        <div class="form-row row-md-12">
+        <div class="col col-md-12 ">
+            <label><b>Fotografia submetida</b></label><br>
+            <a target="_blank" href="{{ submitted_answer  }}">
+                <img class="img-preview" src="{{ submitted_answer }}">
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    <div class="form-row row-md-12 padding-top-25">
+        <div class="col col-md-12 ">
+            <label><b>{{ form.submitted_answer.label }}</b></label><br>
+            {{ form.submitted_answer }}
+        </div>
+    </div>
+
+    <div class="form-row row-md-12 padding-top-25">
+        <div class="col col-md-12">
+            <div class="flex-textarea flex-item">
+                <b>{{ form.notes.label }}</b>
+                <textarea class="notes-area form-control" name="notes" id="" cols="0" rows="2">{{ notes }}</textarea>
+                </textarea>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding-top: 15px" class="flex-buttons">
+        <button class="btn jq-btn flex-left mb-btn-outline"
+                {% if question.section.dimension.number_of_questions > 1 %}
+                data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% else %}
+                data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% endif %}
+            type="button">
+            <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+        </button>
+        <button class="btn btn-submit-upl mb-btn-outline flex-right"
+                data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                style="" type="submit">
+            <i class="fa fa-check"></i>&nbsp; Submeter
+        </button>
+    </div>
+</form>

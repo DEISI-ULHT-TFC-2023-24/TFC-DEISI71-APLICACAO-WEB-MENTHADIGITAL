@@ -1,0 +1,58 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+<div class="container-fluid">
+    <div style="padding: 8px">
+        <div class="bcca-breadcrumb">
+            <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;"></div>
+            <div class="bcca-breadcrumb-item fw-normal fs-5">
+                <a href="{% url 'diario:user_dashboard' %}">
+                    <i class="fa-solid fa-user-doctor" style="color: white;"></i>
+                    {% with grupos.all|first as grupo %}
+                        <span>MentHA {{ grupo.programa }}</span>
+                    {% endwith %}
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover" style="vertical-align: middle;">
+                <thead>
+                <tr>
+                    <th style="text-align: center;"><strong>Grupo</strong></th>
+                    <th style="text-align: center;"><strong>Programa</strong></th>
+                    <th style="text-align: center;"><strong>Diagnóstico</strong></th>
+                    <th style="text-align: center;"><strong>Localização</strong></th>
+                    <th style="text-align: center;"><strong>Referenciação</strong></th>
+                    <th style="text-align: center;"><strong>Nº Membros</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for grupo in grupos %}
+                <tr>
+                    <td style="text-align: center;">
+                        <form action="{% url 'diario:grupo_details' grupo.id %}">
+                            <button class="btn mb-btn btn-group" style="width:100%;justify-content: center;">
+                                <i class="fa-solid fa-user-group" style="top: 25%; left: 5%; position: absolute;"></i>
+                                <span>{{ grupo }}</span>
+                            </button>
+                        </form>
+                    </td>
+                    <td style="text-align: center;">{{ grupo.programa }}</td>
+                    <td style="text-align: center;">{{ grupo.diagnostico }}</td>
+                    <td style="text-align: center;">{{ grupo.localizacao_most_frequent }}</td>
+                    <td style="text-align: center;">{{ grupo.referenciacao_most_frequent }}</td>
+                    <td style="text-align: center;">
+                        <i class="fa-solid fa-users"></i> {{ grupo.nr_membros }}
+                    </td>
+                </tr>
+                {% empty %}
+                <div class="alert alert-warning" role="alert">
+                    Não tem Grupos associados
+                </div>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

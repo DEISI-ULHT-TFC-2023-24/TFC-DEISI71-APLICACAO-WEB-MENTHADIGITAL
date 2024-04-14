@@ -1,0 +1,146 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                </div>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div style="display: flex;flex-direction: row;justify-content: space-between">
+                                    <div class="card-body" style="padding: 8px">
+                                        <p class="m-0 fw-bold" style="margin: 5px; font-size: 26px; color: #4EB4BE">
+                                            Editar Participante</p>
+                                        <br>
+                                        {% if error_message %}
+                                            <p class="m-0 fw-bold fs-5">{{ error_message }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <form action="{% url 'diario:group_members' grupo_id %}">
+                                            <button type="submit" class="btn mb-btn-outline" style="width: 150px">
+                                                <i class="fa-solid fa-angle-left"></i> Anterior
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <form action="" class="row g-3" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div style="display: flex;gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 70%">
+                                                        <label for="{{ formParticipante.nome.id_for_label }}">{{ formParticipante.nome.label }}: </label>
+                                                        <input type="text" id="{{ formParticipante.nome.id_for_label }}"
+                                                               name="{{ formParticipante.nome.html_name }}"
+                                                               value="{{ participante.nome }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 30%">
+                                                        <label for="{{ formParticipante.sexo.id_for_label }}">{{ formParticipante.sexo.label }}: </label>
+                                                        {{ formParticipante.sexo }}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 100%">
+                                                        <label for="{{ formParticipante.username.id_for_label }}">{{ formParticipante.username.label }}: </label>
+                                                        <input type="text" id="{{ formParticipante.username.id_for_label }}"
+                                                               name="{{ formParticipante.username.html_name }}"
+                                                               value="{{ participante.user.username }}">
+                                                    </div>
+                                                    <input type="hidden" name="password" value="@MentHA@23"
+                                                           id="id_password">
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formParticipante.email.id_for_label }}">{{ formParticipante.email.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formParticipante.email.id_for_label }}"
+                                                               name="{{ formParticipante.email.html_name }}"
+                                                               value="{{ participante.email }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 50%; border: #4eb4be">
+                                                        <label for="{{ formParticipante.escolaridade.id_for_label }}">{{ formParticipante.escolaridade.label }}: </label>
+                                                        {{ formParticipante.escolaridade }}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formParticipante.nacionalidade.id_for_label }}">{{ formParticipante.nacionalidade.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formParticipante.nacionalidade.id_for_label }}"
+                                                               name="{{ formParticipante.nacionalidade.html_name }}"
+                                                               value="{{ participante.nacionalidade }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formParticipante.telemovel.id_for_label }}">{{ formParticipante.telemovel.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formParticipante.telemovel.id_for_label }}"
+                                                               name="{{ formParticipante.telemovel.html_name }}"
+                                                               value="{{ participante.telemovel }}">
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 33%">
+                                                        <label for="{{ formParticipante.localizacao.id_for_label }}">{{ formParticipante.localizacao.label }}: </label>
+                                                        <input type="text"
+                                                               id="{{ formParticipante.localizacao.id_for_label }}"
+                                                               name="{{ formParticipante.localizacao.html_name }}"
+                                                               value="{{ participante.localizacao }}">
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 33%">
+                                                        <label for="{{ formParticipante.referenciacao.id_for_label }}">{{ formParticipante.referenciacao.label }}: </label>
+                                                        {{ formParticipante.referenciacao }}
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 33%">
+                                                        <label for="{{ formParticipante.nascimento.id_for_label }}">{{ formParticipante.nascimento.label }}: </label>
+                                                        {{ formParticipante.nascimento }}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 8px">
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formParticipante.residencia.id_for_label }}">{{ formParticipante.residencia.label }}: </label>
+                                                        {{ formParticipante.residencia }}
+                                                    </div>
+                                                    <div class="fieldWrapper" style="width: 50%">
+                                                        <label for="{{ formParticipante.diagnosticos.id_for_label }}">{{ formParticipante.diagnosticos.label }}:</label>
+                                                        <div class="related-widget-wrapper" style="border: 1px solid #4eb4be; padding: 10px;border-radius: 4px">
+                                                            {{ formParticipante.diagnosticos }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; flex-direction: row; justify-content: flex-start">
+                                                    <div class="col-md-6">
+                                                        <button type="submit" class="btn mb-btn-outline"
+                                                                style="width: 150px; color: white">
+                                                            <i class="fa fa-floppy-disk"></i> Editar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

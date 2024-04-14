@@ -1,0 +1,135 @@
+{% load static %}
+{% block head %}
+<script src="{% static 'protocolo/js/registo.js' %}?{% now 'U' %}"></script>
+<link href="{% static 'protocolo/stylingForm.css' %}" rel="stylesheet">
+{% endblock %}
+
+<div class="bcca-breadcrumb" style="padding:38px;">
+    <div class="bcca-breadcrumb-item fw-normal fs-5" style="display:none;"></div>
+
+    <div class="bcca-breadcrumb-item fw-normal fs-5">
+        <a data-href="{% url 'protocolo:participantes_registo' %}" class="jq-btn">
+            <i class="fa fa-exclamation" style="color:white;"></i>
+                O que tem * é obrigatório
+        </a>
+    </div>
+
+    <div class="bcca-breadcrumb-item fw-normal fs-5">
+        <a data-href="{% url 'protocolo:participants' %}" class="jq-btn">
+            <i class="fa-solid fa-user-check" style="color:white;"></i>
+            MentHA-EVAL
+        </a>
+    </div>
+    <div class="bcca-breadcrumb-item fw-normal fs-5">
+        <a data-href="{% url 'protocolo:participants' %}" class="jq-btn">
+            <i class="fa-solid fa-user-check" style="color:white;"></i>
+            Registo de um Participante
+        </a>
+    </div>
+</div>
+
+<div class="container-form-registo">
+    <form action="return false;" id="patient-form" class="row g-3" method="POST">
+        {% csrf_token %}
+        <table style="border-spacing: 15px;
+        border-collapse: separate;">
+            <tr>
+                <td>
+                    <label for="username" class="label"><b>Username *</b></label>
+                        <div class="input-class">
+                                <input class="form-input-registo" type="text" id="username" name="username" required>
+                        </div>
+                </td>
+                <td>
+                    <div class="input-class">
+                        <input type="hidden" name="password" value="@MentHA@23" id="id_password">
+                    </div>
+                </td>        
+            </tr>
+            <tr>
+                <td colspan="2">
+                        <label for="nome" class="label"><b>Nome *</b></label>
+                        <div class="input-class">
+                                <input class="form-input-registo" type="text" id="nome" name="nome" required>
+                        </div>
+                </td>
+                <td>
+                    <label for="sexo" class="label"><b>Indique o seu género *</b></label>
+                    <div class="select-containers">
+                        <select class="select" id="sexo" name="sexo">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Feminino">Não Especificado</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                </td>
+           
+                
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label for="email" class="label"><b>Indique o seu email: (Deixe como está caso o participante não tenha email associado)</b></label>
+                    <div class="input-class">
+                        <input class="form-input-registo" type="email" id="email" name="email" value="example@gmail.com">
+                    </div>
+
+                </td>
+                <td>
+                    <label for="telemovel" class="label"><b>Indique o seu telemóvel (Deixe como está caso o participante não tenha número associado)</b></label>
+                    <div class="input-class">
+                        <input class="form-input-registo" type="text" id="telemovel" name="telemovel" value=987654321>
+                    </div>
+                </td>
+                
+                
+            </tr>
+            <tr>
+                <td>
+                    <label for="nascimento" class="label"><b>Indique a sua data de Nascimento *</b></label>
+                    <div class="input-class">
+                        <input class="form-input-registo" type="date" id="nascimento" name="nascimento" required>
+                    </div>
+                </td>
+                {% comment %} <td>
+                    <label for="referenciacao" class="label"><b>Qual é a referenciacao</b></label>
+                    <div class="select-containers">
+                        <select class="select" id="referenciacao" name="referenciacao">
+                            <option value="ADEB"> ADEB</option>
+                            <option value="Cruz Vermelha"> Cruz Vermelha</option>
+                            <option value="Elo Social"> Elo Social </option>
+                            <option value="Familiarmente"> Familiarmente </option>
+                            <option value="GIRA"> GIRA </option>
+                            <option value="ASMAL"> ASMAL </option>
+                        </select>
+                    </div>
+                </td> {% endcomment %}
+            </tr>
+            <td>
+                <label for="dadosCuidador" class="label"><b>O email e o número estão associados a quem?</b></label>
+                <div class="select-containers">
+                    <select class="select" id="dadosCuidado" name="dadosCuidador">
+                        <option value="Participante">Participante</option>
+                        <option value="Cuidador">Cuidador</option>
+                        <option value="Familiar">Familiar</option>
+                    </select>
+                </div>
+            </td>
+        </table>
+        
+        <div style="padding-right: 15px;display: flex;padding-left: 15px;flex-direction: row-reverse;justify-content: space-between;">
+        <button class="btn mb-btn btn-registar flex-left" type="submit" data-href="{% url 'protocolo:participantes_registo' %}" style="width:150px;">
+            <i class="fa fa fa-user-plus"></i>&nbsp Registar
+        </button>
+        <button class="btn jq-btn mb-btn-outline flex-left" data-href="{% url 'protocolo:participants' %}">
+            <i class="fa fa-times"></i> Cancelar
+        </button> 
+        </div>                                                 
+    </form>
+</div>
+    {% comment %} {% for field in form %}
+        <div>
+            {{ field.label }}: {{ field }}
+        </div>
+        <br>
+    {% endfor %} {% endcomment %}

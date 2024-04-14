@@ -1,0 +1,58 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+{% block main %}
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+            </div>
+            <div class="container-fluid" style="width: auto; display: flex; justify-content: center; align-items: center;flex-direction: column; height: 85vh">
+                <div class="container text-start" style="align-items: center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center">
+                                <div class="card-body" style="padding: 8px">
+                                    <p class="m-0 fw-bold"
+                                       style="margin: 5px; font-size: 26px; color: #4eb4be">
+                                        Atualização da data da sessão
+                                    </p>
+                                </div>
+                                <div>
+                                    <form action="{% url 'diario:group_sessions' grupo_id %}">
+                                        <button type="submit" class="btn mb-btn-outline" style="width: 150px">
+                                            <i class="fa-solid fa-angle-left"></i> Anterior
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="container text-start">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <form method="post" style="justify-items: start; display: flex; flex-direction: column; align-items: center">
+                                        {% csrf_token %}
+                                        <p>{{ formDataSessao.data }}</p>
+                                        <br>
+                                        <div style="display: flex; justify-content: space-evenly;">
+                                            <button type="submit" class="btn mb-btn-outline" style="width: auto">
+                                                <i class="fa-regular fa-calendar-check"></i> Agendar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

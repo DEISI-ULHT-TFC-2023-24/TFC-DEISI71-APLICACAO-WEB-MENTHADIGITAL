@@ -1,0 +1,42 @@
+[
+{
+  "model": "protocolo.dimension",
+  "pk": 42,
+  "fields": {
+    "name": "None",
+    "description": null,
+    "order": 0,
+    "instrument": 20
+  }
+},
+{
+  "model": "protocolo.dimension",
+  "pk": 43,
+  "fields": {
+    "name": "None",
+    "description": null,
+    "order": 1,
+    "instrument": 21
+  }
+},
+{
+  "model": "protocolo.dimension",
+  "pk": 44,
+  "fields": {
+    "name": "None",
+    "description": null,
+    "order": 1,
+    "instrument": 22
+  }
+},
+{
+  "model": "protocolo.dimension",
+  "pk": 45,
+  "fields": {
+    "name": "None",
+    "description": null,
+    "order": 0,
+    "instrument": 23
+  }
+}
+]

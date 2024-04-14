@@ -1,0 +1,103 @@
+
+{% extends 'diario/base.html' %}
+{% block main %}
+{% load markdownify %}
+
+<style>
+    .custom-markdown ul {
+        margin-left: 40px;
+        list-style: disc;
+    }
+
+    .custom-markdown p {
+        margin-top: 10px;
+        text-align: justify;
+    }
+</style>
+
+
+<input type="hidden" id="sessaoGrupo_id" name="sessaoGrupo_id" value="{{sg.id}}" />
+<div style="width:100%;height:100vh;display:flex; justify-content:center;">
+    <div id="carousel" class="carousel slide" data-ride="carousel" style="height: 100%;">
+        <div class="carousel-inner" style="display:flex; justify-content:center">
+            <div class="carousel-item active" style="margin-right:0px">
+                {% if parte.imagens.all|length > 0 %}
+                    <div class="exercicio-imagens">
+                        {% for imagem in parte.imagens.all %}
+                            <br>
+                            <a target="_blank" href="{{ imagem.imagem.url }}">
+                                <img class="img-preview" src="{{ imagem.imagem.url }}">
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <br>
+                {% endif %}
+
+                {% if parte.descricao|length > 0 %}
+                    <div style="padding-bottom: 3%;" class="exercicio-descricao center{% if parte.descricao|length > 150 %}h5{% else %}h4{% endif %}">
+                        {{ parte.descricao|markdownify }}
+                    </div>
+                {% endif %}
+
+                {% if parte.perguntas.all|length > 0 %}
+                    {% csrf_token %}
+                    <div class="flex-container">
+                        {% for pergunta in parte.perguntas.all %}
+                            <div class="exercicio-pergunta form-group right"
+                                    style="{% if pergunta.tipo_resposta == "UPLOAD_FOTOGRAFIA" %} flex-direction: column {% else %} flex-direction: row {% endif %};
+                                    padding-bottom:10px;">
+                                {% if pergunta.dificuldade == "A" or pergunta.dificuldade == "B" %}
+                                    <div class="left text-primary h3">
+                                        {{ pergunta.dificuldade }}
+                                    </div>
+                                {% endif %}
+
+                                {% for perg,parte_ordem,form in form_list %}
+                                    {% if perg == pergunta and parte_ordem == parte.ordem %}
+                                        {% if pergunta.tipo_resposta == 'UPLOAD_FOTOGRAFIA' %}
+                                            <form action="preventDefault()" enctype="multipart/form-data">
+                                                {% for field in form %}
+                                                    <label>{{ pergunta.nome }}</label>
+                                                    <div>
+                                                        {{ field }}
+                                                        <span style="display:none">{{ perg.id }}</span>
+                                                        <span style="display:none">{{ parte.id }}</span>
+                                                    </div>
+                                                {% endfor %}
+                                            </form>
+                                        {% elif pergunta.tipo_resposta == 'ESCOLHA_MULTIPLA' %}
+                                            {% include 'diario/escolha_multipla.html' %}
+                                        {% else %}
+                                            {% for field in form %}
+                                                <label>{{ pergunta.nome }}</label>
+                                                <div>
+                                                    {{ field }}
+                                                    <span style="display:none">{{ perg.id }}</span>
+                                                    <span style="display:none">{{ parte.id }}</span>
+                                                </div>
+                                                {% if pergunta.postexto %}
+                                                    <label>
+                                                        {{ pergunta.postexto }}
+                                                    </label>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                        {% endfor %}
+                        <button onclick="submete({{ sessaoGrupo.id }},{{ parteGrupo.id }},{{ participante.id }})"
+                                type="button" class="btn btn-outline-secondary" style="margin-top: 10px">
+                            Submeter
+                        </button>
+
+                    </div>
+                {% endif %}
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

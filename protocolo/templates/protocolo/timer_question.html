@@ -1,0 +1,60 @@
+<form class="flex-container" id="question-form" action="" method="post">
+    <input type="hidden" name="type" value="0">
+    {% csrf_token %}
+    <h1 style="padding-top:15px;text-align: right;">
+        <button class="btn btn-primary btn-timer" type="button" style="border-radius: 217px;background-color: var(--bs-btn-bg);">
+            <i id="timer-ico" class="fa fa-play" style="border-left-width: 0px;font-size: 15px;text-align: right;"></i>
+        </button>
+        <span id="clock" class="clock">0:00</span></h1>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>0''-15''</th>
+                <th>16''-30''</th>
+                <th>31''-45''</th>
+                <th>46''-60''</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><textarea class="notes-area form-control" id="1"
+                  name="1" style="width: 100%;">{% for a in answers %}{% if a.TIAnswer.all|length > 0 %}{% for ti in a.TIAnswer.all %}{% if ti.seconds == 1 and a.question == question %}{{ ti.text }}{% endif %}{% endfor %}{% endif %}{% endfor %}</textarea></td>
+                <td><textarea class="notes-area form-control" id="2"
+                  name="2" style="width: 100%;">{% for a in answers %}{% if a.TIAnswer.all|length > 0 %}{% for ti in a.TIAnswer.all %}{% if ti.seconds == 2 and a.question == question %}{{ ti.text }}{% endif %}{% endfor %}{% endif %}{% endfor %}</textarea></td>
+                <td><textarea class="notes-area form-control" id="3"
+                  name="3" style="width: 100%;">{% for a in answers %}{% if a.TIAnswer.all|length > 0 %}{% for ti in a.TIAnswer.all %}{% if ti.seconds == 3 and a.question == question %}{{ ti.text }}{% endif %}{% endfor %}{% endif %}{% endfor %}</textarea></td>
+                <td><textarea class="notes-area form-control" id="4"
+                  name="4" style="width: 100%;">{% for a in answers %}{% if a.TIAnswer.all|length > 0 %}{% for ti in a.TIAnswer.all %}{% if ti.seconds == 4 and a.question == question %}{{ ti.text }}{% endif %}{% endfor %}{% endif %}{% endfor %}</textarea></td>
+            </tr>
+            <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+    <div class="flex-textarea flex-item padding-top-25">
+        <label><b>Apontamentos</b></label>
+        <textarea style="white-space: pre-line" class="notes-area form-control" id="notes"
+                  name="notes">{{ notes }}</textarea>
+    </div>
+    <br>
+
+    <div class="flex-buttons">
+        <button class="btn jq-btn flex-left mb-btn-outline"
+                {% if question.section.dimension.number_of_questions > 1 %}
+                data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% else %}
+                data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% endif %}
+            type="button">
+            <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+        </button>
+        <button class="btn btn-submit mb-btn-outline flex-right"
+                data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                style="" type="submit">
+            <i class="fa fa-check"></i>&nbsp; Submeter
+        </button>
+    </div>
+
+</form>

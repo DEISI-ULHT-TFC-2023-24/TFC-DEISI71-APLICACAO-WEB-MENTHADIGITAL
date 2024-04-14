@@ -1,0 +1,168 @@
+{% extends 'diario/base.html' %}
+{% load static %}
+
+{%block head %}
+    <script src="{% static 'diario/js/cria_grupo.js'%}?{% now 'U' %}"/>
+{% endblock %}
+
+{% block main %}
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="container text-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <form action="{% url 'diario:dashboard_Care' %}">
+                                    <button type="submit" class="btn mb-btn" style="width: 200px">Anterior
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div class="card">
+                                    <p class="text-primary m-0 fw-bold"
+                                    style="margin: 5px; font-size: 23px">Criterios de inclusão
+                                    </p>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table ">
+                                                <thead>
+                                                <tr>
+                                                    <th style="text-align: center;"></th>
+                                                    <th style="text-align: center;">
+                                                        <strong>Diagnóstico</strong></th>
+                                                    <th style="text-align: center;">
+                                                        <strong>Localização</strong></th>
+                                                    <th style="text-align: center;">
+                                                        <strong>Escolaridade</strong></th>
+                                                    <th style="text-align: center;">
+                                                        <strong>Referenciação</strong></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input form="filtro" type="submit" value="Filtrar"
+                                                               class="btn btn-primary"/>
+                                                    </td>
+                                                    <form id="filtro"
+                                                          action="{% url 'diario:new_group' %}"
+                                                          method="POST">
+                                                        {% csrf_token %}
+                                                        {% for campo,opcoes in lista_pesquisa.items %}
+                                                            <td class="opcao">
+                                                                <select name="{{ campo }}" id="">
+                                                                    <option value=""></option>
+                                                                    {% for opcao in opcoes %}
+                                                                    {% if opcao != None %}
+
+                                                                            {% if selecoes|get_item:campo == opcao %}
+                                                                                <option value="{{ opcao }}"
+                                                                                        selected>{{ opcao }}</option>
+                                                                            {% else %}
+                                                                                <option value="{{ opcao }}">{{ opcao }}</option>
+                                                                            {% endif %}
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </td>
+                                                        {% endfor %}
+
+                                                    </form>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form method="POST" action="{% url 'diario:guarda_grupo' %}">
+                         {% csrf_token %}
+                        {% for campo,valor in selecoes.items %}
+                            <input type="hidden" name="{{ campo }}" value="{{ valor }}">
+                        {% endfor %}
+
+                        <input type="hidden" name="filtrados" value="{% for cuidador in filtrados %} {{ cuidador.id }} {%  endfor %}">
+
+                        <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col align-self-center">
+                                    <div class="card">
+                                        <p class="text-primary m-0 fw-bold"
+                                    style="margin: 5px; font-size: 23px">Candidatos
+                                        </p>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table ">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="text-align: center;">
+                                                            <strong>Grupo</strong></th>
+                                                        <th style="text-align: center;">
+                                                            <strong>Diagnóstico</strong></th>
+                                                        <th style="text-align: center;">
+                                                            <strong>Localização</strong></th>
+                                                        <th style="text-align: center;">
+                                                            <strong>Escolaridade</strong></th>
+                                                        <th style="text-align: center;">
+                                                            <strong>Referenciação</strong></th>
+                                                            <th style="text-align: center;">
+                                                            <th style="text-align: center;">
+                                                            <strong>Programa</strong></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for cuidador in filtrados %}
+                                                        <tr>
+                                                            <td style="text-align: center;">{{ cuidador }}</td>
+                                                            <td style="text-align: center;">
+                                                                {% for diagonstico in cuidador.doencas %}
+                                                                    <li>{{ diagonstico }}</li>
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                {{ cuidador.localizacao }}</td>
+                                                            <td style="text-align: center;">{{ cuidador.escolaridade }}</td>
+                                                            <td style="text-align: center;">
+                                                                {% for reference in cuidador.obter_reference %}
+                                                                    {{ reference }}
+                                                                {% endfor %}
+                                                            </td>
+                                                            <td>
+                                                                <input type="checkbox" name="cuidadores_selecionados[]" value="{{ cuidador.id }}"/>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <input type="text" name="nome" required>
+                        <select name="programa" id="programa">
+                            <option value="CARE">MentHA-CARE</option>
+                            <option value="COG">MentHA-COG</option>
+                          </select>
+                        <input type="submit" value="Criar Grupo"/>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

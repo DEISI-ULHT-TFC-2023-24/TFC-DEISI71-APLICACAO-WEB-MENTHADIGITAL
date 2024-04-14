@@ -1,0 +1,46 @@
+[
+{
+  "model": "protocolo.part",
+  "pk": 10,
+  "fields": {
+    "name": "0 meses",
+    "description": "Avaliaτπo Cuidador",
+    "order": 1,
+    "protocol": 1,
+    "part_number": 1
+  }
+},
+{
+  "model": "protocolo.part",
+  "pk": 11,
+  "fields": {
+    "name": "2 meses",
+    "description": "Avaliaτπo Cuidador",
+    "order": 2,
+    "protocol": 1,
+    "part_number": 2
+  }
+},
+{
+  "model": "protocolo.part",
+  "pk": 12,
+  "fields": {
+    "name": "6 meses",
+    "description": "Avaliaτπo Cuidador",
+    "order": 3,
+    "protocol": 1,
+    "part_number": 3
+  }
+},
+{
+  "model": "protocolo.part",
+  "pk": 13,
+  "fields": {
+    "name": "Questionßrio Sociodemogrßfico (Cuidador)",
+    "description": null,
+    "order": 0,
+    "protocol": 1,
+    "part_number": 0
+  }
+}
+]

@@ -1,0 +1,48 @@
+<div id="noticias">
+
+    <div class="blue">
+        <div class="titulo">Notícias</div>
+        <div class="texto">
+            
+        </div>
+    </div>
+
+    <div class="hero" style="height: 10em;">
+        <div class="next">
+            <span class="material-symbols-outlined">expand_more</span>
+        </div>
+    </div>
+
+    {% for noticia in noticias %}
+
+    <div class="blue">
+        <div class="subtitulo">
+            <div class="left">{{ noticia.titulo }}</div>
+            <div class="right">({{ noticia.data }})</div>
+        </div>
+        <div class="noticia">
+            {% load markdownify %}
+            <div class="texto">{{ noticia.texto|markdownify }}</div>
+            
+            {% if noticia.url  %}
+                <div class="referencia">         
+                    Para saber mais: <span class="url"><b><a href="{{ noticia.url }}">Link</a></b></span>                  
+                </div>
+            {% endif %}
+        
+            {% if noticia.imagem %}
+                <div class="imagem"> <img src="{{ noticia.imagem.url }}" alt=""> </div>
+            {% endif %}
+            
+        </div>
+    </div>
+
+    
+    <div class="hero" style="height: 10em;">
+        <div class="next">
+            <span class="material-symbols-outlined">expand_more</span>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>

@@ -1,0 +1,518 @@
+{% load static %}
+{% block head %}
+
+
+<link href="{% static 'protocolo/stylingForm.css' %}" rel="stylesheet">
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+
+
+function validateForm() {
+  return true;
+}
+</script>
+{% comment %} <script src="{% static 'protocolo/js/jquery.js' %}"></script> {% endcomment %}
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script> {% endcomment %}
+<script>
+    function openPDF() {
+    window.open('protocolo\templates\protocolo\media\caracteristicas.pdf', '_blank');
+}
+</script>
+
+{% endblock %}
+<div class="container-form">
+    <form method="post" id="risk_form" style="width:100%" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <table style="width:100%;border-spacing: 5px;
+        border-collapse: separate;">
+                <tr>
+                    <td>
+                        <h3 class="m-0 fw-bold mb-text fs-5"><br><br> Questionário</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="doenca_cognitiva">Tem Doença cognitiva?</label>
+                        <div class="select-containers">
+                            <select style="font-weight: bold;" class="select" id="doenca_cognitiva" name="doenca_cognitiva">
+                                <option value=False
+                                {% if existing_risk.doenca_cognitiva == False %}
+                                    selected
+                                {% endif %}>Não</option>
+                                <option value=True
+                                {% if existing_risk.doenca_cognitiva == True %}
+                                    selected
+                                {% endif %}
+                                >Sim</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <label for="horas_jejum">Horas de jejum:
+                            <div class="input-class">
+                                <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" id="horas_jejum" name="horas_jejum" value="{{ existing_risk.horas_jejum }}" required>
+                            </div>
+                        </label>
+                    </td>
+    
+                    <td>
+                        <div style="display: flex;">
+                            <label for="pergunta_cardiovascular" style="width: 36ch;">Como classifica o seu Risco Cardio Vascular</label>
+                            <button type="button" data-toggle="tooltip" data-placement="top" title="Probabilidade de ter um AVC ou Enfarte Agudo do Miocárdio ou de morrer de doença cardiovascular nos próximos 10 anos">
+                                <a href="#"><i style="color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i></a>
+                            </button>
+                        </div>
+    
+                        <div class="select-containers">
+                            <select style="font-weight: bold;" class="select" id="pergunta_cardiovascular" name="pergunta_cardiovascular">
+                                <option value="Baixo" {% if existing_risk.pergunta_cardiovascular == 'Baixo' %}selected{% endif %}>Baixo</option>
+                                <option value="Moderado" {% if existing_risk.pergunta_cardiovascular == 'Moderado' %}selected{% endif %}>Moderado</option>
+                                <option value="Alto" {% if existing_risk.pergunta_cardiovascular == 'Alto' %}selected{% endif %}>Alto</option>
+                                <option value="Elevado" {% if existing_risk.pergunta_cardiovascular == 'Elevado' %}selected{% endif %}>Elevado</option>
+                                <option value="Não se sabe" {% if existing_risk.pergunta_cardiovascular == 'Não se sabe' %}selected{% endif %}>Não se sabe</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="fumador">Fumador Ativo</label>
+                        <div class="select-containers">
+                            <select style="font-weight: bold;" class="select" id="fumador" name="fumador">
+                                <option value="nonSmoking"
+                                {% if existing_risk.fumador == 'nonSmoking' %}
+                                    selected
+                                {% endif %}>Não</option>
+                                <option value="smoking"
+                                {% if existing_risk.fumador == 'smoking' %}
+                                    selected
+                                {% endif %}
+                                >Sim</option>
+                                <option value="exSmoker"
+                                {% if existing_risk.fumador == 'exSmoker' %}
+                                    selected
+                                {% endif %}
+                                >Ex Fumador</option>
+                                <option value="naoSeSabe"
+                                {% if existing_risk.fumador == 'naoSeSabe' %}
+                                    selected
+                                {% endif %}
+                                >Não se tem conhecimento</option>
+                            </select>
+                        </div>
+                    </td>
+    
+                    <td>
+                        <label for="hipercolestrol">
+                            Hipercolesterolemia Familiar (Genética)
+                            <div>
+                                <select style="font-weight: bold;" class="select" id="hipercolestrol" name="hipercolestrol">
+                                    <option value=False
+                                    {% if existing_risk.hipercolestrol == False %}
+                                        selected
+                                    {% endif %}>Não</option>
+                                    <option value=True
+                                    {% if existing_risk.hipercolestrol == True %}
+                                        selected
+                                    {% endif %}
+                                    >Sim</option>
+                                </select>
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="diabetes">Diabetes
+                            <div class="select-containers">
+                                <select style="font-weight: bold;" class="select" id="diabetes" name="diabetes">
+                                    <option value=True
+                                    {% if existing_risk.diabetes == True %}
+                                        selected
+                                    {% endif %}>Sim</option>
+                                    <option value=False
+                                    {% if existing_risk.diabetes == False %}
+                                        selected
+                                    {% endif %}
+                                    >Não</option>
+                                </select>
+                            </div>
+                        </label>
+                    </td>
+                    <td>
+                        <label for="pre_diabetico">Pré Diabético?</label>
+                        <div class="select-containers">
+                            <select style="font-weight: bold;" class="select" id="pre_diabetico" name="pre_diabetico">
+                                <option value=True
+                                {% if existing_risk.pre_diabetico == True %}
+                                    selected
+                                {% endif %}>Sim</option>
+                                <option value=False
+                                {% if existing_risk.pre_diabetico == False %}
+                                    selected
+                                {% endif %}
+                                >Não</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <label for="anos_diabetes">Se tem diabetes, há quantos anos
+                            <div class="input-class">
+                                <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" id="anos_diabetes" name="anos_diabetes" value="{{ existing_risk.anos_diabetes }}">
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="avc">
+                            Acididente Vascular Cerebral (AVC)
+                            <div class="select-containers">
+                                <select style="font-weight: bold;" class="select" id="avc" name="avc">
+                                    <option value=False
+                                    {% if existing_risk.avc == False %}
+                                        selected
+                                    {% endif %}>Não</option>
+                                    <option value=True
+                                    {% if existing_risk.avc == True %}
+                                        selected
+                                    {% endif %}
+                                    >Sim</option>
+                                </select>
+                            </div>
+                        </label>
+                    </td>
+                    <td>
+                        <label for ="enfarte">
+                            Enfarte Agudo do Miocárdio
+                            <div class="select-containers">
+                                <select style="font-weight: bold;" class="select" id="enfarte" name="enfarte">
+                                    <option value="False"
+                                    {% if existing_risk.enfarte == False %}
+                                        selected
+                                    {% endif %}>
+                                        Não
+                                    </option>
+                                    <option value=True
+                                    {% if existing_risk.enfarte == True %}
+                                        selected
+                                    {% endif %}>
+                                        Sim
+                                    </option>
+                                </select>
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="doenca_rins">
+                            Doença dos Rins
+                            <div class="select-containers">
+                                <select style="font-weight: bold;" class="select" id="doenca_rins" name="doenca_rins">
+                                    <option value=False
+                                    {% if existing_risk.doenca_rins == False %}
+                                        selected
+                                    {% endif %}>
+                                        Não
+                                    </option>
+                                    <option value=True
+                                    {% if existing_risk.doenca_rins == True %}
+                                        selected
+                                    {% endif %}>
+                                        Sim
+                                    </option>
+                                </select>
+                            </div>
+                        </label>
+                    </td>
+                    <td>
+                        <label for="doenca_pernas">
+                            Doença Arterial das Pernas
+                            <div class="select-containers">
+                                <select style="font-weight: bold;" class="select" id="doenca_pernas" name="doenca_pernas">
+                                    <option value=False
+                                    {% if existing_risk.doenca_pernas == False %}
+                                        selected
+                                    {% endif %}>
+                                        Não
+                                    </option>
+                                    <option value=True
+                                    {% if existing_risk.doenca_pernas == True %}
+                                        selected
+                                    {% endif %}>
+                                        Sim
+                                    </option>
+                                </select>
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 class="m-0 fw-bold mb-text fs-5"><br><br> Dados Pessoais</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td hidden>
+                        <label for="idade"><b>Idade</b>
+                            <button type="button" class="" data-toggle="tooltip" data-placement="top" title="Insira valores entre 55 e 89">
+                                <i style="padding-left:5px;color: var(--bs-warning);font-size: 20px;" class="fas fa-info-circle"></i>
+                            </button>
+                        </label>
+                        <div class="input-class">
+                            <input style="color:black;" class="form-input" type="number" step="1" min="40" max="89" id="idade" name="idade" value="{{ patient.idade }}" readonly>
+                        </div>
+                    </td>
+    
+                    <td hidden>
+                        <label for="sexo"><b>Género</b></label>
+                        <div class="select-containers">
+                            <select disabled class="select" id="sexo" name="sexo">
+                                <option value="Masculino"
+                                {% if patient.sexo == 'Masculino' %}
+                                    selected
+                                {% endif %}>Masculino</option>
+                                <option value="Feminino"
+                                {% if patient.sexo == 'Feminino' %}
+                                    selected
+                                {% endif %}>Feminino</option>
+                            </select>
+                        </div>
+                    </td>
+    
+                    <td>
+                        <label for="altura">Altura (cm)
+                            <button type="button" class="" data-toggle="tooltip" data-placement="top" title="Se não souber a altura deixe 0">
+                                <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                            </button>
+                        </label>
+                        
+                        <div class="input-class">
+                           
+                            <input style="color:black; font-weight: bold;" class="form-input" type="number" id="altura" name="altura" value="{{existing_risk.altura}}">
+                        </div>
+                    </td>
+    
+                    <td>
+                        <label for="peso">Peso (kg)
+                            <button type="button" class="" data-toggle="tooltip" data-placement="top" title="Se não souber o peso deixe 0">
+                                <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                            </button>
+                        </label>
+                        <div class="input-class">
+                            <input style="color:black; font-weight: bold;" class="form-input" type="number" step="0.1" id="peso" name="peso" value="{{existing_risk.peso}}">
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <div class="input-class">
+                            <div style="display: flex;">
+                                <label style="width: 27ch;" for="pressao_arterial">
+                                    Pressão Arterial Sistólica (mmHg)
+                                </label>
+    
+                                <button type="button" class="" data-toggle="tooltip" data-placement="top" title="Insira valores entre 100 e 179, caso não saiba deixe 0">
+                                    <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+    
+                            <input style="color:black; font-weight: bold;" class="form-input" type="number" step="1" min="100" max="179"  id="pressao_arterial" name="pressao_arterial" value="{{existing_risk.pressao_arterial}}" required >
+                        </div>
+                    </td>
+    
+                    <td>
+                        <label for="batimentos">
+                            <div class="input-class">
+                                Batimentos Cardiacos (bpm)
+                                <button type="button" class="" data-toggle="tooltip" data-placement="top" title="Se não deixe o valor a 0>
+                                    <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                                </button>
+                                <input style="color:black; font-weight: bold;" class="form-input" min="0" type="number" step="1"  id="batimentos" name="batimentos" value="{{existing_risk.batimentos}}" required >
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+    
+            </table>
+            
+            
+            <tr>
+                <td colspan="2">
+                    <h3 class="m-0 fw-bold mb-text fs-5"><br><br>Perfil Lipídico<i style="padding-left:5px;color: var(--bs-warning);font-size: 20px;" class="fa fa-book icon-bg" 
+                        onclick="openPDF('media/caracteristicas.pdf')"></i> (Manual POC)
+                    </h3>
+                    
+                </td>
+                <tr>
+                    <td>
+                        <div style="display: flex;">
+                            <label style="width: 3ch;" for="pat">
+                                PAT
+                            </label>
+    
+                            <button type="button" class="" data-toggle="tooltip" data-placement="top" title="ID dado pelo POC da Roche">
+                                <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+    
+                        <div class="input-class">
+                            <input style="color:black; font-weight: bold;" class="form-input" type="text" id="pat" name="pat" value="{{existing_risk.pat_id}}">
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="colestrol_total">
+                            <div class="input-class">
+                                Colesterol Total (CHOL, mg/dl)
+                                <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="1" id="colestrol_total" name="colestrol_total" value="{{existing_risk.colestrol_total|floatformat:'0'}}" required >
+                            </div>
+                        </label>
+                    </td>
+    
+                    <td>
+                        <label for="ldl">
+                            <div class="input-class">
+                                Lipoproteínas de Baixa Densidade (LDL, mg/dl)
+                                <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="1" id="ldl" name="ldl" value="{{existing_risk.ldl}}" required >
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="tg">
+                            <div class="input-class">
+                                Triglicerios (TG, mg/dl)
+                                <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="1"  id="tg" name="tg" value="{{existing_risk.tg}}" required >
+                            </div>
+                        </label>
+                    </td>
+    
+                    <td>
+                        <label for="colestrol_nao_hdl">
+                            Colestrol Não HDL (Non-HDL, mg/dl)
+                            <div class="input-class">
+                                <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="1" id="colestrol_nao_hdl" name="colestrol_nao_hdl" value="{{existing_risk.colestrol_nao_hdl|floatformat:'0'}}" required>
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="colestrol_hdl">
+                            Colestrol HDL (mg/dl)
+                            <div class="input-class">
+                                <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="1" id="colestrol_hdl" name="colestrol_hdl" value="{{existing_risk.colestrol_hdl|floatformat:'0'}}">
+                            </div>
+                        </label>
+                    </td>
+    
+                    <td>
+                        <label for="cholhdl">
+                            <div class="input-class">
+                                CHOL/HDL (mg/dl)
+                                <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="0.1" id="cholhdl" name="cholhdl" value="{{existing_risk.cholhdl}}" required >
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3 class="m-0 fw-bold mb-text fs-5"><br><br>Intervalo de Medição HBA1
+                </h3>
+            </td>
+            <td>
+                <br>
+                <label for="ifcc_hba1">
+                    <div class="input-class">
+                        IFCC: 20-130 (mmol/mol)
+                        <button type="button" class="ifcc_teste" data-toggle="tooltip" data-placement="top" title="Insira valores entre 20 a 130">
+                            <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                        </button>
+                        <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="0.1" id="ifcc_hba1" name="ifcc_hba1" value="{{existing_risk.ifcc_hba1}}" required >
+                    </div>
+                </label>
+            </td>
+           
+            <td>
+                <label for="ngsp_hba1">
+                    <div class="input-class">
+                        NGSP: 4-14 (%)
+                        <button type="button" class="ngsp_hba1" data-toggle="tooltip" data-placement="top" title="Insira valores entre 4 a 14">
+                            <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                        </button>
+                        <input style="color:black; font-weight: bold;" class="form-input" type="number" min="4" max="14" step="0.1" id="ngsp_hba1" name="ngsp_hba1" value="{{existing_risk.ngsp_hba1}}" required >
+                    </div>
+                </label>
+            </td>
+            <td>
+                <label for="eag_hba1">
+                    <div class="input-class">
+                        eAG: 68-356 (mg/dl)
+                        <button type="button" class="eag_hba1" data-toggle="tooltip" data-placement="top" title="Insira valores entre 68 a 356">
+                            <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                        </button>
+                        <input style="color:black; font-weight: bold;" class="form-input" type="number" min="4" max="14" step="0.1" id="eag_hba1" name="eag_hba1" value="{{existing_risk.eag_hba1}}" required >
+                    </div>
+                </label>
+            </td>
+        </tr>
+
+        <div class="flex-textarea flex-item padding-top-25" style="width:100%">
+            <label for="comentario"><h3 class="m-0 fw-bold mb-text fs-5"><b>Comentários relacionados com o paciente:</b></h3></label>
+            <textarea style="width:100%; color:black;" class="textarea" type="text" id="comentario" name="comentario" placeholder="Escreva o seu comentário:" rows ="5" cols="100">{{existing_risk.comentario}} </textarea>
+        </div>
+        
+        <div class="flex-textarea flex-item padding-top-25" style="width:100%">
+            <label for="recomendacoes"><h3 class="m-0 fw-bold mb-text fs-5"><b>Recomendações relacionadas com o paciente:</b></h3></label>
+            <textarea style="width:100%; color:black;" class="textarea" type="text" id="recomendacoes" name="recomendacoes" placeholder="Escreva a Recomendação:" rows="5" cols="100">{{existing_risk.recomendacoes}}</textarea>
+        </div>
+        
+        <div class="container" style="margin-top: 25px; width:100%;">
+            <div class="text-center">
+                <div class="card-body">
+                    {% if existing_risk %}
+
+                        {% if boolean_pressao and boolean_idade %}
+                            <h1 class="m-0 fw-bold mb-text fs-4">Risco de AVC: {{existing_risk.risco_de_enfarte}}%</h1>
+                        {% else %}
+                            <h1 class="m-0 fw-bold mb-text fs-4">Não corresponde aos parâmetros necessários para o cálculo do Risco</h1>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-buttons padding-top-25">
+            <button class="btn jq-btn btn-primary flex-left mb-btn-outline" data-href="{% url 'protocolo:participant' patient.id %}" type="button">
+                <i class="fa fa-times"></i>&nbsp; Cancelar
+            </button>
+            {% if is_cuidador == 'is_cuidador' %}
+                <button class="btn btn-submit-risk btn-primary mb-btn flex-right" type="submit" id="risk-submit"
+                    data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}/is_cuidador">
+                    <i class="fa fa-check"></i>&nbsp; Submeter
+                </button>
+            {% else %}
+                <button class="btn btn-submit-risk btn-primary mb-btn flex-right" type="submit" id="risk-submit"
+                    data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}">
+                    <i class="fa fa-check"></i>&nbsp; Submeter
+                </button>
+            {% endif %}
+        </div>
+    </form>
+</div>
+

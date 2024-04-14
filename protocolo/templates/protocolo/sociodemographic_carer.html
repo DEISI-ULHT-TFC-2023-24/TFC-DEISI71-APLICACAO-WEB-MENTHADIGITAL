@@ -1,0 +1,393 @@
+{% load static %}
+{% block script %}
+    <script>
+        document.getElementById("nascimento").max = new Date().toISOString().split("T")[0];
+    </script>
+{% endblock %}
+
+<style>
+    .circle-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    }
+
+    @media (max-width:1300px) {
+        .bcca-breadcrumb-item span {
+            display:none;
+        }
+    }
+</style>
+
+<div class="table-responsive">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td rowspan="4" class="align-content-center align-middle" style="width: 0%">
+                    <!-- Imagem -->
+                    {% if patient.imagem %}
+                        <div class="circle-image">
+                            <img src="{{ patient.imagem.url }}"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    {% else %}
+                        <div class="circle-image">
+                            <img src="{% static 'protocolo/img/placeholder-avatar.png' %}"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    {% endif %}
+
+                    <div style="padding-top:10px; text-align:center">
+                        <button data-href="{% url 'protocolo:participante_update' patient.id %}" class="btn jq-btn btn-outline-warning"><i class="fa fa-user-pen"></i> Alterar </button>
+                    </div>
+
+                </td>
+
+                <td class="text-start" style="text-align:center; width: 25%">
+                    <!-- Nome -->
+                    <label class="form-label">Nome</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                        {{ patient.nome }}
+                    </p>
+                </td>
+                <td class="text-start" style="text-align:center; width: 25%">
+                    <!-- Telemovel -->
+                    <label class="form-label">Telemóvel</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                        {{ patient.telemovel }}
+                    </p>
+                </td>
+                <td class="text-start" style="text-align:center; width: 25%">
+                    <!-- Referenciacao -->
+                    <label class="form-label">Referenciação</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                        {{ patient.referenciacao }}
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- Data de Nascimento -->
+                    <label class="form-label">Data de Nascimento</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                        {{ patient.nascimento }}
+                    </p>
+                </td>
+                <td>
+                    <!-- E-mail -->
+                    <label class="form-label">E-mail</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                        {{ patient.email }}
+                    </p>
+                    <p>
+                        <!-- E-mail -->
+                        <label class="form-label" style="margin: 0px;">E-mail</label>
+                        <input style="font-weight: bold;" type="text"
+                            id="id_email"
+                            name="email"
+                            value="{{ patient.email }}" readonly >
+                    </p>
+                </td>
+                <td>
+                    <!-- Grupo COG -->
+                    <label class="form-label">Grupo COG</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold;">
+                        {% if not patient.grupo %}
+                            Não tem grupo COG
+                        {% else %}
+                            {% for grupo in patient.grupo.all %}
+                                {{ grupo.nome }}
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- Sexo -->
+                    <label class="form-label">Género</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                        {{ patient.sexo }}
+                    </p>
+                </td>
+
+                <td>
+                    <!-- Escolaridade -->
+                    <label class="form-label" style="margin: 0px;">Escolaridade</label>
+                    <b>{{ patient.escolaridade }}</b>
+                </td>
+
+                <td>
+                    <!-- Cuidadores -->
+                    <label class="form-label">Cuidador(es)</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                        {% if not patient.cuidadores %}
+                            Não tem cuidador
+                        {% else %}
+                            {% for cuidador in patient.cuidadores.all %}
+                                {{ cuidador.nome }}
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                {% if patient.nacionalidade == "" %}
+                    <td hidden>
+                        <!-- Nacionalidade -->
+                        <label class="form-label">Nacionalidade</label>
+                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                            {{ patient.nacionalidade }}
+                        </p>
+                    </td>
+
+                    <td>
+                        <!-- Localização -->
+                        <label class="form-label" style="margin: 0px;">Localização</label>
+                        <b>{{ patient.localizacao }}</b>
+                    </td>
+
+                    <td></td>
+                {% else %}
+                    <td>
+                        <!-- Nacionalidade -->
+                        <label class="form-label">Nacionalidade</label>
+                        <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                            {{ patient.nacionalidade }}
+                        </p>
+                    </td>
+
+                    <td>
+                        <!-- Localização -->
+                        <label class="form-label" style="margin: 0px;">Localização</label>
+                        <b>{{ patient.localizacao }}</b>
+                    </td>
+                {% endif %}
+
+                <td>
+                    <!-- Grupo CARE dos cuidadores-->
+                    <label class="form-label">Grupo CARE do(s) cuidador(es)</label>
+                    <p style="color: var(--bs-gray-dark);padding-top: 0px;margin-top: -10px;font-weight: bold">
+                        {% for cuidador in patient.cuidadores.all %}
+                            {% if not cuidador.grupo %}
+                                Não tem grupo CARE
+                            {% else %}
+                                {% for grupo in cuidador.grupo.all %}
+                                    {{ grupo.nome }}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                </td>
+            </tr>
+            <tr></tr>
+        </tbody>
+    </table>
+</div>
+
+<form class="flex-container" id="upl-form" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        <tr style="display: flex; justify-content: space-between;">
+            <td style="margin-right: 100px;">
+                <div>
+                    <label>Nacionalidade</label><br>
+                    <input value="{{ patient.nacionalidade }}" style="width: 300px; margin-top: 0rem; font-weight: bold; color: black!important" class="form-text" type="text"
+                           name="nacionalidade" id="nacionalidade">
+                </div>
+            </td>
+
+            <td style="margin-left: 100px;">
+                <div>
+                    <label>Residência Habitual</label><br>
+                    <select class="form-select form-select-sm" style="width: 300px; font-weight: bold;" name="residencia" id="residencia">
+                        <option {% if patient.residencia == "Urbana" %}selected{% endif %} value="Urbana">Urbana</option>
+                        <option {% if patient.residencia == "Rural" %}selected{% endif %} value="Rural">Rural</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+
+        <tr style="display: flex; justify-content: space-between;">
+            <td>
+                <div>
+                    <label>Escolaridade</label><br>
+                    <select class="form-select form-select-sm" style="width: 300px; font-weight: bold;" name="escolaridade" id="escolaridade">
+                        <option {% if patient.escolaridade == "Analfabeto(a)" %}selected{% endif %} value="Analfabeto(a)">
+                            Analfabeto(a)
+                        </option>
+                        <option {% if patient.escolaridade == "1-4" %}selected{% endif %} value="1-4">1-4</option>
+                        <option {% if patient.escolaridade == "5-10" %}selected{% endif %} value="5-10">5-10</option>
+                        <option {% if patient.escolaridade == "11+" %}selected{% endif %} value="11+">11+</option>
+                    </select>
+                </div>
+            </td>
+
+            <td>
+                <div>
+                    <label>Situação Laboral</label><br>
+                    <select class="form-select form-select-sm" style="width: 300px; font-weight: bold;" name="laboral" id="laboral">
+                        <option {% if patient.situacaoLaboral == "Empregado(a)" %}selected{% endif %} value="Empregado(a)">
+                            Empregado(a)
+                        </option>
+                        <option {% if patient.situacaoLaboral == "Desempregado(a)" %}selected{% endif %}
+                                value="Desempregado(a)">Desempregado(a)
+                        </option>
+                        <option {% if patient.situacaoLaboral == "Reformado(a)" %}selected{% endif %} value="Reformado(a)">
+                            Reformado(a)
+                        </option>
+                        <option {% if patient.situacaoLaboral == "Doméstica" %}selected{% endif %} value="Doméstica">Doméstica
+                        </option>
+                        <option {% if patient.situacaoLaboral == "Estudante" %}selected{% endif %} value="Estudante">Estudante
+                        </option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+
+        <tr style="display: flex; justify-content: space-between;">
+            <td>
+                <div>
+                    <label>Profissão atual (ou antiga profissão)</label><br>
+                    <input value="{{ patient.profissaoPrincipal }}" style="width: 300px; margin-top: 0rem; font-weight: bold; color: black!important" class="form-text" type="text" name="profissao">
+                </div>
+            </td>
+
+            <td>
+                <div>
+                    <label>Sit. Económica (Rendimentos/Despesas)</label><br>
+                    <select class="form-select form-select-sm" style="width: 300px; font-weight: bold;" name="economica" id="economica">
+                        <option {% if patient.situacaoEconomica == "Muito satisfatória" %}selected{% endif %}
+                                value="Muito satisfatória">Muito satisfatória
+                        </option>
+                        <option {% if patient.situacaoEconomica == "Satisfatória" %}selected{% endif %} value="Satisfatória">
+                            Satisfatória
+                        </option>
+                        <option {% if patient.situacaoEconomica == "Pouco satisfatória" %}selected{% endif %}
+                                value="Pouco satisfatória">Pouco satisfatória
+                        </option>
+                        <option {% if patient.situacaoEconomica == "Nada satisfatória" %}selected{% endif %}
+                                value="Nada satisfatória">Nada satisfatória
+                        </option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+
+        <tr style="display: flex; justify-content: space-between;">
+            <td>
+                <div>
+                    <label>Estado Civil</label><br>
+                    <select class="form-select form-select-sm" style="width: 300px; font-weight: bold;" name="civil" id="civil">
+                        <option {% if patient.estadoCivil == "Solteiro(a)" %}selected{% endif %} value="Solteiro(a)">
+                            Solteiro(a)
+                        </option>
+                        <option {% if patient.estadoCivil == "Casado(a) ou a viver como tal" %}selected{% endif %}
+                                value="Casado(a) ou a viver como tal">Casado(a) ou a viver como tal
+                        </option>
+                        <option {% if patient.estadoCivil == "Viúvo(a)" %}selected{% endif %} value="Viúvo(a)">Viúvo(a)</option>
+                        <option {% if patient.estadoCivil == "Divorciado(a) ou separado(a)" %}selected{% endif %}
+                                value="Divorciado(a) ou separado(a)">Divorciado(a) ou separado(a)
+                        </option>
+                    </select>
+                </div>
+            </td>
+
+            <td>
+                <div>
+                    <label>Agregado Familiar Atual</label><br>
+                    <select class="form-select form-select-sm" style="width: 300px; font-weight: bold;" name="agregado" id="agregado">
+                        <option {% if patient.agregadoFamiliar == "Vive sozinho(a)" %}selected{% endif %}
+                                value="Vive sozinho(a)">Vive sozinho(a)
+                        </option>
+                        <option {% if patient.agregadoFamiliar == "Vive com o cônjuge" %}selected{% endif %}
+                                value="Vive com o cônjuge">Vive com o cônjuge
+                        </option>
+                        <option {% if patient.agregadoFamiliar == "Vive com os filhos" %}selected{% endif %}
+                                value="Vive com os filhos">Vive com os filhos
+                        </option>
+                        <option {% if patient.agregadoFamiliar == "Vive com terceiros" %}selected{% endif %}
+                                value="Vive com terceiros">Vive com terceiros
+                        </option>
+                        <option {% if patient.agregadoFamiliar == "Vive com o cônjuge e terceiros" %}selected{% endif %}
+                                value="Vive com o cônjuge e terceiros">Vive com o cônjuge e terceiros
+                        </option>
+                        <option {% if patient.agregadoFamiliar == "Vive com os pais" %}selected{% endif %}
+                                value="Vive com os pais">Vive com os pais
+                        </option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+
+        <tr style="display: flex; justify-content: space-between;">
+            <td>
+                <div>
+                    <label>Quantos filhos tem?</label><br>
+                    <input class="form-control" name="nrFilhos" value="{{ patient.nrFilhos }}" style="width: 300px; font-weight: bold;" type="number" min="0" max="10">
+                </div>
+            </td>
+
+            <td>
+                <div>
+                    <label>Estado de saúde (atual)</label><br>
+                    <select class="form-select form-select-sm" style="width: 300px; font-weight: bold;" name="saude" id="saude">
+                        <option {% if patient.autoAvaliacaoEstadoSaude == 'Muito mau' %}selected{% endif %} value="Muito mau">
+                            Muito mau
+                        </option>
+                        <option {% if patient.autoAvaliacaoEstadoSaude == 'Mau' %}selected{% endif %} value="Mau">Mau</option>
+                        {% comment %}
+                        <option {% if patient.autoAvaliacaoEstadoSaude == 'Nem mau nem bom' %}selected{% endif %}
+                                value="Nem mau nem bom">Nem mau nem bom
+                        </option>
+                        {% endcomment %}
+                        <option {% if patient.autoAvaliacaoEstadoSaude == 'Bom' %}selected{% endif %} value="Bom">Bom</option>
+                        <option {% if patient.autoAvaliacaoEstadoSaude == 'Muito bom' %}selected{% endif %} value="Muito bom">
+                            Muito bom
+                        </option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+
+        <tr style="display: flex; justify-content: space-between;">
+            <td>
+                <div>
+                    <label>Diagnóstico de doença</label><br>
+                    <select class="form-select form-select-sm" style="width: 300px; font-weight: bold;" name="doenca" id="doenca">
+                        {% for doenca in doencas %}
+                            <option {% if doenca in patient.diagnosticos.all %}selected{% endif %}
+                                    value="{{ doenca.id }}">{{ doenca.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </td>
+
+            <td>
+                <div>
+                    <label>Outros diagnósticos (comorbilidades)</label><br>
+                    <input class="form-text" style="width: 300px; margin-top: 0rem; font-weight: bold;" type="text"
+                           name="outra-doenca" id="outra-doenca">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="flex-buttons">
+        <button class="btn jq-btn flex-left mb-btn"
+                {% if question.section.dimension.number_of_questions > 1 %}
+                data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id patient.id %}"
+                {% else %}
+                data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}"
+                {% endif %}
+                type="button">
+            <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+        </button>
+        <button class="btn btn-submit-upl mb-btn flex-right"
+                data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}"
+                style="" type="submit">
+            <i class="fa fa-check"></i>&nbsp; Submeter
+        </button>
+    </div>
+</form>

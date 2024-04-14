@@ -1,0 +1,302 @@
+[
+{
+  "model": "protocolo.area",
+  "pk": 49,
+  "fields": {
+    "name": "ConsciΩncia, Humor e Comportamento",
+    "description": null,
+    "order": 1,
+    "part": [
+      10
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 50,
+  "fields": {
+    "name": "Cooperaτπo dada na entrevista",
+    "description": null,
+    "order": 2,
+    "part": [
+      10
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 51,
+  "fields": {
+    "name": "Relaτπo com o Avaliador",
+    "description": null,
+    "order": 3,
+    "part": [
+      10
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 53,
+  "fields": {
+    "name": "Personalidade",
+    "description": null,
+    "order": 4,
+    "part": [
+      10
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 55,
+  "fields": {
+    "name": "Ansiedade e Depressπo",
+    "description": null,
+    "order": 5,
+    "part": [
+      10
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 56,
+  "fields": {
+    "name": "Sobrecarga do Cuidador",
+    "description": null,
+    "order": 6,
+    "part": [
+      10
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 57,
+  "fields": {
+    "name": "Rede de Apoio Social",
+    "description": null,
+    "order": 7,
+    "part": [
+      10
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 58,
+  "fields": {
+    "name": "EstratΘgias de Coping",
+    "description": null,
+    "order": 8,
+    "part": [
+      10
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 59,
+  "fields": {
+    "name": "ConsciΩncia, Humor e Comportamento",
+    "description": null,
+    "order": 1,
+    "part": [
+      11
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 60,
+  "fields": {
+    "name": "Cooperaτπo dada na entrevista",
+    "description": null,
+    "order": 2,
+    "part": [
+      11
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 61,
+  "fields": {
+    "name": "Relaτπo com o Avaliador",
+    "description": null,
+    "order": 3,
+    "part": [
+      11
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 64,
+  "fields": {
+    "name": "Ansiedade e Depressπo",
+    "description": null,
+    "order": 4,
+    "part": [
+      11
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 65,
+  "fields": {
+    "name": "Sobrecarga do Cuidador",
+    "description": null,
+    "order": 5,
+    "part": [
+      11
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 66,
+  "fields": {
+    "name": "Rede de Apoio Social",
+    "description": null,
+    "order": 6,
+    "part": [
+      11
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 67,
+  "fields": {
+    "name": "EstratΘgias de Coping",
+    "description": null,
+    "order": 7,
+    "part": [
+      11
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 68,
+  "fields": {
+    "name": "ConsciΩncia, Humor e Comportamento",
+    "description": null,
+    "order": 1,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 69,
+  "fields": {
+    "name": "Cooperaτπo dada na entrevista",
+    "description": null,
+    "order": 2,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 70,
+  "fields": {
+    "name": "Relaτπo com o Avaliador",
+    "description": null,
+    "order": 3,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 71,
+  "fields": {
+    "name": "Avaliaτπo Psicol≤gica",
+    "description": null,
+    "order": 4,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 72,
+  "fields": {
+    "name": "Funcionalidade",
+    "description": null,
+    "order": 5,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 73,
+  "fields": {
+    "name": "Ansiedade e Depressπo",
+    "description": null,
+    "order": 6,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 74,
+  "fields": {
+    "name": "Sobrecarga do Cuidador",
+    "description": null,
+    "order": 7,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 75,
+  "fields": {
+    "name": "Rede de Apoio Social",
+    "description": null,
+    "order": 8,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 76,
+  "fields": {
+    "name": "EstratΘgias de Coping",
+    "description": null,
+    "order": 9,
+    "part": [
+      12
+    ]
+  }
+},
+{
+  "model": "protocolo.area",
+  "pk": 77,
+  "fields": {
+    "name": "Questionßrio Sociodemogrßfico (Cuidador)",
+    "description": null,
+    "order": 0,
+    "part": [
+      13
+    ]
+  }
+}
+]

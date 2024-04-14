@@ -1,0 +1,31 @@
+<div class="left">
+<div class="wrapper">
+       <div class="box a"><h2>Informações Básicas</h2></div>
+      <div class="box c">
+        <div class="box v"><p>Nome</p> <b>{{ participante.nome }}</b></div>
+        <div class="box e"><p>Sexo</p> <b>{{ participante.sexo }}</b></div>
+        <div class="box h"><p>Data De Nascimento</p> <b>{{ participante.nascimento }}</b></div>
+        <div class="box i"><p>Naturalidade</p> <b>{{ participante.nacionalidade }}</b></div>
+        <div class="box j"><p>Referenciação</p> <b>{{ participante.referenciacao }}</b></div>
+      </div>
+     <div class="box k"><h2>Contactos</h2></div>
+  <div class="box l">
+    <div class="box f"><p>Telemóvel</p> <b>{{ participante.telefone }}</b></div>
+    <div class="box g"><p>E-Mail</p> <b>{{ participante.email }}</b></div>
+  </div>
+  <div class="box b"><h2>Diagnostico</h2></div>
+  <div class="box d">
+         {%  for diagnostico in participante.diagnosticos.all %}
+             <b>{{ diagnostico }}</b>
+         {% endfor %}</div>
+       <div class="box m"><h2>Informação Extra</h2></div>
+  <div class="box n">
+    <div class="box f"><p>Cuidador</p>
+         {% for cuidador in participante.cuidador.all %}
+             <b>{{ cuidador }}</b>
+         {% endfor %}
+    </div>
+      <div class="box g"><p>Grupo COG</p> <b>{{ participante.grupoCog }}</b></div>
+  </div>
+    </div>
+</div>

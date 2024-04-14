@@ -1,0 +1,98 @@
+<form class="flex-container" id="question-form" action="" method="post" style="align-items: flex-start;">
+    <input type="hidden" name="type" value="0">
+    {% csrf_token %}
+    <div class="flex-choices flex-item padding-top-25">
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <td><b>Opção Correta</b></td>
+                <td><b>Opção Errada #1</b></td>
+                <td><b>Opção Errada #2</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label>
+                    {{ question.possible_answers.all.0.name }}
+                        <input class="" id="{{ question.possible_answers.all.0.id }}" name="choice" type="checkbox" value="{{ question.possible_answers.all.0.id }}"
+                        {% if question.possible_answers.all.0.id in existing_answer_id %}
+                       checked="checked"
+                        {% endif %}
+                        />
+
+            </label></td>
+                <td>Jorge Macedo</td>
+                <td>João Madeira</td>
+            </tr>
+            <tr>
+                <td>{{ question.possible_answers.all.1.name }}
+                        <input class="" id="{{ question.possible_answers.all.1.id }}" name="choice" type="checkbox" value="{{ question.possible_answers.all.1.id }}"
+                        {% if question.possible_answers.all.1.id in existing_answer_id %}
+                       checked="checked"
+                        {% endif %}
+                        /></td>
+                <td>Rua do Infante</td>
+                <td>Praça da Infantaria</td>
+            </tr>
+            <tr>
+                <td>{{ question.possible_answers.all.2.name }}
+                        <input class="" id="{{ question.possible_answers.all.2.id }}" name="choice" type="checkbox" value="{{ question.possible_answers.all.2.id }}"
+                        {% if question.possible_answers.all.2.id in existing_answer_id %}
+                       checked="checked"
+                        {% endif %}
+                        /></td>
+                <td>35</td>
+                <td>56</td>
+            </tr>
+            <tr>
+                <td>{{ question.possible_answers.all.3.name }}
+                        <input class="" id="{{ question.possible_answers.all.3.id }}" name="choice" type="checkbox" value="{{ question.possible_answers.all.3.id }}"
+                        {% if question.possible_answers.all.3.id in existing_answer_id %}
+                       checked="checked"
+                        {% endif %}
+                        /></td>
+                <td>Trofa</td>
+                <td>Grândola</td>
+            </tr>
+            <tr>
+                <td>{{ question.possible_answers.all.4.name }}
+                        <input class="" id="{{ question.possible_answers.all.4.id }}" name="choice" type="checkbox" value="{{ question.possible_answers.all.4.id }}"
+                        {% if question.possible_answers.all.4.id in existing_answer_id %}
+                       checked="checked"
+                        {% endif %}
+                        /></td>
+                <td>Beja</td>
+                <td>Braga</td>
+            </tr>
+            <tr></tr>
+        </tbody>
+    </table>
+</div>
+
+    <div class="flex-textarea flex-item padding-top-25">
+        <label><b>Apontamentos</b></label>
+        <textarea style="white-space: pre-line" class="notes-area form-control" id="notes"
+                  name="notes">{{ notes }}</textarea>
+    </div>
+    <br>
+
+    <div class="flex-buttons">
+        <button class="btn jq-btn flex-left mb-btn-outline"
+                {% if question.section.dimension.number_of_questions > 1 %}
+                data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% else %}
+                data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% endif %}
+            type="button">
+            <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+        </button>
+        <button class="btn btn-submit mb-btn-outline flex-right"
+                data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                style="" type="submit">
+            <i class="fa fa-check"></i>&nbsp; Submeter
+        </button>
+    </div>
+
+</form>

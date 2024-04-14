@@ -1,0 +1,8 @@
+<div>
+    <h6 class="mb-0 fw-bold">{{instrumento}}</h6>
+    <span class="fw-bold">
+        <span class="badge bg-{% if resolution.patient.sexo == 'Masculino' %}{% if dict_.total <= 1 %}danger{% elif dict_.total <= 3 %}warning{% else %}success{% endif %}{% elif resolution.patient.sexo == 'Feminino' %}{% if dict_.total <= 3 %}danger{% elif dict_.total <= 5 %}warning{% else %}success{% endif %}{% endif %}">
+            Grau de Dependência {{ dict_.evaluation}}
+        </span>
+    </span>
+</div>

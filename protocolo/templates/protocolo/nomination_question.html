@@ -1,0 +1,45 @@
+<form class="flex-container" id="question-form" action="" method="post" style="align-items: flex-start;">
+    <input type="hidden" name="type" value="0">
+    {% csrf_token %}
+    <div class="flex-choices flex-item padding-top-25" style="display: flex;flex-wrap: wrap">
+        {% for answer in question.possible_answers.all %}
+            <div class="card w-25" style="height: 100px">
+                <img src="media/{{ answer.image }}" class="card-img w-25 d-block" style="object-fit: contain; max-height: 99px" />
+                <div class="card-img-overlay">
+                    <h4 style="text-align: center">{{ answer.name }}</h4>
+                    <p style="text-align: center;justify-content: center"><input style="align-self: center;" id="{{ answer.id }}" name="choice" type="checkbox" value="{{ answer.id }}"
+                                {% if answer.id in existing_answer_id %}
+                               checked="checked"
+                                {% endif %}
+                        /></p>
+                </div>
+            </div>
+            {% endfor %}
+
+    </div>
+
+    <div class="flex-textarea flex-item padding-top-25">
+        <label><b>Apontamentos</b></label>
+        <textarea style="white-space: pre-line" class="notes-area form-control" id="notes"
+                  name="notes">{{ notes }}</textarea>
+    </div>
+    <br>
+
+    <div class="flex-buttons">
+        <button class="btn jq-btn flex-left mb-btn-outline"
+                {% if question.section.dimension.number_of_questions > 1 %}
+                data-href="{% url 'protocolo:sections' protocol.id part.id area.id instrument.id dimension.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% else %}
+                data-href="{% url 'protocolo:dimensions' protocol.id part.id area.id instrument.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                {% endif %}
+            type="button">
+            <i class="fa fa-chevron-left"></i>&nbsp; Anterior
+        </button>
+        <button class="btn btn-submit mb-btn-outline flex-right"
+                data-href="{% url 'protocolo:question' protocol.id part.id area.id instrument.id dimension.id section.id patient.id %}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                style="" type="submit">
+            <i class="fa fa-check"></i>&nbsp; Submeter
+        </button>
+    </div>
+
+</form>

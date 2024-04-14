@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentHA Digital</title>
+
+    <!-- icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'mentha/favicon.ico' %}" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- bootstrap -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- css styles -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'mentha/styles.css' %}">
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /**** getCookie() *******************************************/
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            /**** getCookie *******************************************/
+
+
+            document.querySelector('#a-home').onclick = () => {
+                fetch("{% url 'mentha:home' %}")
+                    .then(response => response.text())
+                    .then(text => {
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                        // let a = document.querySelector('#a-home');
+                        // a.style.borderbottom = '1px solid white';
+                        // a.style.color = 'white';
+                        // a.style.textDecoration = 'none';
+
+                    });
+                return false;
+            }
+
+            document.querySelector('#a-noticias').onclick = () => {
+                fetch("{% url 'mentha:noticias' %}")
+                    .then(response => response.text())
+                    .then(text => {
+
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                        // let a = document.querySelector('#a-noticias');
+                        // a.style.borderbottom = '1px solid white';
+                        // a.style.color = 'white';
+                        // a.style.textDecoration = 'none';
+
+                    });
+                return false;
+            }
+
+            document.querySelector('#a-projeto').onclick = () => {
+                fetch("{% url 'mentha:projeto' %}")
+                    .then(response => response.text())
+                    .then(text => {
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                        // let a = document.querySelector('#a-projeto');
+                        // a.style.color = 'white';
+                        // a.style.borderbottom = '1px solid white';
+                        // a.style.textDecoration = 'none';
+                    });
+                return false;
+            }
+
+
+            function fetchPrograma(programa) {
+                fetch(programa)
+                    .then(response => response.text())
+                    .then(text => {
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                       
+                        // fecha todos os detalhes
+                        document.querySelectorAll('#programa .detalhe').forEach(
+                            detalhe => {
+                                detalhe.style.display = 'none';
+                            }
+                        );
+
+                        // poe todas em cruz
+                        document.querySelectorAll('#programa .cruz').forEach(
+                            cruz => {
+                                cruz.querySelector('.open').style.display = 'block';
+                                cruz.querySelector('.close').style.display = 'none';
+                            }
+                        );
+
+
+                        document.querySelectorAll('#programa .caixa').forEach(caixa => {
+
+                            caixa.onclick = () => {
+                                var principal = caixa.querySelector('.principal');
+                                var detalhe = caixa.querySelector('.detalhe');
+
+                                // poe todas em cruz
+                                document.querySelectorAll('#programa .cruz').forEach(
+                                    cruz => {
+                                        cruz.querySelector('.open').style.display =
+                                            'block';
+                                        cruz.querySelector('.close').style.display =
+                                            'none';
+                                    }
+                                );
+
+                                // fecha tudo excepto o clicado
+                                document.querySelectorAll('#programa .detalhe').forEach(
+                                    outro_detalhe => {
+                                        if (outro_detalhe != detalhe) {
+                                            outro_detalhe.style.display = 'none';
+                                        }
+                                    });
+
+                                if (detalhe.style.display != 'block') {
+                                    detalhe.style.display = 'block';
+                                    principal.querySelector('.open').style.display = 'none';
+                                    principal.querySelector('.close').style.display = 'block';
+
+                                } else {
+                                    detalhe.style.display = 'none';
+                                    principal.querySelector('.open').style.display = 'block';
+                                    principal.querySelector('.close').style.display = 'none';
+                                }
+                            }
+                        });
+
+                    });
+                return false;
+            }
+
+
+            document.querySelector('#a-login').onclick = () => {
+                fetch("{% url 'mentha:login' %}")
+                    .then(response => response.text())
+                    .then(text => {
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                        let a = document.querySelector('#a-login');
+                        a.style.color = 'white';
+                        a.style.borderbottom = '1px solid white';
+                        a.style.textDecoration = 'none';
+                    })
+                    .then(() => {
+                        document.querySelector('#form-login').onsubmit = (e) => {
+                            
+                        // prevent default event onsubmit
+                        e.preventDefault();
+
+                        // elemento form 
+                        var myForm = document.querySelector('#form-login');
+                        
+                        // guarda dados do formulario numa estrutura da dados
+                        var formData = new FormData(myForm); 
+                        
+                        // for (var [key, value] of formData.entries()) { 
+                        //     console.log(key, value);
+                        // }
+                            
+                        fetch("{% url 'mentha:login' %}" , {method: 'POST', body: formData })
+                            .then(response => response.text())
+                            .then(text => {
+                                
+                                if(text == 'ok') {   
+                                    // document.querySelector('#a-videoconferencia').style.display = 'block';
+                                    document.querySelector('#a-logout').style.display = 'block';
+                                    document.querySelector('#a-login').style.display = 'none';  
+                                    
+                                    var nome = document.querySelector('#form-login [name="username"]').value;
+                                    document.querySelector('#login .branco .titulo').innerHTML = `Olá ${nome}!`;
+
+                                    document.querySelector('#login .branco .texto').innerHTML = `Seja bem-vindo ao MentHA Digital.<br><br>`;
+                                    
+                                    fetch("{% url 'mentha:app-list' %}")
+                                    .then(response => response.text())
+                                    .then(text => {
+                                        document.querySelector('.app-list').innerHTML = text;
+                                    })
+                                }
+                                else {
+                                    const mensagem = document.querySelector('#login #mensagem')
+                                    mensagem.innerHTML = "Credenciais inválidas";
+                                }
+
+                            });
+                        }                     
+                    });
+                return false;
+            }
+
+
+            document.querySelector('#a-logout').onclick = () => {
+                fetch()
+                    .then(response => response.text())
+                    .then(text => {
+                        // document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                        // document.querySelector('#a-videoconferencia').style.display = 'none'
+                        document.querySelector('#a-logout').style.display = 'none'
+                        document.querySelector('#a-login').style.display = 'block'
+
+                        // let a = document.querySelector('#a-logout');
+                        // a.style.color = 'white';
+                        // a.style.borderbottom = '1px solid white';
+                        // a.style.textDecoration = 'none';
+
+                    });
+                return false;
+            }
+
+            document.querySelector('.a-aplicacoes').onclick = () => {
+
+                fetch("{% url 'mentha:aplicacoes' %}")
+                    .then(response => response.text())
+                    .then(text => {
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                    })
+                    .then(() => {
+
+                        document.querySelector('#l-login').onclick = () => {
+                            document.querySelector('#a-login').click();
+                        }
+
+                        document.querySelector('#div-mentha-cog').onclick = () => {
+                            fetchPrograma("{% url 'mentha:mentha-cog' %}");
+                        }
+
+                        document.querySelector('#div-mentha-care').onclick = () => {
+                            fetchPrograma("{% url 'mentha:mentha-care' %}");
+                        }
+
+                        document.querySelector('#div-protocolo-mentha').onclick = () => {
+                            fetchPrograma("{% url 'mentha:protocolo-mentha' %}");
+                        }
+
+                    });
+                return false;
+            }
+
+
+            document.querySelector('#a-contacto').onclick = () => {
+                fetch("{% url 'mentha:contacto' %}")
+                    .then(response => response.text())
+                    .then(text => {
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                        // let a = document.querySelector('#a-contacto');
+                        // a.style.color = 'white';
+                        // a.style.borderbottom = '1px solid white';
+                        // a.style.textDecoration = 'none';
+                    }).
+                then(() => {
+
+                    /** formulário ****************************************************/
+
+                    document.querySelector('#form-contacto').onsubmit = () => {
+                        alert('submeteu formulario')
+                        var myForm = document.querySelector('#form-contacto');
+                        var href = myForm.getAttribute('action');
+                        alert(href)
+                        var formData = new FormData(myForm);
+                        alert(formData)
+                        const csrf_token = getCookie('csrftoken');
+
+                        var myInit = {
+                            method: 'POST',
+                            data: formData,
+                            headers: {
+                                'X-CSRFToken': csrf_token
+                            },
+                        };
+
+                        const request = new Request(href, myInit);
+
+                        fetch(request)
+                            .then(response => response.text())
+                            .then(text => {
+                                document.querySelector('#content').innerHTML = text;
+                                document.querySelector('html').scrollTop = 0;
+
+                                return false;
+                                // let a = document.querySelector('#a-contacto');
+                                // a.style.color = 'white';
+                                // a.style.borderbottom = '1px solid white';
+                                // a.style.textDecoration = 'none';                                 
+                            });
+                        return false;
+                    }
+                });
+                return false;
+            }
+
+
+            // document.querySelector('#a-videoconferencia').onclick = () => {
+            //     fetch("{% url 'mentha:videoconferencia' %}")
+            //         .then(response => response.text())
+            //         .then(text => {
+            //             document.querySelector('#content').innerHTML = text;
+            //             document.querySelector('html').scrollTop = 0;
+
+            //             let a = document.querySelector('#a-videoconferencia');
+            //             a.style.color = 'white';
+            //             a.style.borderbottom = '1px solid white';
+            //             a.style.color = 'white';
+            //             a.style.textDecoration = 'none';
+            //         })
+            //         .then( () => {
+
+            //             //  https://forum.shapespark.com/t/room-with-zoom-embeding-a-zoom-meeting-a-short-guide/1214/7
+            //             document.querySelector('#zoom-button').onclick = () => {
+                        
+            //                 fetch("{% url 'mentha:zoom-div' %}")
+            //                     .then(response => response.text())
+            //                     .then(text => {
+            //                         document.querySelector('#zoom').innerHTML = text;
+            //                     });
+            //                 return false;                            
+            //             }
+            //         });
+            //     return false;
+            // }
+
+            
+            document.querySelector('#a-equipa').onclick = () => {
+                fetch("{% url 'mentha:equipa' %}")
+                    .then(response => response.text())
+                    .then(text => {
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+                    })
+                    .then(() => {
+                        document.querySelectorAll('#equipa .descricao').forEach(d => {
+                            d.style.display = 'none';
+                            d.style.paddingLeft = '3ch';
+                        });
+                                    
+                        // let a = document.querySelector('#a-equipa');
+                        // a.style.color = 'white';
+                        // a.style.borderbottom = '1px solid white';
+                        // a.style.textDecoration = 'none';
+                    })
+                    .then(() => {
+                        document.querySelectorAll('#equipa .nome').forEach(d => {
+                            d.onclick = () => {
+                                let texto = d.nextElementSibling;
+
+                                if (texto.style.display == 'block') {
+                                    texto.style.display = 'none';
+                                } else {
+                                    document.querySelectorAll('#equipa .descricao').forEach(d => {
+                                        d.style.display = 'none';
+                                    });
+                                    texto.style.display = 'block';
+                                }
+                            }
+                        });
+                    });
+                return false;
+            }
+
+
+
+            document.querySelector('#a-parceiros').onclick = () => {
+                fetch("{% url 'mentha:parceiros' %}")
+                    .then(response => response.text())
+                    .then(text => {
+                        document.querySelector('#content').innerHTML = text;
+                        document.querySelector('html').scrollTop = 0;
+
+                        // let a = document.querySelector('#a-parceiros');
+                        // a.style.color = 'white';
+                        // a.style.textDecoration = 'none';
+
+                        document.querySelectorAll('#parceiros .subtitulo').forEach(d => {
+                            d.onclick = () => {
+                                let texto = d.nextElementSibling;
+
+                                if (texto.style.display == 'block') {
+                                    texto.style.display = 'none';
+                                } else {
+                                    texto.style.display = 'block';
+                                }
+                            }
+                        });
+                    });
+                return false;
+            }
+
+            window.onscroll = () => {
+
+                let header = document.querySelector('header');
+
+                if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                    header.style.opacity = 0.7;
+                    header.style.backgroundColor = 'black';
+                } else {
+                    header.style.opacity = 1;
+                    header.style.backgroundColor = '';
+                }
+
+                let footer = document.querySelector('footer');
+
+                if (document.body.scrollTop > 1 || document.documentElement.scrollTop > 10) {
+                    footer.style.opacity = 0.7;
+                    footer.style.backgroundColor = 'black';
+                } else {
+                    footer.style.opacity = 1;
+                    footer.style.backgroundColor = '';
+                }
+            };
+
+        });
+    </script>
+
+</head>
+
+<body style="overflow-x: hidden">
+
+    <video autoplay muted loop id="myVideo" style="transform: rotateY(180deg);">
+        <source
+            src="https://cdn.create.vista.com/api/media/medium/275169404/stock-video-senior-man-blue-shirt-laughing?token="
+            type="video/mp4">
+    </video>
+
+    <!-- RostyslavOleksin -->
+    <!-- https://create.vista.com/unlimited/stock-videos/275169404/stock-video-senior-man-blue-shirt-laughing/ -->
+
+    <main>
+
+        <header>
+            <!-- <div>
+                <img src="{% static 'mentha/logos/mentha_wb.png' %}" alt="MentHA: mental health and aging">
+            </div> -->
+
+            <nav class="menu-area navbar navbar-expand-lg  navbar-dark bg-dark" style="background-color:inherit !important; height:10px;" style="z-index:2;">
+            
+
+            <div class="container-fluid" style="width:98vw; display:flex; flex-direction: row; justify-content: space-between;">
+
+                <a class="navbar-brand"><img src="{% static 'mentha/logos/mentha_wb.png' %}" alt="MentHA: mental health and aging"></a>
+                <button class="navbar-toggler" style="border-color:white; margin: 30px;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon navbar-light"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:30px;">
+                    <ul class="navbar-nav mb-2 mb-lg-0" style="margin-left:auto">
+ 
+                    <li>
+                        <a id='a-noticias' href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Noticias</a>
+                    </li>
+                                            
+                    <li class="nav-item">
+                        <a aria-current="page" id='a-home' href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Projeto
+                        </a>
+                        <ul class="dropdown-menu">
+                        <li style="margin:0 !important;"><a class="dropdown-item" id='a-projeto' href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Apresentação</a></li>
+                        <!-- <li><a class="dropdown-item a-aplicacoes" href="">Programas</a></li> -->
+                        <!-- <li style="margin:0 !important;"><hr class="dropdown-divider"></li> -->
+                        <li style="margin:0 !important;"><a class="dropdown-item" id='a-parceiros' href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Parceiros</a></li>
+                        <li style="margin:0 !important;"><a class="dropdown-item" id='a-equipa' href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Equipa</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="a-aplicacoes" href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Programas</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id='a-contacto' href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Contactos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id='a-login' href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Login</a>
+                    
+                        <a id='a-logout' href="" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent">Logout</a>
+                    </li>
+                    </ul>
+                    
+                </div>
+                </div>
+
+                <!-- <a id='a-home' href="">MentHA</a>
+                <a id='a-noticias' href="">Notícias</a>
+                <a id='a-projeto' href="">Projeto</a>
+                <a id='a-aplicacoes' href="">Programas</a>
+                <a id='a-parceiros' href="">Parceiros</a>
+                <a id='a-equipa' href="">Equipa</a>
+                <span style="display:none;">
+                    <a id='a-videoconferencia' href="">Zoom</a>
+                </span>
+                <a id='a-contacto' href="">Contacto</a> -->
+                
+                
+            </nav>
+        </header>
+
+        <article id="content">
+
+            {% include 'mentha/index.html' %}
+
+        </article>
+
+        <footer>
+
+            <div>
+                <span>Promotor: </span>
+                <a href="https://www.ulusofona.pt/" target="_blank">
+                    <img src="{% static 'mentha/parceiros_sm/ulht.jpg' %}" alt="">
+                </a>
+                <a href="http://copelabs.ulusofona.pt/index.php/about/siti-in-a-nutshell" target="_blank">
+                    <img src="{% static 'mentha/parceiros_sm/copelabs.jpg' %}" alt="">
+                </a>
+                <a href="https://cisis.ulusofona.pt/" target="_blank">
+                    <img src="{% static 'mentha/parceiros_sm/cisis.jpeg' %}" alt="">
+                </a>
+
+            </div>
+            <div class="dgs">
+                <span>Financiador: </span>
+                <a href="https://www.dgs.pt/" target="_blank">
+                    <img src="{% static 'mentha/parceiros_sm/dgs_footer.png' %}" alt="">
+                </a>
+            </div>
+            <div class="parceirosfooter">
+                <span>Parceiros:</span>
+
+                <img src="{% static 'mentha/parceiros_sm/adebe.png' %}" alt="">
+
+                <img src="{% static 'mentha/parceiros_sm/asmal_footer.png' %}" alt="">
+
+                <img src="{% static 'mentha/parceiros_sm/cvp.jpg' %}" alt="">
+
+                <img src="{% static 'mentha/parceiros_sm/elo.png' %}" alt="">
+
+                <img src="{% static 'mentha/parceiros_sm/familiarmente.jpg' %}" alt="">
+
+                <img src="{% static 'mentha/parceiros_sm/gira.png' %}" alt="">
+            </div>
+        </footer>
+    </main>
+
+</body>
+
+</html>

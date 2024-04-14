@@ -1,0 +1,19 @@
+{% load markdownify %}
+    {% csrf_token %}
+    <div class="flex-container flex-item padding-top-25" style="flex-direction: row;flex-wrap:wrap;">
+            {% for opcao in pergunta.opcoes.all %}
+                <div class="card" style="max-width:6rem;height:13rem;">
+                <img  src="{{ opcao.imagem.imagem.url }}" class="card-img-top imagem-escolha-multipla" alt="{{ opcao.imagem.nome }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ opcao.resposta}}</h5>
+                    <input class="pergunta" id="{{ opcao.id }}" name="choice" type="radio" value="{{ opcao.id }}"
+                        {% if opcao.id in lista_ids_escolhas_multiplas %}
+                            checked="checked"
+                        {% endif %}
+                />
+                <span style="display:none">{{perg.id}}</span>
+                <span style="display:none">{{parte.id}}</span>
+                </div>
+                </div>
+            {% endfor %}
+    </div>
