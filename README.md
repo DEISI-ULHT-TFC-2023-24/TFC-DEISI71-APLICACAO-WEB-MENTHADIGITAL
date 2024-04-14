@@ -1,8 +1,4 @@
-# protocolo_de_avaliacao
-
-📝 Ficheiro de Bugs
-======
-https://shorturl.at/qAJN8
+# MentHA Digital
 
 ⚙️ Requisitios
 ======
