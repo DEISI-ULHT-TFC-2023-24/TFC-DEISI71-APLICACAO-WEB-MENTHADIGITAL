@@ -1,8 +1,9 @@
 # MentHA Digital
 
-⚙️ Requisitios
+⚙️ Requisitos
 ======
 1. Python 3.10 ou superior
+
 
 🔧 Deployment
 ======
@@ -121,3 +122,5 @@ python manage.py shell
 from mentha.views import * 
 decode()
 ```
+🎥 **Vídeo**
+https://youtu.be/aQCUb4dHRn8
