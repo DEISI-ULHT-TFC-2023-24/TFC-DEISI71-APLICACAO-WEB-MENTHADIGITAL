@@ -16,9 +16,31 @@ function validateForm() {
 {% comment %} <script src="{% static 'protocolo/js/jquery.js' %}"></script> {% endcomment %}
 {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script> {% endcomment %}
 <script>
+
     function openPDF() {
     window.open('protocolo\templates\protocolo\media\caracteristicas.pdf', '_blank');
 }
+</script>
+<script>
+    function atualizarHorario() {
+        var agora = new Date();
+        var horas = agora.getHours();
+        var minutos = agora.getMinutes();
+        var segundos = agora.getSeconds();
+
+        // Formatação para garantir dois dígitos (ex: 09:05:02)
+        horas = (horas < 10 ? "0" : "") + horas;
+        minutos = (minutos < 10 ? "0" : "") + minutos;
+        segundos = (segundos < 10 ? "0" : "") + segundos;
+
+        document.getElementById("horario").textContent = " Horas atuais: " + horas + ":" + minutos + ":" + segundos;
+    }
+
+    // Atualizar o horário a cada segundo
+    setInterval(atualizarHorario, 1000);
+
+    // Chamada inicial para exibir o horário imediatamente
+    atualizarHorario();
 </script>
 
 {% endblock %}
@@ -29,8 +51,9 @@ function validateForm() {
         border-collapse: separate;">
                 <tr>
                     <td>
-                        <h3 class="m-0 fw-bold mb-text fs-5"><br><br> Questionário</h3>
+                        <h3 class="m-0 fw-bold mb-text fs-5"><br><br> Questionário realizado no dia: {{part.data.day}}/{{part.data.month}}/{{part.data.year}}</h3>
                     </td>
+                    <span id="horario"></span> 
                 </tr>
                 <tr>
                     <td>
@@ -328,7 +351,19 @@ function validateForm() {
                             <input style="color:black; font-weight: bold;" class="form-input" type="number" step="1" min="100" max="179"  id="pressao_arterial" name="pressao_arterial" value="{{existing_risk.pressao_arterial}}" required >
                         </div>
                     </td>
-    
+                        <td>
+                            <label for="pressao_arterial_diastolica">
+                                <div class="input-class">
+                                    Pressão Arterial Diastólica (mmHg)
+                                    <button type="button" class="" data-toggle="tooltip" data-placement="top" title="Insira valores entre 60 e 99, caso não saiba deixe 0">
+                                        <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                                    </button>
+                                    <input style="color:black; font-weight: bold;" class="form-input
+                                    " type="number" step="1" min="60" max="99" id="pressao_arterial_diastolica" name="pressao_arterial_diastolica" value="{{existing_risk.pressao_arterial_diastolica}}" required >
+                                </div>
+                            </label>
+                        </td>
+                    </tr>
                     <td>
                         <label for="batimentos">
                             <div class="input-class">
@@ -340,18 +375,18 @@ function validateForm() {
                             </div>
                         </label>
                     </td>
-                </tr>
     
             </table>
-            
-            
             <tr>
                 <td colspan="2">
-                    <h3 class="m-0 fw-bold mb-text fs-5"><br><br>Perfil Lipídico<i style="padding-left:5px;color: var(--bs-warning);font-size: 20px;" class="fa fa-book icon-bg" 
-                        onclick="openPDF('media/caracteristicas.pdf')"></i> (Manual POC)
+                    <h3 class="m-0 fw-bold mb-text fs-5"><br><br>Perfil Lipídico (Manual Point Of Care)
+                      <a href="{% static 'protocolo/files/caracteristicas.pdf' %}#page={{ instrument.get_pdf_page }}{% if is_cuidador == 'is_cuidador' %}/is_cuidador{% endif %}"
+                         target="_blank">
+                        <i style="padding:5px;color: var(--bs-warning);font-size: 20px;"
+                           class="fa fa-book icon-bg"></i>
+                      </a>
                     </h3>
-                    
-                </td>
+                  </td>                  
                 <tr>
                     <td>
                         <div style="display: flex;">
@@ -366,6 +401,21 @@ function validateForm() {
     
                         <div class="input-class">
                             <input style="color:black; font-weight: bold;" class="form-input" type="text" id="pat" name="pat" value="{{existing_risk.pat_id}}">
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display: flex;">
+                            <label style="width: 14ch;" for="patV2">
+                                PAT Para HBA1
+                            </label>
+    
+                            <button type="button" class="" data-toggle="tooltip" data-placement="top" title="ID dado V2">
+                                <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+    
+                        <div class="input-class">
+                            <input style="color:black; font-weight: bold;" class="form-input" type="text" id="pat_id_v2" name="pat_id_v2" value="{{existing_risk.pat_id_v2}}">
                         </div>
                     </td>
                 </tr>
@@ -443,11 +493,10 @@ function validateForm() {
                         <button type="button" class="ifcc_teste" data-toggle="tooltip" data-placement="top" title="Insira valores entre 20 a 130">
                             <i style="padding-left:5px;color: var(--bs-warning);font-size: 16px;" class="fas fa-info-circle"></i>
                         </button>
-                        <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="0.1" id="ifcc_hba1" name="ifcc_hba1" value="{{existing_risk.ifcc_hba1}}" required >
+                        <input style="color:black; font-weight: bold;" class="form-input" type="number" min="0" step="0.1" id="ifcc_hba1" name="ifcc_hba1" value="{{existing_risk.ifcc_hba1}}" required" >
                     </div>
                 </label>
             </td>
-           
             <td>
                 <label for="ngsp_hba1">
                     <div class="input-class">
@@ -473,13 +522,13 @@ function validateForm() {
         </tr>
 
         <div class="flex-textarea flex-item padding-top-25" style="width:100%">
-            <label for="comentario"><h3 class="m-0 fw-bold mb-text fs-5"><b>Comentários relacionados com o paciente:</b></h3></label>
-            <textarea style="width:100%; color:black;" class="textarea" type="text" id="comentario" name="comentario" placeholder="Escreva o seu comentário:" rows ="5" cols="100">{{existing_risk.comentario}} </textarea>
+            <label for="comentario"><h3 class="m-0 fw-bold mb-text fs-5"><b>Comentários adicionais relacionados com o paciente:</b></h3></label>
+            <textarea style="width:100%; color:black;" class="textarea" type="text" id="comentario" name="comentario" placeholder="Escreva os comentários que ache necessário" rows ="5" cols="100">{{existing_risk.comentario}} </textarea>
         </div>
         
         <div class="flex-textarea flex-item padding-top-25" style="width:100%">
-            <label for="recomendacoes"><h3 class="m-0 fw-bold mb-text fs-5"><b>Recomendações relacionadas com o paciente:</b></h3></label>
-            <textarea style="width:100%; color:black;" class="textarea" type="text" id="recomendacoes" name="recomendacoes" placeholder="Escreva a Recomendação:" rows="5" cols="100">{{existing_risk.recomendacoes}}</textarea>
+            <label for="recomendacoes"><h3 class="m-0 fw-bold mb-text fs-5"><b>Notas adicionais acerca do questionário e da sessão:</b></h3></label>
+            <textarea style="width:100%; color:black;" class="textarea" type="text" id="recomendacoes" name="recomendacoes" placeholder="Caso falte algum dado coloque nesta caixa de comentário" rows="5" cols="100">{{existing_risk.recomendacoes}}</textarea>
         </div>
         
         <div class="container" style="margin-top: 25px; width:100%;">

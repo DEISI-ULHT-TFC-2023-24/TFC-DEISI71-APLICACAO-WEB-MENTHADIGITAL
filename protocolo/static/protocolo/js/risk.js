@@ -17,6 +17,7 @@ $(document).on("click", ".btn-submit-risk",  () => {
     
     
     data.append('pressao_arterial', document.getElementById('pressao_arterial').value);
+    data.append('pressao_arterial_diastolica', document.getElementById('pressao_arterial_diastolica').value);
 
     
     data.append('colestrol_hdl', document.getElementById('colestrol_hdl').value);
@@ -38,11 +39,13 @@ $(document).on("click", ".btn-submit-risk",  () => {
     data.append('doenca_rins', document.getElementById('doenca_rins').value);
     data.append('hipercolestrol', document.getElementById('hipercolestrol').value);
     data.append('pat', document.getElementById('pat').value);
+    data.append('pat_id_v2', document.getElementById('pat_id_v2').value);
     data.append('comentario', document.getElementById('comentario').value);
     data.append('recomendacoes', document.getElementById('recomendacoes').value);
     data.append('doenca_cognitiva', document.getElementById('doenca_cognitiva').value);
     data.append('pre_diabetico', document.getElementById('pre_diabetico').value);
     data.append('pergunta_cardiovascular', document.getElementById('pergunta_cardiovascular').value);
+    
 
 
     

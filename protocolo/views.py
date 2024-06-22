@@ -904,6 +904,8 @@ def question_view(request, protocol_id, part_id, area_id, instrument_id, dimensi
                 'horas_jejum'))
             new_risk.pressao_arterial = verificar_form_risk(
                 request.POST.get('pressao_arterial'))
+            new_risk.pressao_arterial_diastolica = verificar_form_risk(
+                request.POST.get('pressao_arterial_diastolica'))
             new_risk.colestrol_total = verificar_form_risk(
                 request.POST.get('colestrol_total'))
             if request.POST.get('colestrol_total') == '':
@@ -962,6 +964,9 @@ def question_view(request, protocol_id, part_id, area_id, instrument_id, dimensi
             new_risk.pat_id = verificar_form_risk(request.POST.get('pat'))
             if request.POST.get('pat') == '':
                 new_risk.pat_id = 'PID00000'
+            new_risk.pat_id_v2 = verificar_form_risk(request.POST.get('pat_id_v2'))
+            if request.POST.get('pat_id_v2') == '':
+                new_risk.pat_id_v2 = 'PID00000'
             anos_diabete = verificar_form_risk(
                 request.POST.get('anos_diabetes'))
             if anos_diabete == '':
@@ -1029,6 +1034,7 @@ def question_view(request, protocol_id, part_id, area_id, instrument_id, dimensi
                 existing_risk.idade = new_risk.idade
                 existing_risk.sexo = new_risk.sexo
                 existing_risk.altura = new_risk.altura
+                existing_risk.pressao_arterial_diastolica = new_risk.pressao_arterial_diastolica
                 existing_risk.pressao_arterial = new_risk.pressao_arterial
                 existing_risk.colestrol_total = new_risk.colestrol_total
                 existing_risk.colestrol_hdl = new_risk.colestrol_hdl
@@ -1045,6 +1051,7 @@ def question_view(request, protocol_id, part_id, area_id, instrument_id, dimensi
                 existing_risk.pre_diabetico = new_risk.pre_diabetico
                 existing_risk.pergunta_cardiovascular = new_risk.pergunta_cardiovascular
                 existing_risk.pat_id = new_risk.pat_id
+                existing_risk.pat_id_v2 = new_risk.pat_id_v2
                 existing_risk.batimentos = new_risk.batimentos
                 existing_risk.hemoglobina_gliciada = 0.0
                 # new_risk.hemoglobina_gliciada = new_risk.hemoglobina_gliciada.replace(',', '.')
@@ -1795,6 +1802,7 @@ def report_risk(request):
         lines.append("Sexo:" + str(r.sexo))
         lines.append("Colesterol:" + str(r.colestrol_total))
         lines.append("pressao_arterial:" + str(r.pressao_arterial))
+        lines.append("Pressão arterial diastólica:" + str(r.pressao_arterial_diastolica))
         lines.append("O risco atual é de:" + str(r.risco_de_enfarte))
         lines.append("Comentario:" + str(r.comentario))
         lines.append("Recomendações adicionais:" + str(r.recomendacoes))
@@ -1836,16 +1844,19 @@ def participants_view(request):
     participants = []
     avaliadores = []
     lista_nr_participantes = []
+
     try:
         user = Avaliador.objects.get(user=doctor)
-        participants = Participante.objects.filter(avaliador=doctor)
+        participants = list(Participante.objects.filter(avaliador=doctor))
+        participants.sort(key=lambda p: (p.info_sensivel.nome.lower(), p.info_sensivel.nome))
         print(participants)
 
     except Avaliador.DoesNotExist:
         try:
             user = Administrador.objects.get(user=doctor)
-            participants = Participante.objects.filter(
-                referenciacao=user.reference)
+            participants = list(Participante.objects.filter(
+                referenciacao=user.reference))
+            participants.sort(key=lambda p: (p.info_sensivel.nome.lower(), p.info_sensivel.nome))
             cuidadores = Cuidador.objects.filter(referenciacao=user.reference)
             all_avaliadores = DjangoGroup.objects.get(
                 name="Avaliador").user_set.all()
@@ -1858,11 +1869,11 @@ def participants_view(request):
             user = None
 
     resolutions = Resolution.objects.filter(doctor=doctor)
-    # cuidadores = Cuidador.objects.filter(referenciacao=user.reference)
     cuidadores = Cuidador.objects.filter(avaliador=doctor)
 
     if request.user.is_superuser:
-        participants = Participante.objects.all()
+        participants = list(Participante.objects.all())
+        participants.sort(key=lambda p: (p.info_sensivel.nome.lower(), p.info_sensivel.nome))
         resolutions = Resolution.objects.all()
 
     context = {'participants': participants,
@@ -2478,6 +2489,12 @@ def gera_relatorio_risk_pdf(parte_risk, patient, username, genero, boolean_idade
     paragraph.add_run(f' {parte_risk.pressao_arterial} mmHg')
     paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
 
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run(f'Pressão arterial Diastólica:')
+    run.bold = True
+    paragraph.add_run(f' {parte_risk.pressao_arterial_diastolica} mmHg')
+    paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+
     # Dados Complementares
     paragraph = document.add_paragraph()
     paragraph = document.add_paragraph()
@@ -2496,6 +2513,12 @@ def gera_relatorio_risk_pdf(parte_risk, patient, username, genero, boolean_idade
     run = paragraph.add_run(f'Pat:')
     run.bold = True
     paragraph.add_run(f' {parte_risk.pat_id}')
+    paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run(f'Pat ID V2:')
+    run.bold = True
+    paragraph.add_run(f' {parte_risk.pat_id_v2}')
     paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
 
     paragraph = document.add_paragraph()
@@ -2687,6 +2710,10 @@ def gera_relatorio_risk_pdf(parte_risk, patient, username, genero, boolean_idade
     paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
 
     paragraph = document.add_paragraph()
+    run = paragraph.add_run(f'IMC: 18.5-24.9 (kg/m2)')
+    run.bold = True
+    paragraph.add_run(f' {parte_risk.imc} mg/Dl')
+    paragraph = document.add_paragraph()
     run = paragraph.add_run(f'IFCC: 20-130 (mmol/mol)')
     run.bold = True
     paragraph.add_run(f' {parte_risk.ifcc_hba1} mg/Dl')
@@ -2847,12 +2874,13 @@ def gera_relatorio_risk_pdf(parte_risk, patient, username, genero, boolean_idade
     run.bold = True
     run.font.size = Pt(14)
     paragraph = document.add_paragraph(f'{parte_risk.comentario}')
+    paragraph = document.add_paragraph()
+    paragraph = document.add_paragraph()
+    paragraph = document.add_paragraph()
     run = paragraph.add_run(f'Recomendações adicionais:')
-    paragraph = document.add_paragraph()
-    paragraph = document.add_paragraph()
-    paragraph = document.add_paragraph()
-    paragraph = document.add_paragraph()
-    run = paragraph.add_run(f'{parte_risk.recomendacoes}')
+    run.bold = True
+    run.font.size = Pt(14)
+    paragraph = document.add_paragraph(f'{parte_risk.recomendacoes}')
     run.bold = True
     run.font.size = Pt(14)
     paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
@@ -3633,10 +3661,8 @@ def gera_relatorio_parte(resolution, chc, coop, rel, reporte, report):
 def calcular_imc(peso, altura):
     # altura em metros
     # peso em kg
-    # peso = float(peso)
-    # altura = int(altura)
-    # imc = peso/(altura*altura)
-    imc = 1
+    imc = peso/(altura*altura)
+    imc = round(imc, 2)
     return imc
 # funcao para por cores no word
 

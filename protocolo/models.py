@@ -144,8 +144,10 @@ class Risk(models.Model):
     ldl = models.IntegerField(default=0)
     cholhdl = models.FloatField(default=0)
     batimentos = models.IntegerField(default=0)
+    pressao_arterial_diastolica = models.IntegerField(default=0)
     risco_de_enfarte = models.IntegerField(default=0, null=True)  # propriedade
     pat_id = models.CharField(max_length=100, blank=True, default=0)
+    pat_id_v2 = models.CharField(max_length=100, blank=True, default=0)
     # parâmetros novos
    
 

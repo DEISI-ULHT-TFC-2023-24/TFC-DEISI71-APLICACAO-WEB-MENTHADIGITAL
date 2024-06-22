@@ -15,6 +15,21 @@
     transition: all 0.2s;
 
 }
+/* Estilização do container do relógio */
+#horario {
+    font-family: monospace; /* Fonte monoespaçada para alinhamento dos dígitos */
+    font-size: 1.2em;     /* Tamanho da fonte um pouco maior */
+    color: rgb(16, 192, 192);         /* Cor branca para o texto */
+    background-color: #333; /* Fundo cinza escuro */
+    padding: 5px 10px;    /* Espaçamento interno */
+    border-radius: 5px;    /* Bordas arredondadas */
+}
+
+/* Estilização do separador */
+#horario::before {
+    content: "";          /* Adiciona o traço antes do horário */
+    margin-right: 5px;    /* Espaçamento à direita do traço */
+}
 .textarea:hover{
     cursor: pointer;
     background-color: #eeeeee;
@@ -25,7 +40,7 @@
     border: 2px solid #666666;
     background-color: white;
     border-color: #333;
-    color: #333333;
+    color: #127e99;
 }
 /* .container-form{
     width: 400px;
