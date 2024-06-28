@@ -43,6 +43,7 @@ function validateForm() {
     atualizarHorario();
 </script>
 
+
 {% endblock %}
 <div class="container-form">
     <form method="post" id="risk_form" style="width:100%" onsubmit="return validateForm()">
@@ -565,3 +566,16 @@ function validateForm() {
     </form>
 </div>
 
+<script>
+    function updateEAG() {
+        var ngsp = document.getElementById("ngsp_hba1").value;
+        var eag = (28.7 * ngsp) - 46.7;
+
+        if (eag < 0) {
+            eag = 0;
+        }
+        document.getElementById("eag_hba1").value = eag.toFixed(1);
+    }
+    document.getElementById("ngsp_hba1").addEventListener("input", updateEAG);
+    updateEAG();
+</script>

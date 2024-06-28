@@ -2877,7 +2877,13 @@ def gera_relatorio_risk_pdf(parte_risk, patient, username, genero, boolean_idade
     paragraph = document.add_paragraph()
     paragraph = document.add_paragraph()
     paragraph = document.add_paragraph()
-    run = paragraph.add_run(f'Recomendações adicionais:')
+    paragraph = document.add_paragraph()
+    run = paragraph.add_run(
+        f'  Recomendações adicionais e notas do Avaliador:')
+    run.bold = True
+    paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+
+    paragraph = document.add_paragraph()
     run.bold = True
     run.font.size = Pt(14)
     paragraph = document.add_paragraph(f'{parte_risk.recomendacoes}')
